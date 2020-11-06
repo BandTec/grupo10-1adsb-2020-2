@@ -33,7 +33,7 @@ a {color: azure; text-decoration: none;}
 
 /* ÍNICIO PÁGINA SOBRE */
 #corpo_sobre {
-    background-image: url(../images/background-sobre.jpg);
+    background-image: url(../images/background-sobre.png);
     background-repeat: no-repeat;
     background-size: 100%;
     background-attachment: fixed;
@@ -42,7 +42,7 @@ a {color: azure; text-decoration: none;}
 }
 .direita{margin-right: 5%; margin-left: 5%; text-align: justify;}
 
-.areaAtuacao{width: 25%; font-size: 15px; padding: 10px; background-color: rgb(251, 212, 76, 0.700);}
+.areaAtuacao{width: 25%; font-size: 15px; padding: 10px; background-color: rgb(218, 155, 53, 0.700);}
 
 .hld{
     width: 55%;
@@ -62,30 +62,32 @@ a {color: azure; text-decoration: none;}
     position: fixed;
     padding-top: 5px;
     z-index: 5;
-    border-bottom: 3px solid #b34933;
+    border-bottom: 3px solid #0f2a2a;
 }
 .container_header{float: left; width: 90%; margin: 1px 68px 1px 68px;}
 
 .logo_titulo {margin: 1px;}
-.ativo{height: 60px; background-color: rgb(0 0 0);}
+.ativo{height: 60px; background-color: rgb(171,163,124);
+    background: linear-gradient(90deg, rgba(171,163,124,1) 10%, rgba(171,163,124,0.8743872549019608) 24%, 
+    rgba(7,64,157,0) 41%, rgba(0,0,0,0) 52%, rgba(171,163,124,0.8911939775910365) 72%, rgba(171,163,124,1) 92%);}
 
 .menu_btn{
     float: right;
     padding-bottom: 0.3%;
     padding-left: 15px;
     padding-right: 15px;
-    border: 2px #b34933 solid;
+    border: 2px #046484 solid;
     border-radius: 5px;
     background-color: transparent;
     float: right;
     margin-top: 1.15%;
     margin-right: 10px;
-    color: #b34933;
+    color: #046484;
     cursor: pointer;
     transition: 0.3s;
     font-weight: bolder;
 }
-.menu_btn:hover{background-color: rgba(135, 202, 202, 0.404); border-color: orange; color: #da9b35;}
+.menu_btn:hover{background-color: rgba(135, 202, 202, 0.404); border-color: #448c64; color: #448c64;}
 
 .title{
     cursor: default;
@@ -166,7 +168,7 @@ a {color: azure; text-decoration: none;}
 
 .membros{text-align: justify;}
 
-.fundoEscuro{background-color: #000000;}
+.fundoEscuro{background-color: rgb(104, 99, 84, .500);}
 .fundoVerde{background-color: #173311;}
 
 /* ÍNICIO TABELA EQUIPE */
@@ -197,7 +199,7 @@ a {color: azure; text-decoration: none;}
     float: left;
     width: 40%;
     text-align: -webkit-center;
-    background-color: #0B2109;
+    background-color: #173311;
     border-radius: 10px;
     padding-bottom: 10px;
     padding-top: 10px;
@@ -211,8 +213,8 @@ a {color: azure; text-decoration: none;}
     border-radius: 10px;
 }
 .form_contact .btn{
-    background-color: #292E1E;
-    border-color: #0f2a2a;
+    background-color: #b34933;
+    border-color: #b34933;
     border-radius: 5px;
     width: 25%;
     margin-top: 5%;
