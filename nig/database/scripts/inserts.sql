@@ -1,9 +1,9 @@
-USE BD_init_0;
+USE BD_nig;
 
 
-insert into tb_Empresa values (null,'Vale','Minas Gerais','0000-123456/22','vale2020ads','João Macedo'),
-							  (null,'Gorverno Federal Paraná','Paraná','0000-458753/22','gfparana2020ads','Carolina Alubuquerque'),
-                              (null,'Exército Brasileiro','Acre','0000-564231/22','exbra2020ads','Cristina Silva');
+insert into tb_Empresa values (null,'Vale','0000-123456/22','vale2020ads','João Macedo'),
+							  (null,'Gorverno Federal Paraná','0000-458753/22','gfparana2020ads','Carolina Alubuquerque'),
+                              (null,'Exército Brasileiro','0000-564231/22','exbra2020ads','Cristina Silva');
 
 insert into tb_Funcionario values (null,'José','Santos','(41)95124-2454','jose.santos@email.com','ze@admin','PR','Curitiba','038.397.279-52',2),
 								  (null,'Maria','Santana','(41)91234-2999','maria.santana@email.com','mariazinhaparana','PR','Curitiba','949.419.629-58',2),
@@ -19,9 +19,9 @@ insert into tb_Controle_Login values (null,'2020-10-24T14:25:15','2020-10-24T18:
                                      (null,'2020-10-26T02:00:30','2020-10-26T06:35:51','192.153.0.2',1005),
                                      (null,'2020-10-15T18:14:35','2020-10-15T00:37:41','192.155.0.1',1000);
 
-insert into tb_Area values (null,'Alto Juruá',3),
-						   (null,'Reserva Ambiental Serelepe',2),
-                           (null,'Floresta Estadual do Uaimií',1);
+insert into tb_Area values (null,'Alto Juruá','Minas Gerais',3),
+						   (null,'Reserva Ambiental Serelepe','Paraná',2),
+                           (null,'Floresta Estadual do Uaimií','Acre',1);
                            
 insert into tb_Sensores values (null,'Sensor Norte-AC','2019-10-30T18:14:35',default,null,2),
 							   (null,'Sensor Sul-AC','2019-10-30T18:14:35',default,null,2),

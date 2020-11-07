@@ -3,11 +3,10 @@ USE BD_nig;
 
 CREATE TABLE tb_Empresa (
 	id_Empresa int primary key auto_increment,
-    nome_Empresa varchar (30),
-    estado_Empresa varchar (30),
-    cnpj char (14),
-    codigo varchar (15),
-    responsavel varchar (45)
+    nome_Empresa varchar (30) not null, 
+    cnpj char (14) not null,
+    codigo varchar (15) not null,
+    responsavel varchar (45) not null
 );
  
 CREATE TABLE tb_Funcionario (
@@ -26,8 +25,8 @@ CREATE TABLE tb_Funcionario (
                         
 CREATE TABLE tb_Controle_Login (
 	id_Controle_Login int primary key auto_increment,
-	horario_LogIn datetime,
-	horario_LogOut datetime,
+	horario_LogIn datetime not null,
+	horario_LogOut datetime not null,
 	ip_Conexao varchar(15) not null,
 	fk_Funcionario int,
 	foreign key (fk_Funcionario) references tb_Funcionario(id_Funcionario)
@@ -35,7 +34,8 @@ CREATE TABLE tb_Controle_Login (
 
 CREATE TABLE tb_Area (
 	id_Area INT PRIMARY KEY AUTO_INCREMENT,
-    nome_Area VARCHAR(30),
+    nome_Area VARCHAR(30) not null,
+    local_Area VARCHAR (40) not null,
     fk_Empresa INT,
     FOREIGN KEY (fk_Empresa) REFERENCES tb_Empresa(id_Empresa)
 );
@@ -44,8 +44,8 @@ CREATE TABLE tb_Sensores (
   id_Sensor INT PRIMARY KEY AUTO_INCREMENT,
   nome VARCHAR(20) NOT NULL,
   horario_inicio DATETIME NOT NULL,
-  estado_Sensor BOOLEAN DEFAULT TRUE,
-  horario_parada DATETIME,
+  estado_Sensor BOOLEAN DEFAULT TRUE not null,
+  horario_parada DATETIME not null,
   fk_Area INT,
   FOREIGN KEY (fk_Area) REFERENCES tb_Area(id_Area)
 );
