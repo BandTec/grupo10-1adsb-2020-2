@@ -304,9 +304,16 @@
 		
 		get_dataHumidity();
 
+		function sendTemperature(){
+			var http = new XMLHttpRequest();
+            http.open('POST', 'http://localhost:3000/api/sendData', false);
+            http.send(null);
+		}
+
         setInterval(() => {
 			get_data();
 			get_dataHumidity();
+			sendTemperature();
 		}, 3000);
 		
 
