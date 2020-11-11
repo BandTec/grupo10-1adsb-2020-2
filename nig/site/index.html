@@ -39,14 +39,16 @@
     <div class="cadastro div_cad" id="tela_cadastro" style="display: none;">
         <form action="" method="post">
             <h2>Cadastre-se</h2>
-            <input type="text" name="nome" placeholder="Nome completo" required>
-            <input type="tel" name="telefone" placeholder="(00) 0000-0000"><br>
+            <input type="text" name="nome" placeholder="Nome" required>
+            <input type="text" name="sobrenome" placeholder="Sobrenome" required>
+            <input type="tel" name="telefone" placeholder="(00) 0000-0000">
+            <input type="text" name="codEmpresa" placeholder="Código empresa"><br />
             <input type="text" name="email" placeholder="Insira seu e-mail" required>
             <input type="text" name="conf_email" placeholder="Confirme o e-mail" required><br>
             <input type="password" name="senha" placeholder="Insira sua senha" required>
             <input type="password" name="conf_senha" placeholder="Confirme sua senha" required><br>
+            <input type="text" name="cpf" placeholder="CPF">
             <input type="text" name="cidade" placeholder="Cidade em que mora">
-            <input type="text" name="codEmpresa" placeholder="Código empresa"><br />
             <div class="ls-custom-select">
                 <select id="uf" class="ls-select">
                     <option value="" disabled selected> UF </option>

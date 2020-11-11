@@ -39,45 +39,48 @@
     <div class="cadastro div_cad" id="tela_cadastro" style="display: none;">
         <form action="" method="post">
             <h2>Cadastre-se</h2>
-            <input type="text" name="nome" placeholder="Nome completo" required>
-            <input type="tel" name="telefone" placeholder="(00) 0000-0000"><br>
+            <input type="text" name="nome" placeholder="Nome" required>
+            <input type="text" name="Sobrenome" placeholder="Sobrenome" required>
+            <input type="tel" name="telefone" placeholder="(00) 0000-0000">
+            <input type="text" name="codEmpresa" placeholder="Código empresa"><br />
             <input type="text" name="email" placeholder="Insira seu e-mail" required>
             <input type="text" name="conf_email" placeholder="Confirme o e-mail" required><br>
             <input type="password" name="senha" placeholder="Insira sua senha" required>
             <input type="password" name="conf_senha" placeholder="Confirme sua senha" required><br>
+            <input type="text" name="cpf" placeholder="CPF">
             <input type="text" name="cidade" placeholder="Cidade em que mora">
-            <input type="text" name="codEmpresa" placeholder="Código empresa"><br/>
-            <select id="uf">
-                <option value="" disabled selected> UF </option>
-                <option value="AC">Acre</option>
-                <option value="AL">Alagoas</option>
-                <option value="AP">Amapá</option>
-                <option value="AM">Amazonas</option>
-                <option value="BA">Bahia</option>
-                <option value="CE">Ceará</option>
-                <option value="DF">Distrito Federal</option>
-                <option value="ES">Espírito Santo</option>
-                <option value="GO">Goiás</option>
-                <option value="MA">Maranhão</option>
-                <option value="MT">Mato Grosso</option>
-                <option value="MS">Mato Grosso do Sul</option>
-                <option value="MG">Minas Gerais</option>
-                <option value="PA">Pará</option>
-                <option value="PB">Paraíba</option>
-                <option value="PR">Paraná</option>
-                <option value="PE">Pernambuco</option>
-                <option value="PI">Piauí</option>
-                <option value="RJ">Rio de Janeiro</option>
-                <option value="RN">Rio Grande do Norte</option>
-                <option value="RS">Rio Grande do Sul</option>
-                <option value="RO">Rondônia</option>
-                <option value="RR">Roraima</option>
-                <option value="SC">Santa Catarina</option>
-                <option value="SP">São Paulo</option>
-                <option value="SE">Sergipe</option>
-                <option value="TO">Tocantins</option>
-            </select> <br>
-
+            <div class="ls-custom-select">
+                <select id="uf">
+                    <option value="" disabled selected> UF </option>
+                    <option value="AC">Acre</option>
+                    <option value="AL">Alagoas</option>
+                    <option value="AP">Amapá</option>
+                    <option value="AM">Amazonas</option>
+                    <option value="BA">Bahia</option>
+                    <option value="CE">Ceará</option>
+                    <option value="DF">Distrito Federal</option>
+                    <option value="ES">Espírito Santo</option>
+                    <option value="GO">Goiás</option>
+                    <option value="MA">Maranhão</option>
+                    <option value="MT">Mato Grosso</option>
+                    <option value="MS">Mato Grosso do Sul</option>
+                    <option value="MG">Minas Gerais</option>
+                    <option value="PA">Pará</option>
+                    <option value="PB">Paraíba</option>
+                    <option value="PR">Paraná</option>
+                    <option value="PE">Pernambuco</option>
+                    <option value="PI">Piauí</option>
+                    <option value="RJ">Rio de Janeiro</option>
+                    <option value="RN">Rio Grande do Norte</option>
+                    <option value="RS">Rio Grande do Sul</option>
+                    <option value="RO">Rondônia</option>
+                    <option value="RR">Roraima</option>
+                    <option value="SC">Santa Catarina</option>
+                    <option value="SP">São Paulo</option>
+                    <option value="SE">Sergipe</option>
+                    <option value="TO">Tocantins</option>
+                </select> <br>
+            </div>
             <div class="botoes">
                 <button type="submit" onclick="enviar()">Cadastrar</button>
             </div>
