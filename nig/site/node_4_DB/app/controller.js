@@ -42,8 +42,8 @@ router.get('/humidity', (request, response, next) => {
 });
 
 router.post('/sendData', (request, response) => {
-    temperature = ArduinoDataTemp.List[ArduinoDataTemp.List.length -1];
-    umidade = ArduinoDataHumidity.List[ArduinoDataHumidity.List.length -1];
+    var temperature = ArduinoDataTemp.List[ArduinoDataTemp.List.length -1];
+    var umidade = ArduinoDataHumidity.List[ArduinoDataHumidity.List.length -1];
 
     // ENVIAR DADOS DE TEMPERATURA
 
@@ -67,5 +67,9 @@ router.post('/sendData', (request, response) => {
     response.sendStatus(200);
 })
 
+
+function teste(){
+    alert("TESTE TESTE TESTE")
+}
 
 module.exports = router;
