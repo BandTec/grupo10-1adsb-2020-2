@@ -43,15 +43,26 @@ router.get('/humidity', (request, response, next) => {
 
 router.post('/sendData', (request, response) => {
     temperature = ArduinoDataTemp.List[ArduinoDataTemp.List.length -1];
-    //luminosidade = ArduinoDataLuminosity.List[ArduinoDataLuminosity.List.length -1]
+    umidade = ArduinoDataHumidity.List[ArduinoDataHumidity.List.length -1];
 
-    var sql = "INSERT INTO medidas (type, temp) VALUES ('temperatura',?)";
+    // ENVIAR DADOS DE TEMPERATURA
+
+    var sql = "INSERT INTO temperatura (type, temp) VALUES ('temperatura',?)";
 
     db.query(sql,temperature, function(err, result) {
         if (err) throw err;
-        console.log("Número de registros inseridos: " + result.affectedRows);
+        console.log("Número de registros de temperatura inseridos: " + result.affectedRows);
       });
       
+    // ENVIAR DADOS DE UMIDADE
+
+    var sql2 = "INSERT INTO umidade (type, umid) VALUES ('umidade',?)";
+
+    db.query(sql2, umidade, function(err, result) {
+        if (err) throw err;
+        console.log("Número de registros de umidade inseridos: " + result.affectedRows);
+        // console.log(umidade);
+      });
 
     response.sendStatus(200);
 })
