@@ -67,7 +67,6 @@ router.post('/sendData', (request, response) => {
     response.sendStatus(200);
 })
 
-
 function teste(){
     alert("TESTE TESTE TESTE")
 }
