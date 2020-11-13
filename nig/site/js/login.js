@@ -27,7 +27,7 @@ function logar() {
         tampa.classList.remove(`abrir_tampa_cadastro`);
         setTimeout(function () {
             tela_login.style.display = `none`
-            tampa.style.display = 'none'
+            tampa.style.display = `none`
             aberto_login = false;
         }, 500)
     }
@@ -35,7 +35,7 @@ function logar() {
 
 function verificar() {
     if (login_email.value == "admin@admin.com" && login_senha.value == "admin") {
-        redirect.action = "node4.1/dashboard.html";
+        redirect.action = "node/dashboard.html";
         redirect.submit();
     } else {
         redirect.email.focus();
