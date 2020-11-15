@@ -18,7 +18,7 @@
     <div class="login" id="tela_login" style="display: none;">
         <a href="index.html"><i class="fas fa-arrow-left"></i></a>
         <div class="div_cad">
-            <form name="redirect" action="" method="" class="ls-form row">
+            <form name="redirect" action="" method="POST" class="ls-form row">
                 <h2>Login</h2>
                 <p>
                     <label for="login_email">Email:</label><br>
@@ -42,43 +42,43 @@
             <input type="text" name="nome" placeholder="Nome" required>
             <input type="text" name="sobrenome" placeholder="Sobrenome" required>
             <input type="tel" name="telefone" placeholder="(00) 0000-0000">
-            <input type="text" name="codEmpresa" placeholder="Código empresa" ><br/>
+            <input type="text" name="codEmpresa" placeholder="Código empresa"><br />
             <input type="text" name="email" placeholder="Insira seu e-mail" required>
             <input type="text" name="conf_email" placeholder="Confirme o e-mail" required><br>
             <input type="password" name="senha" placeholder="Insira sua senha" required>
             <input type="password" name="conf_senha" placeholder="Confirme sua senha" required><br>
             <input type="text" name="cpf" placeholder="CPF">
-            <input type="text" name="cidade" placeholder="Cidade em que mora"><br/>
-                <select id="uf" class="ls-select">
-                    <option value="" disabled selected> UF </option>
-                    <option value="AC">Acre</option>
-                    <option value="AL">Alagoas</option>
-                    <option value="AP">Amapá</option>
-                    <option value="AM">Amazonas</option>
-                    <option value="BA">Bahia</option>
-                    <option value="CE">Ceará</option>
-                    <option value="DF">Distrito Federal</option>
-                    <option value="ES">Espírito Santo</option>
-                    <option value="GO">Goiás</option>
-                    <option value="MA">Maranhão</option>
-                    <option value="MT">Mato Grosso</option>
-                    <option value="MS">Mato Grosso do Sul</option>
-                    <option value="MG">Minas Gerais</option>
-                    <option value="PA">Pará</option>
-                    <option value="PB">Paraíba</option>
-                    <option value="PR">Paraná</option>
-                    <option value="PE">Pernambuco</option>
-                    <option value="PI">Piauí</option>
-                    <option value="RJ">Rio de Janeiro</option>
-                    <option value="RN">Rio Grande do Norte</option>
-                    <option value="RS">Rio Grande do Sul</option>
-                    <option value="RO">Rondônia</option>
-                    <option value="RR">Roraima</option>
-                    <option value="SC">Santa Catarina</option>
-                    <option value="SP">São Paulo</option>
-                    <option value="SE">Sergipe</option>
-                    <option value="TO">Tocantins</option>
-                </select><br>
+            <input type="text" name="cidade" placeholder="Cidade em que mora"><br />
+            <select id="uf" class="ls-select">
+                <option value="" disabled selected> UF </option>
+                <option value="AC">Acre</option>
+                <option value="AL">Alagoas</option>
+                <option value="AP">Amapá</option>
+                <option value="AM">Amazonas</option>
+                <option value="BA">Bahia</option>
+                <option value="CE">Ceará</option>
+                <option value="DF">Distrito Federal</option>
+                <option value="ES">Espírito Santo</option>
+                <option value="GO">Goiás</option>
+                <option value="MA">Maranhão</option>
+                <option value="MT">Mato Grosso</option>
+                <option value="MS">Mato Grosso do Sul</option>
+                <option value="MG">Minas Gerais</option>
+                <option value="PA">Pará</option>
+                <option value="PB">Paraíba</option>
+                <option value="PR">Paraná</option>
+                <option value="PE">Pernambuco</option>
+                <option value="PI">Piauí</option>
+                <option value="RJ">Rio de Janeiro</option>
+                <option value="RN">Rio Grande do Norte</option>
+                <option value="RS">Rio Grande do Sul</option>
+                <option value="RO">Rondônia</option>
+                <option value="RR">Roraima</option>
+                <option value="SC">Santa Catarina</option>
+                <option value="SP">São Paulo</option>
+                <option value="SE">Sergipe</option>
+                <option value="TO">Tocantins</option>
+            </select><br>
 
             <div class="botoes">
                 <button type="submit" onclick="enviar()">Cadastrar</button>
