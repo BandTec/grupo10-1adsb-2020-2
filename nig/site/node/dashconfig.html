@@ -1,0 +1,60 @@
+<html>
+
+<head>
+	<title>Dashboard</title>
+	<link rel="shortcut icon" href="../images/logo3.png" type="image/x-icon">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+	<script src="http://www.chartjs.org/dist/2.7.1/Chart.js"></script>
+	<script src="http://www.chartjs.org/samples/latest/utils.js"></script>
+	<link rel="stylesheet" href="../css/dashboard.css">
+	<script src="app/controller.js"></script> <!-- LINKANDO CONTROLLER.JS PARA CHAMAR A FUNÇÃO DOS ALERTAS -->
+	<style>
+		canvas {
+			-moz-user-select: none;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="sidebar">
+		<div class="logo_icons">
+			<div class="logo">
+				<img src="../images/logo4.png" alt=""></img>
+			</div>
+			<div class="icons">
+				<a href="../index.html" id="home"><img src="../images/home-icon.png" alt="home-icone"></a>
+				<a href="dashboard.html" id="graph"><img src="../images/chart-green.png" alt="grafico-icone"></a>
+				<a href="../settings.html" id="config"><img src="../images/settings-green.png"alt="configurações-icone"></a>
+				<a href="dashconfig.html" id="help"><img src="../images/help-red.png" alt="help-ícone"></a>
+			</div>
+			<div class="icon_logout">
+				<a href="../index.html"><img src="../images/logout.png" alt=""></a>
+			</div>
+		</div>
+	</div>
+	<div class="containers">
+			<div class="cont_faq">
+				<div class="inside">
+				<h1 class="title_faq">FAQ - Perguntas Frequentes</h3>
+					<p class= "itm_faq"><b class="num_faq">1 </b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim hic eum voluptates nostrum perspiciatis nemo alias qui et esse! Asperiores ut, sequi nam neque consequuntur nesciunt nemo sint temporibus laudantium.</p>
+					<p class= "itm_faq"><b class="num_faq">2 </b>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, aut aliquam! Dolores, quia? Amet neque omnis laborum autem deserunt fugiat quaerat cupiditate voluptatem sunt sapiente possimus eligendi, delectus, ratione modi.</p>
+					<p class= "itm_faq"><b class="num_faq">3 </b>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente sit dicta aliquam, dolor mollitia numquam! Omnis, recusandae vitae, quisquam voluptate ducimus debitis ea dicta, blanditiis eligendi eveniet odio obcaecati possimus.</p>
+					<p class= "itm_faq"><b class="num_faq">4 </b>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Inventore consequatur sit veniam quam! Tempora sit, vero illum nemo minus culpa perspiciatis earum? Magnam voluptatibus magni quidem quo, ex deleniti tempora?</p>
+					<p class= "itm_faq"><b class="num_faq">5 </b>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque distinctio, dolorum sunt neque accusamus eos saepe beatae deleniti nemo incidunt animi eligendi doloremque sint tempora ea quisquam enim quae soluta.</p>
+					<p class= "itm_faq"><b class="num_faq">6 </b>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Mollitia deleniti repellat perferendis natus quo id, quis debitis, a unde velit, dolore non tempore! Mollitia velit quas maiores eos obcaecati. Animi?</p>
+					<p class= "itm_faq"><b class="num_faq">7 </b>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque voluptate temporibus vero? Sint tenetur at ullam tempore, voluptatum nihil enim fugiat soluta optio dolores? Fuga vel sapiente ipsa ullam necessitatibus?</p>
+				<div class="contact">
+					<p id="msg_faq">Ainda com dúvidas/problema?</p>
+					<button class = "btn_faq" href=""><b>Contate-nos</b></button>
+				</div>
+			</div>
+			</div>
+
+	</div>
+
+	</div>
+</body>
+
+</html>

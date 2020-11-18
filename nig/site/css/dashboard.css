@@ -68,17 +68,21 @@ table {
 }
 #config{
     position: absolute;
-    bottom: 30%;
+    bottom: 35%;
 }
 #graph{
     position: absolute;
-    bottom: 45%;
+    top: 35%;
 }
 #home{
     position: absolute;
-    bottom: 60%;
+    top: 20%;
 }
 
+#help{
+    position: absolute;
+    bottom: 20%;
+}
 .logo_icons .icon_logout img{
     position: absolute;
     width: 50%;
@@ -93,7 +97,7 @@ table {
 /* INICIO CONTAIERNS */
 
 .containers{
-    margin-top: 20px;
+    margin-top: 10px;
     margin-left:95px;
 }
 
@@ -164,3 +168,68 @@ table {
 
 
 /* ----------------PAGINA SETTINGS ----------------*/
+
+/* ----------------PAGINA FAQ------------------- */
+
+.cont_faq {
+    margin-top:5px;
+    width: 100%;
+    height: 1125px;
+    left: 112.02px;
+    background-color: #282C31;
+    border: 2px solid #448C64;
+    border-radius: 10px;
+}
+
+.inside{
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+    padding: 34px 56px 0px 59px;
+}
+
+.title_faq{
+    color: #b34933;
+}
+
+.itm_faq{
+    font-size: 25px;
+    color: rgb(196, 196, 196);
+    justify-items: center;
+
+}
+
+.num_faq {
+    font-size: 30px;
+    color: #e22626;
+}
+
+.contact {
+    margin-left: 35%;
+    margin-top: 5%;
+    width: 30%;
+}
+
+.btn_faq {
+    margin-left: 25%;
+    height: 60px;
+    width: 200px ;
+    background-color: #b34933;
+    border-radius: 20px;
+    border: 2px #e22626 solid;
+    transition: 2s;
+    text-shadow: 50px;
+}
+
+.btn_faq:hover{
+    background-color: #e22626;
+    cursor: pointer;
+    color: aliceblue;
+}
+
+#msg_faq{
+    color: aliceblue; 
+    font-size: 20px;
+    margin-left: 5%;
+    text-align: center;
+}
