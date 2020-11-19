@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIG</title>
+    <link rel="shortcut icon" href="images/logo2.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <script src="js/login.js"></script>
+    <script src="js/cadastro.js"></script>
+    <script src="js/financeiro.js"></script>
+</head>
+
+<body id="corpo_sobre" style="position: static;">
+<!-- INICIO POP'S DE LOGIN E CADASTRO -->
+<div class="login" id="tela_login" style="display: none;">
+    <!-- INICIO CAMPO DE LOGIN -->
+    <a href="index.html"><i class="fas fa-arrow-left"></i></a>
+    <div class="div_cad">
+        <form id="form_login" method="post" onclick="return entrar()">
+            <h2>Login</h2>
+            <p>
+                <label for="login_email">Email:</label><br>
+                <input id="login_email" type="text" name="login" placeholder="Insira seu e-mail:" required>
+            </p>
+            <p>
+                <label for="login_senha">Senha:</label><br>
+                <input id="login_senha" type="password" name="senha" placeholder="Insira sua senha:" required>
+            </p>
+
+            <div class="botoes">
+                <button id="btn_entrar" type="button">Entrar</button><br><br>
+            </div>
+        </form>
+        <div class="btnCad">Ainda não tem conta?<a onclick="cadastrar_animacao()">Cadastre-se</a></div>
+    </div>
+</div>
+<!-- FIM CAMPO DE LOGIN -->
+<!-- CAMPO DE CADASTRO -->
+<div class="cadastro div_cad" id="tela_cadastro" style="display: none;">
+    <form id="form_cadastro" method="post" onclick="return cadastrar()">
+        <h2>Cadastre-se</h2>
+        <input type="text" name="nome" placeholder="Nome" required>
+        <input type="text" name="sobrenome" placeholder="Sobrenome" required>
+        <input type="tel" name="telefone" placeholder="(00) 0000-0000">
+        <input type="text" name="codEmpresa" placeholder="Código empresa" ><br/>
+        <input type="text" name="email" placeholder="Insira seu e-mail" required>
+        <input type="text" name="conf_email" placeholder="Confirme o e-mail" required><br>
+        <input type="password" name="senha" placeholder="Insira sua senha" required>
+        <input type="password" name="conf_senha" placeholder="Confirme sua senha" required><br>
+        <input type="text" name="cpf" placeholder="CPF">
+        <input type="text" name="cidade" placeholder="Cidade em que mora"><br/>
+            <select id="uf" class="ls-select">
+                <option value="" disabled selected> UF </option>
+                <option value="AC">Acre</option>
+                <option value="AL">Alagoas</option>
+                <option value="AP">Amapá</option>
+                <option value="AM">Amazonas</option>
+                <option value="BA">Bahia</option>
+                <option value="CE">Ceará</option>
+                <option value="DF">Distrito Federal</option>
+                <option value="ES">Espírito Santo</option>
+                <option value="GO">Goiás</option>
+                <option value="MA">Maranhão</option>
+                <option value="MT">Mato Grosso</option>
+                <option value="MS">Mato Grosso do Sul</option>
+                <option value="MG">Minas Gerais</option>
+                <option value="PA">Pará</option>
+                <option value="PB">Paraíba</option>
+                <option value="PR">Paraná</option>
+                <option value="PE">Pernambuco</option>
+                <option value="PI">Piauí</option>
+                <option value="RJ">Rio de Janeiro</option>
+                <option value="RN">Rio Grande do Norte</option>
+                <option value="RS">Rio Grande do Sul</option>
+                <option value="RO">Rondônia</option>
+                <option value="RR">Roraima</option>
+                <option value="SC">Santa Catarina</option>
+                <option value="SP">São Paulo</option>
+                <option value="SE">Sergipe</option>
+                <option value="TO">Tocantins</option>
+            </select><br>
+        <div class="botoes">
+            <button type="submit" onclick="cadastrar()">Cadastrar</button>
+        </div>
+    </form>
+<!-- FIM CAMPO DE CADASTRO -->
+</div>
+<!-- FIM POP'S LOGIN E CADASTRO -->
+<!-- BARRA LATERAL LARANJA -->
+<div class="tampa tampa_direita" id="tampa" style="display: none;" onclick="logar()"> <img src="images/skip.png"
+        alt="seta de skip"></div>
+<!-- ######################################################################################## -->
+
+    <div class="div_cad financeiro" style="display: none;" id="tela_financeiro">
+        <h2>Calcule o seu custo utilizando o NIG</h2>
+        <h3>Insira abaixo a área de seu terreno</h3>
+        <p>
+            <input type="text" id="inp_area" class="inp_calculadora" placeholder="Área em m²">
+
+            <button onclick="calculo_financeiro()"><b>Calcular</b></button>
+        </p>
+        <div id="resp" class="resp" style="display: none;">
+            <span>A instalação ficará</span>
+            <div id="instalacao" class="valor"></div><br>
+            <span>A quantidade de arduínos será de:</span>
+            <div id="quantid" class="valor"></div><br>
+            <span id="distancia">E cada um terá uma distância de 5 metros para outro.</span>
+            <span id="duvidas">Tem dúvidas? Fale conosco <a href="index.html#contato" onclick="calc_financeiro()"
+                    style="color: #b74a33;">aqui</a>.</span></span>
+        </div>
+    </div>
+    <div class="tampa tampa_esquerda" id="tampa_esquerda" onclick="calc_financeiro()" style="display: none;"><img
+            src="images/skip.png" alt="seta de skip"></div>
+    <div class="header ativo">
+
+        <div class="container_header">
+            <div class="logo_titulo">
+                <div class="logo">
+                    <img src="images/logo2.png" alt="Logo" v style="width: 50px">
+                </div>
+                <div class="title">
+                    <b>N<span style="color: #325f47;">o</span>IG<span style="color:#325f47;">nite</span></b>
+                </div>
+                <a onclick="logar()">
+                    <div class="menu_btn">Login</div>
+                </a>
+                <div class="menu" id="menu">
+                    <a href="index.html" class="item_menu"><b>Home</b></a>
+                    <a href="sobre.html" class="item_menu" style="color: #b74a33;"><b>Projeto</b></a>
+                    <!-- <a href="#contato" class="item_menu"><b>Contato</b></a> -->
+                    <a onclick="calc_financeiro()" class="item_menu"><b>Financeiro</b></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="corpo">
+        <div class="linha ani_esquerda"></div> <br>
+        <div id="inicio">Sobre o Projeto</div><br>
+        <div class="linha ani_direita"></div> <br>
+        <!-- <p>Um projeto a favor da mata</p> -->
+    </div>
+    <div class="conteudo">
+        <div class="content fundoEscuro">
+            <div class="alinhamento container">
+                <div class="titulo">Contextualização</div>
+                <div class="texto projeto">A fauna e flora do Brasil é rica em espécies de plantas e animais, sendo
+                    muitos deles
+                    típicos da região e com risco de extinção.
+                    <br />A vegetação brasileira é importante desde sempre e o ser humano faz uso dela para diversos
+                    propósitos, como alimentação, vestuário, medicina, habitação, estudos entre outros. Além de que
+                    nossa flora é muito importante para o controle e saúde da nossa atmosfera, é a flora que é
+                    responsável por deixar o ar mais puro, o calor não ser tão excessivo, reduzir as tempestades
+                    desproporcionais e abrigar os animais da nossa fauna.
+                    <p>Na nossa fauna existem diversas de espécies únicas do mundo, somos responsáveis por manter e
+                        preservar animais que se extintos, não haverá em nenhum outro lugar.
+                        Somos o país da América do Sul com a maior diversidade de aves e com a maior biodiversidade
+                        vegetal do planeta, com mais de 55 mil espécies de plantas superiores e cerca de 10 mil de
+                        briófitas, fungos e algas, um total equivalente a quase 25% de todas as espécies de plantas
+                        existentes.</p>
+                </div>
+                <img src="images/logo1.png" class="logo_projeto" alt="logo_projeto">
+            </div>
+        </div>
+
+        <div class="content fundoVerde">
+            <div class="container alinhamento">
+                <div class="titulo">Como Funciona</div>
+                <div><img class="hld" src="images/HLD.png"></div>
+            </div>
+        </div>
+
+        <div class="content fundoEscuro">
+            <div class="direita container">
+                <div class="titulo">Nosso alvo</div>
+                <div class="texto">Nossa solução é voltada para todo o tipo de bioma e/ou vegetação, nosso sistema com
+                    sensores é capaz de captar a temperatura e
+                    a umidade independente da região por ser estruturado através de cabeamento.
+                    <br />O cerrado apesar de ser um bioma com foco alto de incêndio não é o nosso principal alvo, pois
+                    o bioma está preparado para o incêndio e é mais natural do que nas demais regiões. Uma das
+                    curiosidades que reforçam essa característica típica da região são os troncos das árvores do cerrado
+                    que contém uma casca grossa, o que já não acontece nas regiões de Mata Atlântica.
+                    <br /><br /><br />
+                    <select class="areaAtuacao">
+                        <option>Verifique nossas áreas de atuação:</option>
+                        <option>Mata Atlântica</option>
+                        <option>Cerrado</option>
+                        <option>Pantanal</option>
+                        <option>Plantações</option>
+                        <option>Parques Estaduais</option>
+                        <option>Reservas ambientais</option>
+                    </select>
+
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <ul>
+                <li><a href="https://www.instagram.com/nolgnite?r=nametag" target="blank"><img
+                            src="images/icon-instagram.png" alt="instagram"><br>@NoIgnite</a></li>
+                <li><a href="https://www.facebook.com/NIG-Nolgnite-100273575202474" target="blank"> <img
+                            src="images/icon-facebook.png" alt="facebook"><br>NoIgnite</a></li>
+                <li><img src="images/ico-linkedin.png" alt="linkedin"><br>/NoIgnite</li>
+            </ul>
+            <p style="float: center;">nig@bandtec.com.br</p>
+        </div>
+    </div>
+
+</body>
+
+</html>
