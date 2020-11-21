@@ -34,7 +34,7 @@ function cadastrar_animacao() {
 function cadastrar() {
     aguardar();
     var formulario = new URLSearchParams(new FormData(form_cadastro));
-    fetch("/usuarios/cadastrar", {
+    fetch("../usuarios/cadastrar", {
         method: "POST",
         body: formulario
     }).then(function (response) {

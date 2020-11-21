@@ -15,13 +15,13 @@ module.exports = (sequelize, DataTypes) => {
 		},		
 		nome: {
 			field: 'nome',
-			type: DataTypes.STRING,
-			allowNull: false
+			type: DataTypes.STRING(20),
+			allowNull: false 
 		},
 		login: {
 			field: 'login',
 			type: DataTypes.STRING,
-			allowNull: false
+			allowNull: true
 		},
 		senha: {
 			field: 'senha',

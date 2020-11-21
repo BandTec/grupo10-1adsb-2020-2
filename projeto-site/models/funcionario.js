@@ -38,11 +38,11 @@ module.exports = (sequelize, DataTypes) => {
 			type: DataTypes.STRING,
 			allowNull: false
         },
-        UF: {
-			field: 'UF',
-			type: DataTypes.CHAR,
-			allowNull: false
-        },
+        // UF: {
+		// 	field: 'UF',
+		// 	type: DataTypes.STRING,
+		// 	allowNull: true
+        // },
         cidade: {
 			field: 'cidade',
 			type: DataTypes.STRING,
@@ -50,7 +50,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         cpf: {
 			field: 'cpf',
-			type: DataTypes.CHAR,
+			type: DataTypes.STRING,
 			allowNull: false
 		},
 	}, 

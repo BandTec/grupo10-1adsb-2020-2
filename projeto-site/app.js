@@ -1,15 +1,15 @@
 process.env.NODE_ENV = 'production';
 
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usuariosRouter = require('./routes/usuarios');
-var leiturasRouter = require('./routes/leituras');
+const indexRouter = require('./routes/index');
+const usuariosRouter = require('./routes/usuarios');
+const leiturasRouter = require('./routes/leituras');
 
-var app = express();
+const app = express();
 
 app.use(logger('dev'));
 app.use(express.json());

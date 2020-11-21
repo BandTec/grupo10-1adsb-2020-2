@@ -20,11 +20,11 @@
         <!-- INICIO CAMPO DE LOGIN -->
         <a href="index.html"><i class="fas fa-arrow-left"></i></a>
         <div class="div_cad">
-            <form id="form_login" method="post" onclick="return entrar()">
+            <form id="form_login" method="post" onsubmit="return entrar()">
                 <h2>Login</h2>
                 <p>
                     <label for="login_email">Email:</label><br>
-                    <input id="login_email" type="text" name="login" placeholder="Insira seu e-mail:" required>
+                    <input type="text" name="email" placeholder="Insira seu e-mail:" required>
                 </p>
                 <p>
                     <label for="login_senha">Senha:</label><br>
@@ -32,64 +32,75 @@
                 </p>
 
                 <div class="botoes">
-                    <button id="btn_entrar" type="button">Entrar</button><br><br>
+                    <button id="btn_entrar" type="submit">Entrar</button><br><br>
                 </div>
             </form>
             <div class="btnCad">Ainda não tem conta?<a onclick="cadastrar_animacao()">Cadastre-se</a></div>
         </div>
     </div>
     <!-- FIM CAMPO DE LOGIN -->
+
     <!-- CAMPO DE CADASTRO -->
     <div class="cadastro div_cad" id="tela_cadastro" style="display: none;">
-        <form id="form_cadastro" method="post" onclick="return cadastrar()">
+
+        <form id="form_cadastro" method="post" onsubmit="return cadastrar()">
+
             <h2>Cadastre-se</h2>
-            <input type="text" id="id_nome" name="nome" placeholder="Nome" required>
+            <input type="text" name="nome" placeholder="Nome" required>
             <input type="text" name="sobrenome" placeholder="Sobrenome" required>
             <input type="tel" name="telefone" placeholder="(00) 0000-0000">
-            <input type="number" name="codEmpresa" placeholder="Código empresa" ><br/>
+            <input type="number" name="codEmpresa" placeholder="Código empresa"><br />
             <input type="email" name="email" placeholder="Insira seu e-mail" required>
             <input type="email" name="conf_email" placeholder="Confirme o e-mail" required><br>
             <input type="password" name="senha" placeholder="Insira sua senha" required>
             <input type="password" name="conf_senha" placeholder="Confirme sua senha" required><br>
             <input type="text" name="cpf" placeholder="CPF">
-            <input type="text" name="cidade" placeholder="Cidade em que mora"><br/>
-                <select id="uf" class="ls-select">
-                    <option value="" disabled selected> UF </option>
-                    <option value="AC">Acre</option>
-                    <option value="AL">Alagoas</option>
-                    <option value="AP">Amapá</option>
-                    <option value="AM">Amazonas</option>
-                    <option value="BA">Bahia</option>
-                    <option value="CE">Ceará</option>
-                    <option value="DF">Distrito Federal</option>
-                    <option value="ES">Espírito Santo</option>
-                    <option value="GO">Goiás</option>
-                    <option value="MA">Maranhão</option>
-                    <option value="MT">Mato Grosso</option>
-                    <option value="MS">Mato Grosso do Sul</option>
-                    <option value="MG">Minas Gerais</option>
-                    <option value="PA">Pará</option>
-                    <option value="PB">Paraíba</option>
-                    <option value="PR">Paraná</option>
-                    <option value="PE">Pernambuco</option>
-                    <option value="PI">Piauí</option>
-                    <option value="RJ">Rio de Janeiro</option>
-                    <option value="RN">Rio Grande do Norte</option>
-                    <option value="RS">Rio Grande do Sul</option>
-                    <option value="RO">Rondônia</option>
-                    <option value="RR">Roraima</option>
-                    <option value="SC">Santa Catarina</option>
-                    <option value="SP">São Paulo</option>
-                    <option value="SE">Sergipe</option>
-                    <option value="TO">Tocantins</option>
-                </select><br>
+            <input type="text" name="cidade" placeholder="Cidade em que mora"><br />
+            <!-- <select name="uf" class="ls-select">
+                <option value="" disabled selected> UF </option>
+                <option value="AC">Acre</option>
+                <option value="AL">Alagoas</option>
+                <option value="AP">Amapá</option>
+                <option value="AM">Amazonas</option>
+                <option value="BA">Bahia</option>
+                <option value="CE">Ceará</option>
+                <option value="DF">Distrito Federal</option>
+                <option value="ES">Espírito Santo</option>
+                <option value="GO">Goiás</option>
+                <option value="MA">Maranhão</option>
+                <option value="MT">Mato Grosso</option>
+                <option value="MS">Mato Grosso do Sul</option>
+                <option value="MG">Minas Gerais</option>
+                <option value="PA">Pará</option>
+                <option value="PB">Paraíba</option>
+                <option value="PR">Paraná</option>
+                <option value="PE">Pernambuco</option>
+                <option value="PI">Piauí</option>
+                <option value="RJ">Rio de Janeiro</option>
+                <option value="RN">Rio Grande do Norte</option>
+                <option value="RS">Rio Grande do Sul</option>
+                <option value="RO">Rondônia</option>
+                <option value="RR">Roraima</option>
+                <option value="SC">Santa Catarina</option>
+                <option value="SP">São Paulo</option>
+                <option value="SE">Sergipe</option>
+                <option value="TO">Tocantins</option>
+            </select><br> -->
+
             <div class="botoes">
                 <button type="submit">Cadastrar</button>
             </div>
+
+            <div id="div_erro" style="background-color: sandybrown; color: maroon; display: none;">
+                Erro no cadastro
+            </div>
+
         </form>
-    <!-- FIM CAMPO DE CADASTRO -->
+        <!-- FIM CAMPO DE CADASTRO -->
+
     </div>
     <!-- FIM POP'S LOGIN E CADASTRO -->
+
     <!-- BARRA LATERAL LARANJA -->
     <div class="tampa tampa_direita" id="tampa" style="display: none;" onclick="logar()"> <img src="images/skip.png"
             alt="seta de skip"></div>

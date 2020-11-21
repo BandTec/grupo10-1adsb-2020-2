@@ -40,15 +40,15 @@ function entrar() {
         method: "POST",
         body: formulario
     }).then(resposta => {
-        
+
         if (resposta.ok) {
 
             resposta.json().then(json => {
 
-                sessionStorage.login_usuario_meuapp = json.login;
+                sessionStorage.login_usuario_meuapp = json.email;
                 sessionStorage.nome_usuario_meuapp = json.nome;
-                
-                window.location.href = 'tempo-real.html';
+
+                window.location.href = '../dashboard/dashboard.html';
             });
 
         } else {
