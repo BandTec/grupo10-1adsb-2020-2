@@ -6,30 +6,30 @@ https://codewithhugo.com/sequelize-data-types-a-practical-guide/
 */
 
 module.exports = (sequelize, DataTypes) => {
-    let Area = sequelize.define('Area',{	
+    let Microcontrolador = sequelize.define('microcontrolador',{
 		id: {
-			field: 'id_Area',
+			field: 'id',
 			type: DataTypes.INTEGER,
 			primaryKey: true,
 			autoIncrement: true
-		},	
-		nome_area: {
-			field: 'nome_Area',
-			type: DataTypes.VARCHAR,
+		},		
+		numero_serial: {
+			field: 'nome_area',
+			type: DataTypes.INTEGER,
 			allowNull: false
 		},
-		local_area: {
-			field: 'local_Alrea',
-			type: DataTypes.VARCHAR,
+		localizacao: {
+			field: 'localizacao',
+			type: DataTypes.STRING(30),
 			allowNull: false
 		},
 	}, 
 	{
-		tableName: 'area', 
+		tableName: 'Microcontrolador', 
 		freezeTableName: true, 
 		underscored: true,
-		timestamps: false,
+		timestamps: true,
 	});
 
-    return Area;
+    return Microcontrolador;
 };

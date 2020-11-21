@@ -6,7 +6,7 @@ https://codewithhugo.com/sequelize-data-types-a-practical-guide/
 */
 
 module.exports = (sequelize, DataTypes) => {
-    let area = sequelize.define('area',{
+    let Area = sequelize.define('area',{
 		id: {
 			field: 'id',
 			type: DataTypes.INTEGER,
@@ -35,11 +35,11 @@ module.exports = (sequelize, DataTypes) => {
         }
 	}, 
 	{
-		tableName: 'Sensor', 
+		tableName: 'Area', 
 		freezeTableName: true, 
 		underscored: true,
 		timestamps: true,
 	});
 
-    return Sensor;
+    return Area;
 };

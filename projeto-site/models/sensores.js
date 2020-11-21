@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
 			allowNull: false
 		},
 		estdo_sensor: {
-			field: 'estdo_sensor',
+			field: 'estado_sensor',
 			type: DataTypes.BOOLEAN,
 			allowNull: false
         },

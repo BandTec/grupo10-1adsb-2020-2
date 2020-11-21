@@ -6,7 +6,7 @@ https://codewithhugo.com/sequelize-data-types-a-practical-guide/
 */
 
 module.exports = (sequelize, DataTypes) => {
-    let Controle_login = sequelize.define('Empresa',{	
+    let Controle_login = sequelize.define('Controle_login',{	
 		id: {
 			field: 'id_Controle_Login',
 			type: DataTypes.INTEGER,

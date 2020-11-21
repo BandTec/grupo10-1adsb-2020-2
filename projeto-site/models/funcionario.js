@@ -6,9 +6,9 @@ https://codewithhugo.com/sequelize-data-types-a-practical-guide/
 */
 
 module.exports = (sequelize, DataTypes) => {
-    let Funcionario = sequelize.define('Empresa',{	
+    let Funcionario = sequelize.define('Funcionario',{	
 		id: {
-			field: 'id_Empresa',
+			field: 'id_Funcionario',
 			type: DataTypes.INTEGER,
 			primaryKey: true,
 			autoIncrement: true

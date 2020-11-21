@@ -6,18 +6,13 @@ https://codewithhugo.com/sequelize-data-types-a-practical-guide/
 */
 
 module.exports = (sequelize, DataTypes) => {
-    let area = sequelize.define('area',{
+    let Dados_sensor = sequelize.define('dados_sensor',{
 		id_dados: {
 			field: 'id_dados',
 			type: DataTypes.INTEGER,
 			primaryKey: true,
 			autoIncrement: true
 		},		
-		nome_area: {
-			field: 'nome_area',
-			type: DataTypes.STRING,
-			allowNull: false
-		},
 		temperatura: {
 			field: 'temperatura',
 			type: DataTypes.DECIMAL(3,1),//caso esteja dando problema tirar o (3,1)
@@ -35,11 +30,11 @@ module.exports = (sequelize, DataTypes) => {
         }
 	}, 
 	{
-		tableName: 'area', 
+		tableName: 'dados_sensor', 
 		freezeTableName: true, 
 		underscored: true,
 		timestamps: true,
 	});
 
-    return area;
+    return Dados_sensor;
 };
