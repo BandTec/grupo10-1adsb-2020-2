@@ -13,7 +13,6 @@ CREATE TABLE bd_nig.tb_empresa (
     nome_empresa varchar (30) not null,
     estado_empresa varchar (30) not null,
     cnpj char (14) unique not null,
-    codigo varchar (15) unique not null,
     responsavel varchar (45) not null
 );
 
@@ -63,18 +62,6 @@ CREATE TABLE bd_nig.tb_microcontrolador(
 	    FOREIGN KEY (fk_area) REFERENCES bd_nig.tb_area(id_area)
 );
 
--- CRIANDO TABELA DE SENSOR DE TEMPERATURA --
-
-CREATE TABLE bd_nig.tb_sensor_lm35 (
-	id_sensor_lm35 INT PRIMARY KEY AUTO_INCREMENT,
-	nome_sensor_lm35 VARCHAR(20) NOT NULL,
-    inicio_funcionamento DATETIME NOT NULL,
-    termino_funcionamento DATETIME NOT NULL,
-    estado_sensor_lm35 BOOLEAN DEFAULT FALSE,
-    fk_microcontrolador INT not null,
-	    FOREIGN KEY (fk_microcontrolador) REFERENCES bd_nig.tb_microcontrolador(id_microcontrolador)
-);
-
 -- CRIANDO TABELA DE SENSOR DE UMIDADE --
 
 CREATE TABLE bd_nig.tb_sensor_dht11 (
@@ -89,20 +76,11 @@ CREATE TABLE bd_nig.tb_sensor_dht11 (
 
 -- CRIANDO TABELA DE DADOS DE TEMPERATURA --
 
-CREATE TABLE bd_nig.tb_dado_temperatura (
-	id_temperatura INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE bd_nig.tb_dado_dht11 (
+	id_dado INT PRIMARY KEY AUTO_INCREMENT,
     temperatura DECIMAL(3,1) NOT NULL,
+    umidade int not null,
     horario_captacao DATETIME NOT NULL,
     fk_sensor INT not null,
 		FOREIGN KEY (fk_sensor) REFERENCES bd_nig.tb_sensor_lm35(id_sensor_lm35)
-);
-
--- CRIANDO TABELA DE DADOS DE UMIDADE --
-
-CREATE TABLE bd_nig.tb_dado_umidade (
-	id_umidade INT PRIMARY KEY AUTO_INCREMENT,
-    umidade INT NOT NULL,
-    horario_captacao DATETIME NOT NULL,
-    fk_sensor INT not null,
-		FOREIGN KEY (fk_sensor) REFERENCES bd_nig.tb_sensor_dht11(id_sensor_dht11)
 );
