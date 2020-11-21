@@ -10,11 +10,11 @@ USE bd_nig;
 
 CREATE TABLE bd_nig.tb_empresa (
 	id_empresa int primary key auto_increment,
-    nome_empresa varchar (30),
-    estado_empresa varchar (30),
-    cnpj char (14) unique,
-    codigo varchar (15) unique,
-    responsavel varchar (45)
+    nome_empresa varchar (30) not null,
+    estado_empresa varchar (30) not null,
+    cnpj char (14) unique not null,
+    codigo varchar (15) unique not null,
+    responsavel varchar (45) not null
 );
 
 -- CRIANDO TABELA FUNCIONARIO -- 
@@ -29,18 +29,18 @@ CREATE TABLE bd_nig.tb_funcionario (
 	uf char(2) not null,
 	cidade varchar(50) not null,
     cpf char(14) not null unique,
-    fk_empresa int,
+    fk_empresa int not null,
     foreign key (fk_empresa) references bd_nig.tb_empresa(id_empresa)
 ) auto_increment = 1000;
-             
+			
 -- CRIANDO TABELA CONTROLE DE LOGIN -- 
              
 CREATE TABLE bd_nig.tb_controle_login (
 	id_controle_login int primary key auto_increment,
-	horario_login datetime,
-	horario_logout datetime,
+	horario_login datetime not null,
+	horario_logout datetime not null,
 	ip_conexao varchar(15) not null,
-	fk_funcionario int,
+	fk_funcionario int not null,
 	foreign key (fk_funcionario) references bd_nig.tb_funcionario(id_funcionario)
 );
 
@@ -48,8 +48,8 @@ CREATE TABLE bd_nig.tb_controle_login (
 
 CREATE TABLE bd_nig.tb_area (
 	id_area INT PRIMARY KEY AUTO_INCREMENT,
-    nome_area VARCHAR(30),
-    fk_empresa INT,
+    nome_area VARCHAR(30) not null,
+    fk_empresa INT not null,
     FOREIGN KEY (fk_empresa) REFERENCES bd_nig.tb_empresa(id_empresa)
 );
 
@@ -58,8 +58,8 @@ CREATE TABLE bd_nig.tb_area (
 CREATE TABLE bd_nig.tb_microcontrolador(
 	id_microcontrolador int primary key auto_increment,
     numero_serial int not null,
-    localizacao varchar(30),
-	fk_area INT,
+    localizacao varchar(30) not null,
+	fk_area INT not null,
 	    FOREIGN KEY (fk_area) REFERENCES bd_nig.tb_area(id_area)
 );
 
@@ -71,7 +71,7 @@ CREATE TABLE bd_nig.tb_sensor_lm35 (
     inicio_funcionamento DATETIME NOT NULL,
     termino_funcionamento DATETIME NOT NULL,
     estado_sensor_lm35 BOOLEAN DEFAULT FALSE,
-    fk_microcontrolador INT,
+    fk_microcontrolador INT not null,
 	    FOREIGN KEY (fk_microcontrolador) REFERENCES bd_nig.tb_microcontrolador(id_microcontrolador)
 );
 
@@ -83,7 +83,7 @@ CREATE TABLE bd_nig.tb_sensor_dht11 (
     inicio_funcionamento DATETIME NOT NULL,
     termino_funcionamento DATETIME NOT NULL,
     estado_sensor_dht11 BOOLEAN DEFAULT FALSE,
-    fk_microcontrolador INT,
+    fk_microcontrolador INT not null,
 	    FOREIGN KEY (fk_microcontrolador) REFERENCES bd_nig.tb_microcontrolador(id_microcontrolador)
 );
 
@@ -93,7 +93,7 @@ CREATE TABLE bd_nig.tb_dado_temperatura (
 	id_temperatura INT PRIMARY KEY AUTO_INCREMENT,
     temperatura DECIMAL(3,1) NOT NULL,
     horario_captacao DATETIME NOT NULL,
-    fk_sensor INT,
+    fk_sensor INT not null,
 		FOREIGN KEY (fk_sensor) REFERENCES bd_nig.tb_sensor_lm35(id_sensor_lm35)
 );
 
@@ -103,6 +103,6 @@ CREATE TABLE bd_nig.tb_dado_umidade (
 	id_umidade INT PRIMARY KEY AUTO_INCREMENT,
     umidade INT NOT NULL,
     horario_captacao DATETIME NOT NULL,
-    fk_sensor INT,
+    fk_sensor INT not null,
 		FOREIGN KEY (fk_sensor) REFERENCES bd_nig.tb_sensor_dht11(id_sensor_dht11)
 );
