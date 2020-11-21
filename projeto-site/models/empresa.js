@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
 		},
         codigo: {
 			field: 'codigo',
-			type: DataTypes.VARCHAR,
+			type: DataTypes.STRING,
 			allowNull: false
 		},
         responsavel: {

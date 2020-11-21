@@ -15,27 +15,27 @@ module.exports = (sequelize, DataTypes) => {
 		},	
 		nome: {
 			field: 'nome',
-			type: DataTypes.VARCHAR,
+			type: DataTypes.STRING,
 			allowNull: false
 		},
 		sobrenome: {
 			field: 'sobrenome',
-			type: DataTypes.VARCHAR,
+			type: DataTypes.STRING,
 			allowNull: false
 		},
         telefone: {
 			field: 'telefone',
-			type: DataTypes.VARCHAR,
+			type: DataTypes.STRING, // ALTERANDO DE VARCHAR PARA STRING POPIS ESTAVA DANDO ERRO
 			allowNull: false
 		},
         email: {
 			field: 'email',
-			type: DataTypes.VARCHAR,
+			type: DataTypes.STRING,// DEPOIS REVER O TAMANHO DO CAMPO NO DATABASE
 			allowNull: false
         },
         senha: {
 			field: 'senha',
-			type: DataTypes.VARCHAR,
+			type: DataTypes.STRING,
 			allowNull: false
         },
         UF: {
@@ -45,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         cidade: {
 			field: 'cidade',
-			type: DataTypes.VARCHAR,
+			type: DataTypes.STRING,
 			allowNull: false
         },
         cpf: {

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIG</title>
+    <link rel="shortcut icon" href="images/logo2.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <script src="js/financeiro.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/cadastro.js"></script>
+</head>
+
+<body id="corpo_index" style="position: static;">
+    <!-- INICIO POP'S DE LOGIN E CADASTRO -->
+    <div class="login" id="tela_login" style="display: none;">
+        <!-- INICIO CAMPO DE LOGIN -->
+        <a href="index.html"><i class="fas fa-arrow-left"></i></a>
+        <div class="div_cad">
+            <form id="form_login" method="post" onclick="return entrar()">
+                <h2>Login</h2>
+                <p>
+                    <label for="login_email">Email:</label><br>
+                    <input id="login_email" type="text" name="login" placeholder="Insira seu e-mail:" required>
+                </p>
+                <p>
+                    <label for="login_senha">Senha:</label><br>
+                    <input id="login_senha" type="password" name="senha" placeholder="Insira sua senha:" required>
+                </p>
+
+                <div class="botoes">
+                    <button id="btn_entrar" type="button">Entrar</button><br><br>
+                </div>
+            </form>
+            <div class="btnCad">Ainda não tem conta?<a onclick="cadastrar_animacao()">Cadastre-se</a></div>
+        </div>
+    </div>
+    <!-- FIM CAMPO DE LOGIN -->
+    <!-- CAMPO DE CADASTRO -->
+    <div class="cadastro div_cad" id="tela_cadastro" style="display: none;">
+        <form id="form_cadastro" method="post" onclick="return cadastrar()">
+            <h2>Cadastre-se</h2>
+            <input type="text" id="id_nome" name="nome" placeholder="Nome" required>
+            <input type="text" name="sobrenome" placeholder="Sobrenome" required>
+            <input type="tel" name="telefone" placeholder="(00) 0000-0000">
+            <input type="number" name="codEmpresa" placeholder="Código empresa" ><br/>
+            <input type="email" name="email" placeholder="Insira seu e-mail" required>
+            <input type="email" name="conf_email" placeholder="Confirme o e-mail" required><br>
+            <input type="password" name="senha" placeholder="Insira sua senha" required>
+            <input type="password" name="conf_senha" placeholder="Confirme sua senha" required><br>
+            <input type="text" name="cpf" placeholder="CPF">
+            <input type="text" name="cidade" placeholder="Cidade em que mora"><br/>
+                <select id="uf" class="ls-select">
+                    <option value="" disabled selected> UF </option>
+                    <option value="AC">Acre</option>
+                    <option value="AL">Alagoas</option>
+                    <option value="AP">Amapá</option>
+                    <option value="AM">Amazonas</option>
+                    <option value="BA">Bahia</option>
+                    <option value="CE">Ceará</option>
+                    <option value="DF">Distrito Federal</option>
+                    <option value="ES">Espírito Santo</option>
+                    <option value="GO">Goiás</option>
+                    <option value="MA">Maranhão</option>
+                    <option value="MT">Mato Grosso</option>
+                    <option value="MS">Mato Grosso do Sul</option>
+                    <option value="MG">Minas Gerais</option>
+                    <option value="PA">Pará</option>
+                    <option value="PB">Paraíba</option>
+                    <option value="PR">Paraná</option>
+                    <option value="PE">Pernambuco</option>
+                    <option value="PI">Piauí</option>
+                    <option value="RJ">Rio de Janeiro</option>
+                    <option value="RN">Rio Grande do Norte</option>
+                    <option value="RS">Rio Grande do Sul</option>
+                    <option value="RO">Rondônia</option>
+                    <option value="RR">Roraima</option>
+                    <option value="SC">Santa Catarina</option>
+                    <option value="SP">São Paulo</option>
+                    <option value="SE">Sergipe</option>
+                    <option value="TO">Tocantins</option>
+                </select><br>
+            <div class="botoes">
+                <button type="submit">Cadastrar</button>
+            </div>
+        </form>
+    <!-- FIM CAMPO DE CADASTRO -->
+    </div>
+    <!-- FIM POP'S LOGIN E CADASTRO -->
+    <!-- BARRA LATERAL LARANJA -->
+    <div class="tampa tampa_direita" id="tampa" style="display: none;" onclick="logar()"> <img src="images/skip.png"
+            alt="seta de skip"></div>
+    <!-- ######################################################################################## -->
+
+    <div class="div_cad financeiro" style="display: none;" id="tela_financeiro">
+        <h2>Calcule o seu custo utilizando o NIG</h2>
+        <h3>Insira abaixo a área de seu terreno</h3>
+        <p>
+            <input type="text" id="inp_area" class="inp_calculadora" placeholder="Área em m²">
+
+            <button onclick="calculo_financeiro()"><b>Calcular</b></button>
+        </p>
+        <div id="resp" class="resp" style="display: none;">
+            <span>A instalação ficará</span>
+            <div id="instalacao" class="valor"></div><br>
+            <span>A quantidade de arduínos será de:</span>
+            <div id="quantid" class="valor"></div><br>
+            <span id="distancia">E cada um terá uma distância de 5 metros para outro.</span>
+            <span id="duvidas">Tem dúvidas? Fale conosco <a href="index.html#contato" onclick="calc_financeiro()"
+                    style=" color: #b74a33;">aqui</a>.</span></span>
+        </div>
+    </div>
+    <div class="tampa tampa_esquerda" id="tampa_esquerda" onclick="calc_financeiro()" style="display: none;"><img
+            src="images/skip.png" alt="seta de skip"></div>
+
+    <div class="header ativo">
+
+        <div class="container_header">
+            <div class="logo_titulo">
+                <div class="logo">
+                    <img src="images/logo2.png" alt="Logo" v style="width: 50px">
+                </div>
+                <div class="title">
+                    <b>N<span style="color: #325f47;">o</span>IG<span style="color:#325f47;">nite</span></b>
+                </div>
+                <a onclick="logar()">
+                    <div class="menu_btn">Login</div>
+                </a>
+                <div class="menu" id="menu">
+                    <a href="index.html" class="item_menu" style="color: #b74a33;"><b>Home</b></a>
+                    <a href="sobre.html" class="item_menu"><b>Projeto</b></a>
+                    <a onclick="calc_financeiro()" class="item_menu"><b>Financeiro</b></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="corpo">
+        <div class="linha ani_esquerda"></div> <br>
+        <div id="inicio">Seja bem-vindo ao <span style="color: #b74a33">NIG</span> </div><br>
+        <div class="linha ani_direita"></div> <br>
+        <!-- <p>Um projeto a favor da mata</p> -->
+    </div>
+    <div class="conteudo">
+        <div class="content fundoEscuro">
+            <div class="alinhamento container">
+                <div class="titulo">O Projeto</div>
+                <div class="texto projeto">
+                    <p>O ser humano vem interferindo em grande escala no meio ambiente, direta ou indiretamente, e
+                        grande parte disso é para explorar matéria prima para as finalidades como vestuário, uso
+                        medicinal, habitação e até mesmo uso do próprio solo para criação de animais.
+                        <strong style="color: #b74a33;">Mas quais são nossas interferências e como elas impactam o nosso
+                            ecossistema?</strong> Nossa principal interferência na flora são as derrubadas de árvores
+                        para construção e produção industrial. Com essa
+                        interferência reduzimos drasticamente o equilíbrio da atmosfera, gerando maior calor na região
+                        desmatada e nas proximidades, maiores intensidades de chuvas com relâmpagos e trovões, o ar fica
+                        mais seco, animais são expulsos da sua região nativa ou muitas vezes mortos, o clima fica mais
+                        seco,
+                        aumentamos o aquecimento global, perdemos diversidade de espécies nativas e únicas, entre
+                        outros.</p>
+                    <p>Com o <strong>NIG</strong> você poderá prever possíveis focos de incêndio, ter um
+                        plano de contenção e se adiantar em pedir ajuda antes do fogo se alastrar pelo seu terreno. A
+                        NIG
+                        veio para solucionar incêndios naturais e não naturais, combatendo o fogo com tecnologia.</p>
+
+                </div>
+                <img src="images/logo2.png" class="logo_projeto" alt="logo_projeto">
+            </div>
+        </div>
+
+        <div class="content fundoVerde">
+            <div class="alinhamento container">
+                <div class="titulo">Simulador Financeiro</div>
+                <div class="texto">
+
+                    <p>Um terreno propenso a ter focos de incêndios podem ser da propriedade Governamental
+                        ou particular, nossa solução é voltada para áreas de risco, independente de ser público ou
+                        privado.
+                        Se você está buscando uma solução, nossa empresa é para você!</p>
+                    <p>Sabemos que queimadas desenfreadas podem causar um grande dano financeiro pois prejudica o solo e
+                        dependendo do segmento dele, ocorrem até mesmo perdas de plantações.
+                        Por isso criamos um simulador financeiro onde você poderá verificar o custo benefício para seu
+                        terreno adquirindo nosso produto.</p>
+                    <p>Basta clicar na aba <b style="color: #b74a33;">"Simulador financeiro"</b> em nosso Menu para
+                        verificar o valor e a quantidade de sensores que serão necessários por m²!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content fundoEscuro">
+            <div class="alinhamento container">
+                <div class="titulo" style="text-align: center; font-size: 200%;"><b>Sobre Nós</b></div>
+                <div class="texto">
+                    <p>A NIG foi criada para desenvolver um projeto com soluções tecnológicas voltadas para o meio
+                        ambiente. Visamos melhorar e construir um mundo sustentável trazendo soluções atuais e de ponta,
+                        para que assim os usuários tenham maior controle e autonomia para combater desastres ambientais.
+                    </p>
+                    <ul class="membros" style="display: none;">
+                        <li>
+                            <strong style="color: #b74a33;">Gustavo Cassimiro</strong> - Programador Back-end.
+                        </li>
+                        <li>
+                            <strong style="color: #b74a33;">Ju Souza</strong> - Programador Front-end.
+                        </li>
+                        <li>
+                            <strong style="color: #b74a33;">Gabriel Dias</strong> - Analista de sistemas.
+                        </li>
+                        <li>
+                            <strong style="color: #b74a33;">Mathias Carvalho</strong> - Programador Back-end.
+                        </li>
+                        <li>
+                            <strong style="color: #b74a33;">Karla Moncayo</strong> - Programadora Front-end.
+                        </li>
+                        <li>
+                            <strong style="color: #b74a33;">Bruno Pinheiro</strong> - Analista de sistemas.
+                        </li>
+                    </ul>
+                    <table class="equipe">
+                        <tr>
+                            <td></td>
+                            <td>
+                                <b style="font-size: 150%;">EQUIPE</b>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <img src="images/equipe/bruno.png" alt="">
+                            </th>
+                            <th>
+                                <img src="images/equipe/gabriel.png" alt="">
+                            </th>
+                            <th>
+                                <img src="images/equipe/gustavo.jpg" alt="">
+                            </th>
+                        </tr>
+                        <tr>
+                        <tr>
+                            <th>
+                                Bruno Pinheiro Teixeira
+                            </th>
+                            <th>
+                                Gabriel Dias
+                            </th>
+                            <th>
+                                Gustavo Cassimiro
+                            </th>
+                        </tr>
+                        </tr>
+                        <tr>
+                            <td><a href=""><img src="images/ico-linkedin.png" class="linked_ico" alt=""
+                                        target="blank"></a> <a href="https://github.com/bruno-pteixeira"
+                                    target="blank"><img src="images/github.png" alt="" class="github_ico"></a></td>
+                            <td><a href=""><img src="images/ico-linkedin.png" class="linked_ico" alt=""
+                                        target="blank"></a> <a href="https://github.com/Dias-01001" target="blank"><img
+                                        src="images/github.png" alt="" class="github_ico"></a></td>
+                            <td><a href="https://www.linkedin.com/in/gustavo-cassimiro-801196192/"><img
+                                        src="images/ico-linkedin.png" class="linked_ico" alt="" target="blank"></a> <a
+                                    href="https://github.com/cKassimiro" target="blank"><img src="images/github.png"
+                                        alt="" class="github_ico"></a></td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <img src="images/equipe/ju.jpg" alt="">
+                            </th>
+                            <th>
+                                <img src="images/equipe/karla.jpg" alt="">
+                            </th>
+                            <th>
+                                <img src="images/equipe/mathias.jpg" alt="">
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                Ju Souza (ex-membro)
+                            </th>
+                            <th>
+                                Karla Pinheiro Moncayo
+                            </th>
+                            <th>
+                                Mathias de Souza
+                            </th>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.linkedin.com/in/ju-souza-silva-686a981a1/"><img
+                                        src="images/ico-linkedin.png" class="linked_ico" alt="" target="blank"></a> <a
+                                    href="https://github.com/Ju-Souza" target="blank"><img src="images/github.png"
+                                        alt="" class="github_ico"></a></td>
+                            <td><a href="https://www.linkedin.com/in/karla-moncayo-843494186/"><img
+                                        src="images/ico-linkedin.png" class="linked_ico" alt="" target="blank"></a> <a
+                                    href="https://github.com/karlamoncayo" target="blank"><img src="images/github.png"
+                                        alt="" class="github_ico"></a></td>
+                            <td><a href=""><img src="images/ico-linkedin.png" class="linked_ico" alt=""
+                                        target="blank"></a> <a href="https://github.com/dasSouza" target="blank"><img
+                                        src="images/github.png" alt="" class="github_ico"></a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="container" id="contato">
+            <form class="form_contact" action="/cadastro" method="POST">
+                <label for="inp_email">Insira seu email:</label>
+                <input type="email" id="inp_email" class="campoEntradaForm" required>
+
+                <label for="inp_nome">Insira seu nome:</label>
+                <input type="text" id="inp_nome" class="campoEntradaForm" required>
+
+                <label for="txt_area">Digite sua mensagem</label>
+                <textarea id="txt_area" cols="30" rows="10" class="campoEntradaForm" required></textarea>
+                <label for="">
+                    <input type="checkbox" checked>Receber notificação por email.
+                </label>
+                <br> <button type="submit" class="btn">Enviar</button>
+            </form>
+        </div>
+        <div class="footer">
+            <ul>
+                <li><a href="https://www.instagram.com/nolgnite?r=nametag" target="blank"><img
+                            src="images/icon-instagram.png" alt="instagram"><br>@NoIgnite</a></li>
+                <li><a href="https://www.facebook.com/NIG-Nolgnite-100273575202474" target="blank"> <img
+                            src="images/icon-facebook.png" alt="facebook"><br>NoIgnite</a></li>
+                <li><img src="images/ico-linkedin.png" alt="linkedin"><br>/NoIgnite</li>
+            </ul>
+            <p style="float: center;">nig@bandtec.com.br</p>
+        </div>
+    </div>
+
+</body>
+
+</html>

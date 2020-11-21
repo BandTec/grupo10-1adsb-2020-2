@@ -22,12 +22,12 @@ module.exports = (sequelize, DataTypes) => {
 			field: 'horario_logOut',
 			type: DataTypes.DATE,
 			allowNull: false
-		},
+		}/*,
         ip_Conexao: {
 			field: 'ip_Conexao',
-			type: DataTypes.VARCHAR,
+			type: DataTypes.STRING(50),
 			allowNull: false
-		},
+		},*/
 	}, 
 	{
 		tableName: 'controle_login', 

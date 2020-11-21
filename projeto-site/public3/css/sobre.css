@@ -1,0 +1,16 @@
+/* ÍNICIO GLOBAL */
+
+body{scroll-behavior: smooth;}
+p {margin-top: 0;}
+a {color: azure; text-decoration: none;}
+
+#corpo_sobre {
+    background-image: url(../images/background-sobre.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-attachment: fixed;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    scrollbar-color: #095b81;
+}
+
+/* FIM GLOBAL */
