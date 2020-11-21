@@ -3,6 +3,7 @@ var router = express.Router();
 var sequelize = require('../models').sequelize;
 var Usuario = require('../models').Usuario;
 
+
 let sessoes = [];
 
 /* Recuperar usuário por login e senha */
