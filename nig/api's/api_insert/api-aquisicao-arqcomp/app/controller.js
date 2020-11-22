@@ -77,8 +77,6 @@ router.get("/luminosity", (request, response, next) => {
 router.get("/sendData", (request, response) => {
 const temperature = ArduinoDataTemp.List[ArduinoDataTemp.List.length - 1];
 const Humidity = ArduinoDataHumidity.List[ArduinoDataHumidity.List.length - 1];
-//luminosidade = ArduinoDataLuminosity.List[ArduinoDataLuminosity.List.length -1]
-
 
 db.conectar()
     .then(() => {

@@ -1,7 +1,7 @@
 var configuracoes = {
     server: "SEU_BANCO_DE_DADOS.database.windows.net",
     user: "root",
-    password: "senha",
+    password: "0v4T5Ug64!",
     database: "bd_nig",
     options: {
       encrypt: true,
