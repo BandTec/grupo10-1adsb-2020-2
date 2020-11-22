@@ -1,9 +1,9 @@
 module.exports = {
   production: {
-    username: 'nig',
-    password: '#Gfgrupo10',
-    database: 'bd-grupo10',
-    host: 'bd-grupo10.database.windows.net',
+    username: 'nigteste',
+    password: '#Grupo10',
+    database: 'bd-nig-testes',
+    host: 'nigteste.database.windows.net',
     dialect: 'mssql',
     xuse_env_variable: 'DATABASE_URL',
     dialectOptions: {

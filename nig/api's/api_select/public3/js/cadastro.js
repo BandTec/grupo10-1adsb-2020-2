@@ -41,7 +41,8 @@ function cadastrar() {
         
         if (response.ok) {
 
-            window.location.href='login.html';
+            // window.location.href='../index.html';
+            logar();
 
         } else {
 
