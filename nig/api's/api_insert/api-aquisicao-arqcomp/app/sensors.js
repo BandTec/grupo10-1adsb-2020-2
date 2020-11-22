@@ -1,10 +1,10 @@
-function dht11(options){
+function dht11(){
 
-    minHumidity = options.minHum;
-    maxHumidity = options.maxHum;
+    minHumidity = 20;
+    maxHumidity = 80;
 
-    minTemperature = options.minTemp;
-    maxTemperature = options.maxTemp;
+    minTemperature = 0;
+    maxTemperature = 50;
 
     if (minHumidity < 20 || maxHumidity > 100) {
         throw new Error('Os valores minímos e máximos para umidade são 20% e 100% respectivamente.')

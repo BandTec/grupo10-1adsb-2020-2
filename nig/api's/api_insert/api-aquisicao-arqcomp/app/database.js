@@ -1,8 +1,8 @@
 var configuracoes = {
-    server: "SEU_BANCO_DE_DADOS.database.windows.net",
-    user: "root",
-    password: "0v4T5Ug64!",
-    database: "bd_nig",
+    server: "bd-grupo10.database.windows.net",
+    user: "nig",
+    password: "#Gfgrupo10",
+    database: "bd-grupo10",
     options: {
       encrypt: true,
       enableArithAbort: true,
@@ -15,7 +15,7 @@ var configuracoes = {
     },
 };
 
-var sql = require('mysql');
+var sql = require("mssql");
 sql.on("error", (err) => {
   console.error(`Erro de Conexão: ${err}`);
 });

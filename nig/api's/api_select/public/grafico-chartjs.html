@@ -90,14 +90,14 @@
     // altere aqui as configurações do gráfico
     // (tamanhos, cores, textos, etc)
     function configurarGrafico() {
-        var configuracoes = {
+        var configuracoes_temp = {
             responsive: true,
             animation: { duration: 500 },
             hoverMode: 'index',
             stacked: false,
             title: {
                 display: true,
-                text: 'Histórico recente de temperatura e umidade'
+                text: 'Histórico recente de temperatura'
             },
             scales: {
                 yAxes: [{
@@ -105,10 +105,27 @@
                     display: true,
                     position: 'left',
                     id: 'y-temperatura',
-                }, {
+                 // grid line settings
+                    gridLines: {
+                        drawOnChartArea: false, // only want the grid lines for one axis to show up
+                    },
+                }],
+            }
+        };
+        var configuracoes_umid = {
+            responsive: true,
+            animation: { duration: 500 },
+            hoverMode: 'index',
+            stacked: false,
+            title: {
+                display: true,
+                text: 'Histórico recente de umidade'
+            },
+            scales: {
+                yAxes: [{
                     type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
                     display: true,
-                    position: 'right',
+                    position: 'left',
                     id: 'y-umidade',
 
                     // grid line settings
@@ -119,7 +136,7 @@
             }
         };
 
-        return configuracoes;
+        return configuracoes_umid;
     }
 
     // altere aqui como os dados serão exibidos
