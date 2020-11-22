@@ -82,5 +82,5 @@ CREATE TABLE bd_nig.tb_dado_dht11 (
     umidade int not null,
     horario_captacao DATETIME NOT NULL,
     fk_sensor INT not null,
-		FOREIGN KEY (fk_sensor) REFERENCES bd_nig.tb_sensor_lm35(id_sensor_dht11)
+		FOREIGN KEY (fk_sensor) REFERENCES bd_nig.tb_sensor_dht11(id_sensor_dht11)
 );
