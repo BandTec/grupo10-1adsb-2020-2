@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const sequelize = require('../models').sequelize;
-const Funcionario	 = require('../models').Funcionario;
+const Funcionario = require('../models').Funcionario;
 
 let sessoes = [];
 
@@ -56,7 +56,7 @@ router.post('/cadastrar', function(req, res, next) {
 
 	console.log('Criando um usuário \n');
 	
-	Funcionario	.create({
+	Funcionario.create({
 		nome : req.body.nome, 
 		sobrenome: req.body.sobrenome,
 		telefone: req.body.telefone,
@@ -145,7 +145,7 @@ router.get('/', function(req, res, next) {
 
 	console.log('Recuperando todos os usuários \n');
 
-	Funcionario	.findAndCountAll().then(resultado => {
+	Funcionario.findAndCountAll().then(resultado => {
 		
 		console.log(`${resultado.count} registros \n`);
 

@@ -1,8 +1,6 @@
 const express = require("express");
-// const { ArduinoDataTemp } = require("./newserial");
+const { ArduinoDataTemp } = require("./newserial");
 const { ArduinoDataHumidity } = require("./serialHumidity");
-// const { ArduinoDataSwitch } = require("./serialSwitch");
-// const { ArduinoDataLuminosity} = require("./serialLuminosidity");
 const db = require("./database");
 const router = express.Router();
 
@@ -39,55 +37,23 @@ router.get("/humidity", (request, response, next) => {
   });
 });
 
-router.get("/switch", (request, response, next) => {
-  let sum = ArduinoDataSwitch.List.reduce((a, b) => a + b, 0);
-  let average = (sum / ArduinoDataSwitch.List.length).toFixed(2);
-  let sumHour = ArduinoDataSwitch.ListHour.reduce((a, b) => a + b, 0);
-  let averageHour = (sumHour / ArduinoDataSwitch.ListHour.length).toFixed(2);
-
-  response.json({
-    data: ArduinoDataSwitch.List,
-    total: ArduinoDataSwitch.List.length,
-    average: isNaN(average) ? 0 : average,
-    dataHour: ArduinoDataSwitch.ListHour,
-    totalHour: ArduinoDataSwitch.ListHour.length,
-    averageHour: isNaN(averageHour) ? 0 : averageHour,
-  });
-});
-
-router.get("/luminosity", (request, response, next) => {
-  let sum = ArduinoDataLuminosity.List.reduce((a, b) => a + b, 0);
-  let average = (sum / ArduinoDataLuminosity.List.length).toFixed(2);
-  let sumHour = ArduinoDataLuminosity.ListHour.reduce((a, b) => a + b, 0);
-  let averageHour = (sumHour / ArduinoDataLuminosity.ListHour.length).toFixed(
-    2
-  );
-
-  response.json({
-    data: ArduinoDataLuminosity.List,
-    total: ArduinoDataLuminosity.List.length,
-    average: isNaN(average) ? 0 : average,
-    dataHour: ArduinoDataLuminosity.ListHour,
-    totalHour: ArduinoDataLuminosity.ListHour.length,
-    averageHour: isNaN(averageHour) ? 0 : averageHour,
-  });
-
-});
-
 router.get("/sendData", (request, response) => {
 const temperature = ArduinoDataTemp.List[ArduinoDataTemp.List.length - 1];
 const Humidity = ArduinoDataHumidity.List[ArduinoDataHumidity.List.length - 1];
 
+console.log(temperature)
+console.log(Humidity);
+
 db.conectar()
     .then(() => {
         const sql = `
-        INSERT into dbo.leitura (temperatura, umidade, momento, idcaminhao)
+        INSERT into dbo.leitura (temperatura, umidade, horario_captacao, idcaminhao)
         values (${temperature+10}, ${Humidity+20}, '${agora()}', 1);
-        INSERT into dbo.leitura (temperatura, umidade, momento, idcaminhao)
+        INSERT into dbo.leitura (temperatura, umidade, horario_captacao, idcaminhao)
         values (${temperature-10}, ${Humidity+20}, '${agora()}', 2);
-        INSERT into dbo.leitura (temperatura, umidade, momento, idcaminhao)
+        INSERT into dbo.leitura (temperatura, umidade, horario_captacao, idcaminhao)
         values (${temperature+5}, ${Humidity-20}, '${agora()}', 3);
-        INSERT into dbo.leitura (temperatura, umidade, momento, idcaminhao)
+        INSERT into dbo.leitura (temperatura, umidade, horario_captacao, idcaminhao)
         values (${temperature-5}, ${Humidity-20}, '${agora()}', 4);`;
         console.log(sql);
     return db.sql.query(sql).then(()=>{
