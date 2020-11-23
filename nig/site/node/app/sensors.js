@@ -1,3 +1,6 @@
+<<<<<<< HEAD:nig/api's/api_insert/api-aquisicao-arqcomp/app/sensors.js
+function dht11(){
+=======
 function lm35(min, max) {
     min = typeof min == 'undefined' ? 18 : min;
     max = typeof max == 'undefined' ? 25 : max;
@@ -8,12 +11,13 @@ function lm35(min, max) {
 }
 
 function dht11(options){
+>>>>>>> 2545e93a36b23679b1f716655f76bf867d72b868:nig/site/node/app/sensors.js
 
-    minHumidity = options.minHum;
-    maxHumidity = options.maxHum;
+    minHumidity = 20;
+    maxHumidity = 80;
 
-    minTemperature = options.minTemp;
-    maxTemperature = options.maxTemp;
+    minTemperature = 0;
+    maxTemperature = 50;
 
     if (minHumidity < 20 || maxHumidity > 100) {
         throw new Error('Os valores minímos e máximos para umidade são 20% e 100% respectivamente.')
