@@ -55,7 +55,7 @@ function entrar() {
 
             console.log('Erro de login!');
 
-            response.text().then(texto => {
+            resposta.text().then(texto => {
                 console.error(texto);
                 finalizar_aguardar(texto);
             });
