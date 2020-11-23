@@ -7,6 +7,7 @@
 	<script src="http://www.chartjs.org/dist/2.7.1/Chart.js"></script>
 	<script src="http://www.chartjs.org/samples/latest/utils.js"></script>
 	<link rel="stylesheet" href="../css/dashboard.css">
+	<script src="../js/autenticar.js" ></script>
 	<script src="app/controller.js"></script> <!-- LINKANDO CONTROLLER.JS PARA CHAMAR A FUNÇÃO DOS ALERTAS -->
 	<style>
 		canvas {
@@ -30,7 +31,7 @@
 				<a href="dashconfig.html" id="help"><img src="../images/help-red.png" alt="help-ícone"></a>
 			</div>
 			<div class="icon_logout">
-				<a href="../index.html"><img src="../images/logout.png" alt=""></a>
+				<a href="../index.html"  onclick="logoff()"><img src="../images/logout.png" alt=""></a>
 			</div>
 		</div>
 	</div>
