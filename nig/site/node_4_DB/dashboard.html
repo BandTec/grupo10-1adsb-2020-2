@@ -1,0 +1,326 @@
+<html>
+
+<head>
+	<title>Dashboard</title>
+	<link rel="shortcut icon" href="../images/logo3.png" type="image/x-icon">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+	<script src="http://www.chartjs.org/dist/2.7.1/Chart.js"></script>
+	<script src="http://www.chartjs.org/samples/latest/utils.js"></script>
+	<link rel="stylesheet" href="../css/dashboard.css">
+	<script src="app/controller.js"></script> <!-- LINKANDO CONTROLLER.JS PARA CHAMAR A FUNÇÃO DOS ALERTAS -->
+	<style>
+		canvas {
+			-moz-user-select: none;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="sidebar">
+		<div class="logo_icons">
+			<div class="logo">
+				<img src="../images/logo4.png" alt=""></img>
+			</div>
+			<div class="icons">
+				<a href="../index.html" id="home"><img src="../images/home-icon.png" alt="home-icone"></a>
+				<a href="dashboard.html" id="graph"><img src="../images/chart-red.png" alt="grafico-icone"></a>
+				<a href="../settings.html" id="config"><img src="../images/settings-green.png"
+						alt="configurações-icone"></a>
+			</div>
+			<div class="icon_logout">
+				<a href="../index.html"><img src="../images/logout.png" alt=""></a>
+			</div>
+		</div>
+	</div>
+	<div class="containers">
+		<!-- GRAFICO TEMPERATURA -->
+		<div class="container_chart1">
+			<section>
+				<canvas id="chart"></canvas>
+			</section>
+			<section style="float: right; margin-right: 15px;">
+				<b style="color:white">Sensor LM35 - Temperatura</b>
+				<b style="color:white">Média: <label id='average'>0.00</label></b>
+				<b u style="color:white">Média Hora: <label id='averageHour'>0.00</label></b>
+			</section>
+		</div>
+		<!-- GRAFICO UMIDADE -->
+
+		<div class="container_chart2" style="padding-top: 20px; float: right;">
+			<section>
+				<canvas id="chart-humidity"></canvas>
+			</section>
+			<section style="float: right; margin-right: 15px; color: white;">
+				<!-- ******AQUI É ONDE IRA MOSTRAR O GRAFICO*****  -->
+				<b>Sensor DHT11 - Umidade</b>
+				<b>Média: <label id='averageHumidity'>0.00</label></b>
+				<b>Média Hora: <label id='averageHourHumidity'>0.00</label></b>
+			</section>
+		</div>
+		<!-- TABELA -->
+		<div class="container_table" style=" float: right;">
+			<table id="tbStatus">
+				<thead>
+					<tr>
+						<th>Gleba</th>
+						<th>Status Geral</th>
+						<th>Status Temperatura</th>
+						<th>Status Umidade</th>
+						<th>Número de Alertas</th>
+						<th>Status Sensor</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Gleba Oeste 1</td>
+						<td>IMAGEM</td>
+						<td>30ºC</td>
+						<td>35%</td>
+						<td>5</td>
+						<td>IMAGEM</td>
+					</tr>
+					<tr>
+						<td>Gleba Sul 1</td>
+						<td>IMAGEM</td>
+						<td>23ºC</td>
+						<td>60%</td>
+						<td>2</td>
+						<td>IMAGEM</td>
+					</tr>
+					<tr>
+						<td>Gleba Norte 1</td>
+						<td>IMAGEM</td>
+						<td>25ºC</td>
+						<td>28%</td>
+						<td>4</td>
+						<td>IMAGEM</td>
+					</tr>
+					<tr>
+						<td>Gleba Leste 1</td>
+						<td>IMAGEM</td>
+						<td>23ºC</td>
+						<td>80%</td>
+						<td>20</td>
+						<td>IMAGEM</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	</div>
+
+	</div>
+	<script>
+
+		var context = document.getElementById("chart").getContext("2d");
+		context.canvas.width = 700;
+		context.canvas.height = 150;
+
+		var configuration = {
+			type: 'line',
+			data: {
+				datasets: [{
+					label: "Temperatura x Tempo",
+					type: 'line',
+					borderColor: ['#ff3232'],
+					backgroundColor: ['transparent']
+				}]
+			},
+			options: {
+				scales: {
+					xAxes: [{
+						//type: 'value',
+						distribution: 'series',
+						ticks: {
+							beginAtZero: true
+						},
+						scaleLabel: {
+							display: true,
+							labelString: 'Minutos',
+							fontColor: 'gray'
+						},
+						gridLines: {
+							display: true,
+							color: "rgb(68, 140, 100, 0.1)"
+						},
+
+					}],
+					yAxes: [{
+						scaleLabel: {
+							display: true,
+							labelString: 'Temperatura',
+							fontColor: 'gray'
+						},
+						ticks: {
+							beginAtZero: true
+						},
+						gridLines: {
+							display: true,
+							color: "rgb(68, 140, 100, 0.5)"
+						},
+					}]
+				},
+				animation: {
+					duration: 0
+				}
+			}
+		};
+
+		var chart = new Chart(context, configuration);
+
+        //Função para obter os dados de temperatura do server
+               
+        //Esse atributo dentro do contexto serve para saber qual foi o último índice processado, assim eliminado os outros elementos na
+        //hora de montar/atualizar o gráfico
+        this.lastIndexTemp = 0;
+        this.time = 0;
+
+        function get_data(){
+			
+            var http = new XMLHttpRequest();
+            http.open('GET', 'http://localhost:3000/api/temperature', false);
+            http.send(null);        
+			
+            var obj = JSON.parse(http.responseText);
+            if (obj.data.length == 0){
+                return;
+            }
+
+            var _lastIndexTemp = this.lastIndexTemp;
+            this.lastIndexTemp = obj.data.length;
+            listTemp = obj.data.slice(_lastIndexTemp);
+		
+            listTemp.forEach(data => {
+                //Máximo de 60 itens exibidos no gráfico
+                if (chart.data.labels.length == 10 && chart.data.datasets[0].data.length == 10){
+                    chart.data.labels.shift();
+                    chart.data.datasets[0].data.shift();
+                }
+                chart.data.labels.push(this.time++);
+                chart.data.datasets[0].data.push(parseFloat(data));
+                chart.update();
+			});
+			
+			document.getElementById('average').textContent = obj.average;
+			document.getElementById('averageHour').textContent = obj.averageHour;
+		} 
+
+		get_data();
+
+		//Second Graphic
+
+		var context2 = document.getElementById("chart-humidity").getContext("2d");
+		context2.canvas.width = 700;
+		context2.canvas.height = 150;
+
+		var humidity = {
+			type: 'line',
+			data: {
+				datasets: [{
+					label: "Umidade x Tempo",
+					type: 'line',
+					borderColor: ['#3232ff'],
+					backgroundColor: ['transparent']
+				}]
+			},
+			options: {
+				scales: {
+					xAxes: [{
+						//type: 'value',
+						distribution: 'series',
+						ticks: {
+							beginAtZero: true
+						},
+						scaleLabel: {
+							display: true,
+							labelString: 'Minutos',
+							fontColor: 'gray',
+						},
+						gridLines: {
+							display: true,
+							color: "rgb(68, 140, 100, 0.1)"
+						}
+					}],
+					yAxes: [{
+						scaleLabel: {
+							display: true,
+							labelString: 'Umidade',
+							fontColor: 'gray',
+						},
+						ticks: {
+							beginAtZero: true
+						},
+						gridLines: {
+							display: true,
+							color: "rgb(68, 140, 100, 0.5)"
+						}
+					}]
+				},
+				animation: {
+					duration: 0
+				}
+			}
+		};
+
+		var chartHumidity = new Chart(context2, humidity);
+        //Função para obter os dados de temperatura do server
+        
+        
+        //Esse atributo dentro do contexto serve para saber qual foi o último índice processado, assim eliminado os outros elementos na
+        //hora de montar/atualizar o gráfico
+        this.lastIndexTempHumidity = 0;
+        this.timeHumidity = 0;
+
+        function get_dataHumidity(){
+
+            var http = new XMLHttpRequest();
+            http.open('GET', 'http://localhost:3000/api/humidity', false);
+            http.send(null);        
+			
+            var obj = JSON.parse(http.responseText);
+            if (obj.data.length == 0){
+                return;
+            }
+
+            var _lastIndexTemp = this.lastIndexTempHumidity;
+            this.lastIndexTempHumidity = obj.data.length;
+            listTemp = obj.data.slice(_lastIndexTemp);
+
+            listTemp.forEach(data => {
+                //Máximo de 60 itens exibidos no gráfico
+                if (chartHumidity.data.labels.length == 10 && chartHumidity.data.datasets[0].data.length == 10){
+                    chartHumidity.data.labels.shift();
+                    chartHumidity.data.datasets[0].data.shift();
+                }
+
+                chartHumidity.data.labels.push(this.time++);
+                chartHumidity.data.datasets[0].data.push(parseFloat(data));
+                chartHumidity.update();
+			});
+			
+			document.getElementById('averageHumidity').textContent = obj.average;
+			document.getElementById('averageHourHumidity').textContent = obj.averageHour;
+		} 
+		
+		get_dataHumidity();
+
+		function sendTemperature(){
+			var http = new XMLHttpRequest();
+            http.open('POST', 'http://localhost:3000/api/sendData', false);
+            http.send(null);
+		}
+
+        setInterval(() => {
+			get_data();
+			get_dataHumidity();
+			sendTemperature();
+			teste(); // AQUI SERA CHAMADA A FUNÇÃO DOS ALERTAS, QUE ESTÁ EM CONTROLLER.JS
+		}, 3000);
+		
+
+	</script>
+</body>
+
+</html>
