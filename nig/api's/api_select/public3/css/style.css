@@ -45,13 +45,14 @@ a {color: azure; text-decoration: none;}
 .areaAtuacao{width: 25%; font-size: 15px; padding: 10px; background-color: rgb(218, 155, 53, 0.700);}
 
 .hld{
-    width: 55%;
-    margin-left: 60px;
-    border-radius: 15%;
+    width: 45%;
+    border-radius: 5%;
     border-right: #059ee6 solid 3px;
     border-left: #059ee6 solid 3px;
-    margin-left: 22.5%;
+    float: right;
+    
 }
+.text_inst{text-align: justify; width: 50%; float: left; padding-top: 5%;}
 /* FIM PÁGINA SOBRE */
 
 /* ÍNICIO MENU / HEADER */
