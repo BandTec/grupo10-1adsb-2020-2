@@ -7,7 +7,7 @@
 	<script src="http://www.chartjs.org/dist/2.7.1/Chart.js"></script>
 	<script src="http://www.chartjs.org/samples/latest/utils.js"></script>
 	<link rel="stylesheet" href="../css/dashboard.css">
-	<script src="../js/autenticar.js" ></script>
+	<script src="../js/autenticar.js"></script>
 	<script src="app/controller.js"></script> <!-- LINKANDO CONTROLLER.JS PARA CHAMAR A FUNÇÃO DOS ALERTAS -->
 	<style>
 		canvas {
@@ -41,7 +41,7 @@
 		<!-- GRAFICO TEMPERATURA -->
 		<div class="container_chart1">
 			<section>
-				<canvas id="chart"></canvas>
+				<canvas id="canvas_grafico"></canvas>
 			</section>
 			<section style="float: right; margin-right: 15px;">
 				<b style="color:white">Sensor LM35 - Temperatura</b>
@@ -332,195 +332,196 @@
 
 <script>
 
-    let proximaAtualizacao;
+	let proximaAtualizacao;
 
-    window.onload = obterDadosGraficoPrimeiraVez(1);
-
-
-    function chamargraficos(id) {
-
-        obterDadosGraficoPrimeiraVez(id)
-        //atualizarGrafico(id)
-
-    }
-
-    verificar_autenticacao();
-
-    // neste JSON tem que ser 'labels', 'datasets' etc, 
-    // porque é o padrão do Chart.js
+	window.onload = obterDadosGraficoPrimeiraVez(1);
 
 
 
-    // altere aqui as configurações do gráfico
-    // (tamanhos, cores, textos, etc)
-    function configurarGrafico() {
-        var configuracoes_temp = {
-            responsive: true,
-            animation: { duration: 500 },
-            hoverMode: 'index',
-            stacked: false,
-            title: {
-                display: true,
-                text: 'Histórico recente de temperatura'
-            },
-            scales: {
-                yAxes: [{
-                    type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
-                    display: true,
-                    position: 'left',
-                    id: 'y-temperatura',
-                 // grid line settings
-                    gridLines: {
-                        drawOnChartArea: false, // only want the grid lines for one axis to show up
-                    },
-                }],
-            }
-        };
-        var configuracoes_umid = {
-            responsive: true,
-            animation: { duration: 500 },
-            hoverMode: 'index',
-            stacked: false,
-            title: {
-                display: true,
-                text: 'Histórico recente de umidade'
-            },
-            scales: {
-                yAxes: [{
-                    type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
-                    display: true,
-                    position: 'left',
-                    id: 'y-umidade',
+	function chamargraficos(id_dados) {
 
-                    // grid line settings
-                    gridLines: {
-                        drawOnChartArea: false, // only want the grid lines for one axis to show up
-                    },
-                }],
-            }
-        };
+		obterDadosGraficoPrimeiraVez(id_dados)
+		//atualizarGrafico(id)
 
-        return configuracoes_umid;
-    }
+	}
 
-    // altere aqui como os dados serão exibidos
-    // e como são recuperados do BackEnd
-    function obterDadosGraficoPrimeiraVez(id) {
+	verificar_autenticacao();
 
-        if (proximaAtualizacao != undefined) {
-            clearTimeout(proximaAtualizacao);
-        }
-
-        fetch(`/leituras/ultimas/${id}`, { cache: 'no-store' }).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (resposta) {
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    resposta.reverse();
-
-                    var dados = {
-                        labels: [],
-                        datasets: [
-                            {
-                                yAxisID: 'y-temperatura',
-                                label: 'Temperatura',
-                                borderColor: window.chartColors.red,
-                                backgroundColor: window.chartColors.red,
-                                fill: false,
-                                data: []
-                            },
-                            {
-                                yAxisID: 'y-umidade',
-                                label: 'Umidade',
-                                borderColor: window.chartColors.blue,
-                                backgroundColor: window.chartColors.blue,
-                                fill: false,
-                                data: []
-                            }
-                        ]
-                    };
-                    for (i = 0; i < resposta.length; i++) {
-                        var registro = resposta[i];
-                        dados.labels.push(registro.momento_grafico);
-                        dados.datasets[0].data.push(registro.temperatura);
-                        dados.datasets[1].data.push(registro.umidade);
-
-                    }
-                    console.log(JSON.stringify(dados));
-                    div_aguarde.style.display = 'none';
-                    plotarGrafico(dados, id);
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
-
-    }
+	// neste JSON tem que ser 'labels', 'datasets' etc, 
+	// porque é o padrão do Chart.js
 
 
 
-    // só mexer se quiser alterar o tempo de atualização
-    // ou se souber o que está fazendo!
-    function atualizarGrafico(id, dados) {
+	// altere aqui as configurações do gráfico
+	// (tamanhos, cores, textos, etc)
+	function configurarGrafico() {
+		var configuracoes_temp = {
+			responsive: true,
+			animation: { duration: 500 },
+			hoverMode: 'index',
+			stacked: false,
+			title: {
+				display: true,
+				text: 'Histórico recente de temperatura'
+			},
+			scales: {
+				yAxes: [{
+					type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
+					display: true,
+					position: 'left',
+					id: 'y-temperatura',
+					// grid line settings
+					gridLines: {
+						drawOnChartArea: false, // only want the grid lines for one axis to show up
+					},
+				}],
+			}
+		};
+		var configuracoes_umid = {
+			responsive: true,
+			animation: { duration: 500 },
+			hoverMode: 'index',
+			stacked: false,
+			title: {
+				display: true,
+				text: 'Histórico recente de umidade'
+			},
+			scales: {
+				yAxes: [{
+					type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
+					display: true,
+					position: 'left',
+					id: 'y-umidade',
 
-        fetch(`/leituras/tempo-real/${id}`, { cache: 'no-store' }).then(function (response) {
-            console.log("Estou tentando pegar id = ", id)
-            if (response.ok) {
-                response.json().then(function (novoRegistro) {
+					// grid line settings
+					gridLines: {
+						drawOnChartArea: false, // only want the grid lines for one axis to show up
+					},
+				}],
+			}
+		};
 
-                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-                    console.log(`Dados atuais do gráfico: ${dados}`);
+		return configuracoes_umid;
+	}
 
-                    // tirando e colocando valores no gráfico
-                    dados.labels.shift(); // apagar o primeiro
-                    dados.labels.push(novoRegistro.momento_grafico); // incluir um novo momento
-                    dados.datasets[0].data.shift();  // apagar o primeiro de temperatura
-                    dados.datasets[1].data.shift();  // apagar o primeiro de umidade
-                    dados.datasets[0].data.push(novoRegistro.temperatura); // incluir uma nova leitura de temperatura
-                    dados.datasets[1].data.push(novoRegistro.umidade); // incluir uma nova leitura de umidade
+	// altere aqui como os dados serão exibidos
+	// e como são recuperados do BackEnd
+	function obterDadosGraficoPrimeiraVez(id_dados) {
 
-                    console.log("meu caminhão é o " + id)
+		if (proximaAtualizacao != undefined) {
+			clearTimeout(proximaAtualizacao);
+		}
 
-                    window.grafico_linha.update();
+		fetch(`/Dados_sensor/ultimas/${id_dados}`, { cache: 'no-store' }).then(function (response) {
+			if (response.ok) {
+				response.json().then(function (resposta) {
+					console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+					resposta.reverse();
+
+					var dados = {
+						labels: [],
+						datasets: [
+							{
+								yAxisID: 'y-temperatura',
+								label: 'Temperatura',
+								borderColor: window.chartColors.red,
+								backgroundColor: window.chartColors.red,
+								fill: false,
+								data: []
+							},
+							{
+								yAxisID: 'y-umidade',
+								label: 'Umidade',
+								borderColor: window.chartColors.blue,
+								backgroundColor: window.chartColors.blue,
+								fill: false,
+								data: []
+							}
+						]
+					};
+					for (i = 0; i < resposta.length; i++) {
+						var registro = resposta[i];
+						dados.labels.push(registro.momento_grafico);
+						dados.datasets[0].data.push(registro.temperatura);
+						dados.datasets[1].data.push(registro.umidade);
+
+					}
+					console.log(JSON.stringify(dados));
+					div_aguarde.style.display = 'none';
+					plotarGrafico(dados, id_dados);
+				});
+			} else {
+				console.error('Nenhum dado encontrado ou erro na API');
+			}
+		})
+			.catch(function (error) {
+				console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+			});
+
+	}
 
 
-                    proximaAtualizacao = setTimeout(() => atualizarGrafico(id, dados), 5000);
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-                proximaAtualizacao = setTimeout(() => atualizarGrafico(id, dados), 5000);
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
 
-    }
+	// só mexer se quiser alterar o tempo de atualização
+	// ou se souber o que está fazendo!
+	function atualizarGrafico(id_dados, dados) {
 
-    // só altere aqui se souber o que está fazendo!
-    function plotarGrafico(dados, id) {
-        console.log('iniciando plotagem do gráfico...');
+		fetch(`/leituras/tempo-real/${id_dados}`, { cache: 'no-store' }).then(function (response) {
+			console.log("Estou tentando pegar id = ", id_dados)
+			if (response.ok) {
+				response.json().then(function (novoRegistro) {
 
-        var ctx = canvas_grafico.getContext('2d');
-        window.grafico_linha = Chart.Line(ctx, {
-            data: dados,
-            options: configurarGrafico()
-        });
+					console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+					console.log(`Dados atuais do gráfico: ${dados}`);
 
-        setTimeout(() => atualizarGrafico(id, dados), 2000);
-    }
+					// tirando e colocando valores no gráfico
+					dados.labels.shift(); // apagar o primeiro
+					dados.labels.push(novoRegistro.momento_grafico); // incluir um novo momento
+					dados.datasets[0].data.shift();  // apagar o primeiro de temperatura
+					dados.datasets[1].data.shift();  // apagar o primeiro de umidade
+					dados.datasets[0].data.push(novoRegistro.temperatura); // incluir uma nova leitura de temperatura
+					dados.datasets[1].data.push(novoRegistro.umidade); // incluir uma nova leitura de umidade
+
+					console.log("meu sensor é o " + id_dados)
+
+					window.grafico_linha.update();
 
 
-    function sendData() {
-        var http = new XMLHttpRequest();
-        http.open('GET', 'http://localhost:9000/api/sendData', false);
-        http.send(null);
-    }
+					proximaAtualizacao = setTimeout(() => atualizarGrafico(id_dados, dados), 5000);
+				});
+			} else {
+				console.error('Nenhum dado encontrado ou erro na API');
+				proximaAtualizacao = setTimeout(() => atualizarGrafico(id_dados, dados), 5000);
+			}
+		})
+			.catch(function (error) {
+				console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+			});
 
-    setInterval(() => {
-        sendData();
-    }, 2000);
+	}
+
+	// só altere aqui se souber o que está fazendo!
+	function plotarGrafico(dados, id_dados) {
+		console.log('iniciando plotagem do gráfico...');
+
+		var ctx = canvas_grafico.getContext('2d');
+		window.grafico_linha = Chart.Line(ctx, {
+			data: dados,
+			options: configurarGrafico()
+		});
+
+		setTimeout(() => atualizarGrafico(id_dados, dados), 2000);
+	}
+
+
+	function sendData() {
+		var http = new XMLHttpRequest();
+		http.open('GET', 'http://localhost:9000/api/sendData', false);
+		http.send(null);
+	}
+
+	setInterval(() => {
+		sendData();
+	}, 2000);
 
 </script>
