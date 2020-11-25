@@ -211,18 +211,22 @@ a {color: azure; text-decoration: none;}
     border: black 1px solid;
     resize: none;
     border-radius: 10px;
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
 .form_contact .btn{
     background-color: #b34933;
     border-color: #b34933;
     border-radius: 5px;
     width: 25%;
-    margin-top: 5%;
+    margin-top: 2%;
     text-align: center;
     font-size: 18px;
     color: #f8f8d0;
     padding: 8px;
 }
+
+.div_noneForm{background-color: #b34933; color: white; padding: 5px; width: 70%; margin-bottom: 5px;}
 /* FIM FORMULÁRIO CONTATO */
 
 /* ÍNICIO BARRA DE ROLAGEM */

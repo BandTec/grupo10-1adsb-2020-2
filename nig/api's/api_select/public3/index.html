@@ -313,18 +313,19 @@
             </div>
         </div>
         <div class="container" id="contato">
-            <form class="form_contact" action="/cadastro" method="POST">
+            <form class="form_contact" action="/cadastro" method="POST" onsubmit="return contato()" name="form_contato" novalidate>
                 <label for="inp_email">Insira seu email:</label>
-                <input type="email" id="inp_email" class="campoEntradaForm" required>
+                <input type="email" id="inp_email" name="email_cont" class="campoEntradaForm" required>
 
                 <label for="inp_nome">Insira seu nome:</label>
-                <input type="text" id="inp_nome" class="campoEntradaForm" required>
+                <input type="text" id="inp_nome" name="nome_cont" oninput="validandoNome()" maxlength="30" class="campoEntradaForm" required>
 
                 <label for="txt_area">Digite sua mensagem</label>
-                <textarea id="txt_area" cols="30" rows="10" class="campoEntradaForm" required></textarea>
-                <label for="">
-                    <input type="checkbox" checked>Receber notificação por email.
-                </label>
+                <textarea id="txt_area" cols="30" rows="10" oninput="validandoMsg()" name="mensagem_cont" maxlength="256" class="campoEntradaForm" required></textarea>
+                <br><p>Restam <strong id="caracter_rest">256</strong> caracteres!</p>
+                <div id="div_msgEmail" style="display: none;" class="div_noneForm">"Insira um endereço de e-mail válido!"</div>
+                <div id="div_msgNome" style="display: none;" class="div_noneForm">"Nome não informado, por favor preencha este campo!"</div>
+                <div id="div_msgMensagem" style="display: none;" class="div_noneForm">"Mensagem não informada!"</div>
                 <br> <button type="submit" class="btn">Enviar</button>
             </form>
         </div>
@@ -341,6 +342,41 @@
     </div>
 
 </body>
-
 </html>
 
+<script>
+    
+    function contato(){
+        var email = form_contato.email_cont.value;
+        var nome = form_contato.nome_cont.value;
+        var mensagem = form_contato.mensagem_cont.value;
+        
+        div_msgEmail.style = "display: none";
+        div_msgNome.style = "display: none";
+        div_msgMensagem.style = "display: none";
+
+        if (email == "" || email.indexOf('.') == -1 || email.indexOf('@') == -1) {
+            div_msgEmail.style = "display: block";
+            return false;
+        }
+        else if(nome == ""){
+            div_msgNome.style = "display: block";
+            return false;
+        }
+        else if(mensagem == ""){
+            div_msgMensagem.style = "display: block";
+            return false;
+        }
+        return true;
+    } 
+    function validandoMsg(){
+        let qtd = txt_area.value.length;
+        let rest = 256 - qtd;
+        caracter_rest.innerHTML = rest;
+    }
+    function validandoNome(){
+        let qtd = inp_nome.value.length;
+        let rest = 30 - qtd;
+    }
+
+</script>
