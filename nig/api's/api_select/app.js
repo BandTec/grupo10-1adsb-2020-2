@@ -4,10 +4,12 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const contato = require("./models/contato");
 
 const indexRouter = require('./routes/index');
 const usuariosRouter = require('./routes/usuarios');
 const leiturasRouter = require('./routes/leituras');
+const { json } = require('sequelize');
 
 const app = express();
 
@@ -20,5 +22,16 @@ app.use(express.static(path.join(__dirname, 'public3')));
 app.use('/', indexRouter);
 app.use('/usuarios', usuariosRouter);
 app.use('/leituras', leiturasRouter);
+app.post('/contato', function(req,res){
+    contato.create({
+        email: req.body.email_cont,
+        nome: req.body.nome_cont,
+        mensagem: req.body.mensagem_cont
+    }).then(function(){
+        res.send(console.log("Comentário gerado com sucesso!"));
+    }).catch(function(erro){
+        res.send("Erro: falha no envio do comentário!" +erro)
+    })
+});
 
 module.exports = app;
