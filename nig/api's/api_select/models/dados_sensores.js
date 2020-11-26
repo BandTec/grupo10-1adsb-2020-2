@@ -6,7 +6,7 @@ https://codewithhugo.com/sequelize-data-types-a-practical-guide/
 */
 
 module.exports = (sequelize, DataTypes) => {
-    let Dados_sensor = sequelize.define('dados_sensor',{
+    let Dados_sensor = sequelize.define('Dados_sensor',{
 		id_dados: {
 			field: 'id_dados',
 			type: DataTypes.INTEGER,
@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
         }
 	}, 
 	{
-		tableName: 'dados_sensor', 
+		tableName: 'Dados_sensor', 
 		freezeTableName: true, 
 		underscored: true,
 		timestamps: true,
