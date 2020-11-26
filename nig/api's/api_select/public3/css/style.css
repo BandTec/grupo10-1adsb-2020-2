@@ -42,7 +42,22 @@ a {color: azure; text-decoration: none;}
 }
 .direita{margin-right: 5%; margin-left: 5%; text-align: justify;}
 
-.areaAtuacao{width: 25%; font-size: 15px; padding: 10px; background-color: rgb(218, 155, 53, 0.700);}
+.areaAtuacao{width: 25%; font-size: 15px; padding: 10px; -webkit-appearance: none; background-color: rgb(218, 155, 53, 0.700); border-radius: 5px;}
+.areaAtuacao option{background-color: rgb(171,163,124); }
+
+.div_areas img{width: 600px; height: 400px; padding-top: 5%;}
+.div_textEsquerda{text-align: justify; width: 45%; float: left; padding-top: 12%;}
+.div_textDireita{text-align: justify; width: 45%; float: right; padding-top: 12%;}
+.div_imgDireita{
+    width: 40%;
+    border-radius: 5%;
+    float: right;
+}
+.div_imgEsquerda{
+    width: 40%;
+    border-radius: 5%;
+    float: left;
+}
 
 .hld{
     width: 45%;
@@ -53,6 +68,7 @@ a {color: azure; text-decoration: none;}
     
 }
 .text_inst{text-align: justify; width: 50%; float: left; padding-top: 5%;}
+
 /* FIM PÁGINA SOBRE */
 
 /* ÍNICIO MENU / HEADER */

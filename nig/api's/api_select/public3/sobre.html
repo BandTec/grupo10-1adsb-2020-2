@@ -189,16 +189,41 @@
                     curiosidades que reforçam essa característica típica da região são os troncos das árvores do cerrado
                     que contém uma casca grossa, o que já não acontece nas regiões de Mata Atlântica.
                     <br /><br /><br />
-                    <select class="areaAtuacao">
-                        <option>Verifique nossas áreas de atuação:</option>
-                        <option>Mata Atlântica</option>
-                        <option>Cerrado</option>
-                        <option>Pantanal</option>
-                        <option>Plantações</option>
-                        <option>Parques Estaduais</option>
-                        <option>Reservas ambientais</option>
+                    <select class="areaAtuacao" id="atuacao" onchange="area()">
+                        <option value="Selecione">Selecione nossas áreas de atuação:</option>
+                        <option value="Mata Atlantica">Mata Atlântica</option>
+                        <option value="Cerrado">Cerrado</option>
+                        <option value="Pantanal">Pantanal</option>
+                        <option value="Plantações">Plantações</option>
+                        <option value="Parques Estaduais">Parques Estaduais</option>
+                        <option value="Reservas Ambientais">Reservas ambientais</option>
                     </select>
-
+                    <div class="div_areas">
+                        <div id="cerrado" style="display: none;">
+                            <p class="div_textEsquerda">Cerrado é o nome dado às savanas brasileiras caracterizadas por árvores baixas, arbustos espaçados e gramíneas, e pode ser classificado como cerradão, cerrado típico, campo cerrado, campo sujo de cerrado ou campo limpo, sendo que o cerradão é o único que apresenta formação florestal.</p>
+                            <img src="images/cerrado1.jpg" alt="Cerrado" class="div_imgDireita">
+                        </div>
+                        <div id="mataAtlant" style="display: none;">
+                            <img src="images/mataAtlan.jpeg" alt="Mata Atlantica" class="div_imgEsquerda">
+                            <p class="div_textDireita">A Mata Atlântica é um bioma que cobria uma área de 15% do território brasileiro, área essa que incluía os estados de Alagoas, Bahia, Ceará, Espírito Santo, Goiás, Mato Grosso do Sul, Minas Gerais, Paraíba, Paraná, Pernambuco, Piauí, Rio de Janeiro, Rio Grande do Norte, Rio Grande do Sul, Santa Catarina, São Paulo e Sergipe. Originalmente, o referido bioma cobria uma área superior a 1,3 milhões de km2.</p>
+                        </div>
+                        <div id="pantanal" style="display: none;">
+                            <img src="images/pantanal.png" alt="Pantanal" class="div_imgDireita">
+                            <p class="div_textEsquerda">Pantanal ou Complexo do Pantanal é o menor bioma brasileiro e a maior planície de inundação do mundo com 250 mil km² de extensão. Considerado pela UNESCO "Patrimônio Natural Mundial" e "Reserva da Biosfera", essa região possui grande biodiversidade.</p>
+                        </div>
+                        <div id="plantacoes" style="display: none;">
+                            <img src="images/plantacao.png" alt="Plantação" class="div_imgEsquerda">
+                            <p class="div_textDireita">Dos principais produtos agropecuários do Brasil, cabe destaque para a cana-de-açúcar, o café e a laranja, dos quais somos os maiores produtores mundiais; a soja, o fumo e a carne bovina – encontramos-nos na segunda posição internacional; e o milho, produto em que o Brasil é o terceiro país em volume de produção anual.</p>
+                        </div>
+                        <div id="parqEstad" style="display: none;">
+                            <img src="images/parqueestadual.png" alt="Parque Estadual" class="div_imgDireita">
+                            <p class="div_textEsquerda">No Brasil, parque estadual é a denominação dada às unidades de conservação de proteção integral da natureza pertencentes à categoria "parque nacional" do Sistema Nacional de Unidades de Conservação da Natureza, quando criadas na esfera administrativa estadual. </p>
+                        </div>
+                        <div id="reserAmb" style="display: none;">
+                            <img src="images/reserva.png" alt="Reserva Ambiental" class="div_imgEsquerda">
+                            <p class="div_textDireita">As unidades de conservação ambiental são espaços geralmente formados por áreas contínuas, institucionalizados com o objetivo de preservar e conservar a flora, a fauna, os recursos hídricos, as características geológicas, culturais, as belezas naturais, recuperar ecossistemas degradados, promover o desenvolvimento sustentável, entre outros fatores que contribuem para a preservação ambiental.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -217,3 +242,36 @@
 </body>
 
 </html>
+
+<script>
+    function area(){
+        cerrado.style = "display: none";
+        mataAtlant.style = "display: none";
+        pantanal.style = "display: none";
+        plantacoes.style = "display: none";
+        parqEstad.style = "display: none";
+        reserAmb.style = "display: none";
+
+        if(atuacao.value == "Mata Atlantica"){
+            mataAtlant.style = "display: block";
+        }
+        else if(atuacao.value == "Parques Estaduais"){
+            parqEstad.style = "display: block";
+        }
+        else if(atuacao.value == "Reservas Ambientais"){
+            reserAmb.style = "display: block";
+        }
+        else if(atuacao.value == "Plantações"){
+            plantacoes.style = "display: block";
+        }
+        else if(atuacao.value == "Pantanal"){
+            pantanal.style = "display: block";
+        }
+        else if(atuacao.value == "Cerrado"){
+            cerrado.style = "display: block";
+        }
+        else if(atuacao.value == "Selecione"){
+            alert("Por favor, selecione uma área de atuação!");
+        }
+    }
+</script>
