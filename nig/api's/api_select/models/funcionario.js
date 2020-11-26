@@ -55,7 +55,7 @@ module.exports = (sequelize, DataTypes) => {
 		},
 	}, 
 	{
-		tableName: 'funcionario', 
+		tableName: 'Funcionario', 
 		freezeTableName: true, 
 		underscored: true,
 		timestamps: false,
