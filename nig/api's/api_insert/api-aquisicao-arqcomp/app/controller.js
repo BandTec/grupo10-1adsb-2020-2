@@ -38,42 +38,44 @@ router.get("/humidity", (request, response, next) => {
 });
 
 router.get("/sendData", (request, response) => {
-const temperature = ArduinoDataTemp.List[ArduinoDataTemp.List.length - 1];
-const Humidity = ArduinoDataHumidity.List[ArduinoDataHumidity.List.length - 1];
+  let teste = Math.random()* 45;
+  // let temperature = ArduinoDataTemp.List[ArduinoDataTemp.List.length - 1];
+  let Humidity = ArduinoDataHumidity.List[ArduinoDataHumidity.List.length - 1];
 
-console.log(temperature)
-console.log(Humidity);
+  console.log(temperature);
+  console.log(teste);
+  console.log(Humidity);
 
-db.conectar()
+  db.conectar()
     .then(() => {
-        const sql = `
-        INSERT into Dados_sensor (temperatura, umidade, horario_captacao, id_dados)
-        values (${temperature+10}, ${Humidity+20}, '${agora()}', 1);
-        INSERT into Dados_sensor (temperatura, umidade, horario_captacao, id_dados)
-        values (${temperature-10}, ${Humidity+20}, '${agora()}', 2);
-        INSERT into Dados_sensor (temperatura, umidade, horario_captacao, id_dados)
-        values (${temperature+5}, ${Humidity-20}, '${agora()}', 3);
-        INSERT into Dados_sensor (temperatura, umidade, horario_captacao, id_dados)
-        values (${temperature-5}, ${Humidity-20}, '${agora()}', 4);`;
-        console.log(sql);
-    return db.sql.query(sql).then(()=>{
+      const sql = `
+        INSERT into Dados_sensor(temperatura, umidade, horario_captacao)
+        values (${Math.trunc(teste)}, ${Math.trunc(Humidity)}, '${agora()}');`;
+      /*INSERT into Dados_sensor (temperatura, umidade, horario_captacao, id_dados)
+      values (${temperature-10}, ${Humidity+20}, '${agora()}', 2);
+      INSERT into Dados_sensor (temperatura, umidade, horario_captacao, id_dados)
+      values (${temperature+5}, ${Humidity-20}, '${agora()}', 3);
+      INSERT into Dados_sensor (temperatura, umidade, horario_captacao, id_dados)
+      values (${temperature-5}, ${Humidity-20}, '${agora()}', 4);*/
+      console.log(sql);
+      return db.sql.query(sql).then(() => {
         console.log("Registro inserido com sucesso! \n");
-    });;
+      });
     })
     .catch((erro) => {
-    console.error(`Erro ao tentar registrar aquisição na base: ${erro}`);
+      console.error(`Erro ao tentar registrar aquisição na base: ${erro} \n`);
     })
     .finally(() => {
-    db.sql.close();
+      db.sql.close();
     });
 
-response.sendStatus(200);
+  response.sendStatus(200);
 });
 
 
 function agora() {
-    const agora_d = new Date();
-    return `${agora_d.getFullYear()}-${agora_d.getMonth()+1}-${agora_d.getDate()} ${agora_d.getHours()}:${agora_d.getMinutes()}:${agora_d.getSeconds()}`;
+  const agora_d = new Date();
+  return `${agora_d.getFullYear()}-${agora_d.getMonth() + 1}-${agora_d.getDate()} ${agora_d.getHours()}:${agora_d.getMinutes()}:${agora_d.getSeconds()}`;
 }
 
 module.exports = router;
