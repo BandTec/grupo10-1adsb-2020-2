@@ -20,11 +20,11 @@
     <!-- INICIO CAMPO DE LOGIN -->
     <a href="index.html"><i class="fas fa-arrow-left"></i></a>
     <div class="div_cad">
-        <form id="form_login" method="post" onclick="return entrar()">
+        <form id="form_login" method="post" onsubmit="return entrar()">
             <h2>Login</h2>
             <p>
                 <label for="login_email">Email:</label><br>
-                <input id="login_email" type="text" name="login" placeholder="Insira seu e-mail:" required>
+                <input type="text" name="email" placeholder="Insira seu e-mail:" required>
             </p>
             <p>
                 <label for="login_senha">Senha:</label><br>
@@ -32,13 +32,14 @@
             </p>
 
             <div class="botoes">
-                <button id="btn_entrar" type="button">Entrar</button><br><br>
+                <button id="btn_entrar" type="submit">Entrar</button><br><br>
             </div>
         </form>
-        <div class="btnCad">Ainda não tem conta?<a onclick="cadastrar_animacao()">Cadastre-se</a></div>
+        <div>Ainda não tem conta?<a onclick="cadastrar_animacao()"> Cadastre-se</a></div>
     </div>
 </div>
 <!-- FIM CAMPO DE LOGIN -->
+
 <!-- CAMPO DE CADASTRO -->
 <div class="cadastro div_cad" id="tela_cadastro" style="display: none;">
     <form id="form_cadastro" method="post" onclick="return cadastrar()">
