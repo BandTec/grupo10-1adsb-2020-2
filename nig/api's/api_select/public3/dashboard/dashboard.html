@@ -50,17 +50,17 @@
 		</div>
 		<!-- GRAFICO UMIDADE -->
 
-		<div class="container_chart2" style="padding-top: 20px; float: right;">
+		<!-- <div class="container_chart2" style="padding-top: 20px; float: right;">
 			<section>
 				<canvas id="chart-humidity"></canvas>
 			</section>
-			<section style="float: right; margin-right: 15px; color: white;">
+			<section style="float: right; margin-right: 15px; color: white;"> -->
 				<!-- ******AQUI É ONDE IRA MOSTRAR O GRAFICO*****  -->
-				<b>Sensor DHT11 - Umidade</b>
+				<!-- <b>Sensor DHT11 - Umidade</b>
 				<b>Média: <label id='averageHumidity'>0.00</label></b>
 				<b>Média Hora: <label id='averageHourHumidity'>0.00</label></b>
 			</section>
-		</div>
+		</div> -->
 		<!-- TABELA -->
 		<div class="container_table" style=" float: right;">
 			<table id="tbStatus">
@@ -114,217 +114,7 @@
 	</div>
 
 	</div>
-	<!-- <script>
-
-		var context = document.getElementById("chart").getContext("2d");
-		context.canvas.width = 700;
-		context.canvas.height = 150;
-
-		var configuration = {
-			type: 'line',
-			data: {
-				datasets: [{
-					label: "Temperatura x Tempo",
-					type: 'line',
-					borderColor: ['#ff3232'],
-					backgroundColor: ['transparent']
-				}]
-			},
-			options: {
-				scales: {
-					xAxes: [{
-						//type: 'value',
-						distribution: 'series',
-						ticks: {
-							beginAtZero: true
-						},
-						scaleLabel: {
-							display: true,
-							labelString: 'Minutos',
-							fontColor: 'gray'
-						},
-						gridLines: {
-							display: true,
-							color: "rgb(68, 140, 100, 0.1)"
-						},
-
-					}],
-					yAxes: [{
-						scaleLabel: {
-							display: true,
-							labelString: 'Temperatura',
-							fontColor: 'gray'
-						},
-						ticks: {
-							beginAtZero: true
-						},
-						gridLines: {
-							display: true,
-							color: "rgb(68, 140, 100, 0.5)"
-						},
-					}]
-				},
-				animation: {
-					duration: 0
-				}
-			}
-		};
-
-		var chart = new Chart(context, configuration);
-
-		//Função para obter os dados de temperatura do server
-
-		//Esse atributo dentro do contexto serve para saber qual foi o último índice processado, assim eliminado os outros elementos na
-		//hora de montar/atualizar o gráfico
-		this.lastIndexTemp = 0;
-		this.time = 0;
-
-		function get_data() {
-
-			var http = new XMLHttpRequest();
-			http.open('GET', 'http://localhost:3000/api/temperature', false);
-			http.send(null);
-
-			var obj = JSON.parse(http.responseText);
-			if (obj.data.length == 0) {
-				return;
-			}
-
-			var _lastIndexTemp = this.lastIndexTemp;
-			this.lastIndexTemp = obj.data.length;
-			listTemp = obj.data.slice(_lastIndexTemp);
-
-			listTemp.forEach(data => {
-				//Máximo de 60 itens exibidos no gráfico
-				if (chart.data.labels.length == 10 && chart.data.datasets[0].data.length == 10) {
-					chart.data.labels.shift();
-					chart.data.datasets[0].data.shift();
-				}
-				chart.data.labels.push(this.time++);
-				chart.data.datasets[0].data.push(parseFloat(data));
-				chart.update();
-			});
-
-			document.getElementById('average').textContent = obj.average;
-			document.getElementById('averageHour').textContent = obj.averageHour;
-		}
-
-		get_data();
-
-		//Second Graphic
-
-		var context2 = document.getElementById("chart-humidity").getContext("2d");
-		context2.canvas.width = 700;
-		context2.canvas.height = 150;
-
-		var humidity = {
-			type: 'line',
-			data: {
-				datasets: [{
-					label: "Umidade x Tempo",
-					type: 'line',
-					borderColor: ['#3232ff'],
-					backgroundColor: ['transparent']
-				}]
-			},
-			options: {
-				scales: {
-					xAxes: [{
-						//type: 'value',
-						distribution: 'series',
-						ticks: {
-							beginAtZero: true
-						},
-						scaleLabel: {
-							display: true,
-							labelString: 'Minutos',
-							fontColor: 'gray',
-						},
-						gridLines: {
-							display: true,
-							color: "rgb(68, 140, 100, 0.1)"
-						}
-					}],
-					yAxes: [{
-						scaleLabel: {
-							display: true,
-							labelString: 'Umidade',
-							fontColor: 'gray',
-						},
-						ticks: {
-							beginAtZero: true
-						},
-						gridLines: {
-							display: true,
-							color: "rgb(68, 140, 100, 0.5)"
-						}
-					}]
-				},
-				animation: {
-					duration: 0
-				}
-			}
-		};
-
-		var chartHumidity = new Chart(context2, humidity);
-		//Função para obter os dados de temperatura do server
-
-
-		//Esse atributo dentro do contexto serve para saber qual foi o último índice processado, assim eliminado os outros elementos na
-		//hora de montar/atualizar o gráfico
-		this.lastIndexTempHumidity = 0;
-		this.timeHumidity = 0;
-
-		function get_dataHumidity() {
-
-			var http = new XMLHttpRequest();
-			http.open('GET', 'http://localhost:3000/api/humidity', false);
-			http.send(null);
-
-			var obj = JSON.parse(http.responseText);
-			if (obj.data.length == 0) {
-				return;
-			}
-
-			var _lastIndexTemp = this.lastIndexTempHumidity;
-			this.lastIndexTempHumidity = obj.data.length;
-			listTemp = obj.data.slice(_lastIndexTemp);
-
-			listTemp.forEach(data => {
-				//Máximo de 60 itens exibidos no gráfico
-				if (chartHumidity.data.labels.length == 10 && chartHumidity.data.datasets[0].data.length == 10) {
-					chartHumidity.data.labels.shift();
-					chartHumidity.data.datasets[0].data.shift();
-				}
-
-				chartHumidity.data.labels.push(this.time++);
-				chartHumidity.data.datasets[0].data.push(parseFloat(data));
-				chartHumidity.update();
-			});
-
-			document.getElementById('averageHumidity').textContent = obj.average;
-			document.getElementById('averageHourHumidity').textContent = obj.averageHour;
-		}
-
-		get_dataHumidity();
-
-		function sendTemperature() {
-			var http = new XMLHttpRequest();
-			http.open('POST', 'http://localhost:3000/api/sendData', false);
-			http.send(null);
-		}
-
-		setInterval(() => {
-			get_data();
-			get_dataHumidity();
-			sendTemperature();
-			teste(); // AQUI SERA CHAMADA A FUNÇÃO DOS ALERTAS, QUE ESTÁ EM CONTROLLER.JS
-		}, 3000);
-
-
-	</script> -->
 </body>
-
 </html>
 
 <!-- NOVA API ABAIXO -->
@@ -337,10 +127,10 @@
 
 
 
-	function chamargraficos(id_dados) {
+	function chamargraficos(fk_Sensor) {
 
-		obterDadosGraficoPrimeiraVez(id_dados)
-		//atualizarGrafico(id)
+		obterDadosGraficoPrimeiraVez(fk_Sensor)
+		atualizarGrafico(fk_Sensor)
 
 	}
 
@@ -405,13 +195,13 @@
 
 	// altere aqui como os dados serão exibidos
 	// e como são recuperados do BackEnd
-	function obterDadosGraficoPrimeiraVez(id_dados) {
+	function obterDadosGraficoPrimeiraVez(fk_Sensor) {
 
 		if (proximaAtualizacao != undefined) {
 			clearTimeout(proximaAtualizacao);
 		}
 
-		fetch(`/Dados_sensor/ultimas/${id_dados}`, { cache: 'no-store' }).then(function (response) {
+		fetch(`/leituras/ultimas/${fk_Sensor}`, { cache: 'no-store' }).then(function (response) {
 			if (response.ok) {
 				response.json().then(function (resposta) {
 					console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
@@ -446,8 +236,8 @@
 
 					}
 					console.log(JSON.stringify(dados));
-					div_aguarde.style.display = 'none';
-					plotarGrafico(dados, id_dados);
+					// div_aguarde.style.display = 'none';
+					plotarGrafico(dados, fk_Sensor);
 				});
 			} else {
 				console.error('Nenhum dado encontrado ou erro na API');
@@ -463,10 +253,10 @@
 
 	// só mexer se quiser alterar o tempo de atualização
 	// ou se souber o que está fazendo!
-	function atualizarGrafico(id_dados, dados) {
+	function atualizarGrafico(fk_Sensor, dados) {
 
-		fetch(`/leituras/tempo-real/${id_dados}`, { cache: 'no-store' }).then(function (response) {
-			console.log("Estou tentando pegar id = ", id_dados)
+		fetch(`/leituras/tempo-real/${fk_Sensor}`, { cache: 'no-store' }).then(function (response) {
+			console.log("Estou tentando pegar id = ", fk_Sensor)
 			if (response.ok) {
 				response.json().then(function (novoRegistro) {
 
@@ -481,16 +271,16 @@
 					dados.datasets[0].data.push(novoRegistro.temperatura); // incluir uma nova leitura de temperatura
 					dados.datasets[1].data.push(novoRegistro.umidade); // incluir uma nova leitura de umidade
 
-					console.log("meu sensor é o " + id_dados)
+					console.log("meu sensor é o " + fk_Sensor)
 
 					window.grafico_linha.update();
 
 
-					proximaAtualizacao = setTimeout(() => atualizarGrafico(id_dados, dados), 5000);
+					proximaAtualizacao = setTimeout(() => atualizarGrafico(fk_Sensor, dados), 5000);
 				});
 			} else {
 				console.error('Nenhum dado encontrado ou erro na API');
-				proximaAtualizacao = setTimeout(() => atualizarGrafico(id_dados, dados), 5000);
+				proximaAtualizacao = setTimeout(() => atualizarGrafico(fk_Sensor, dados), 5000);
 			}
 		})
 			.catch(function (error) {
@@ -500,16 +290,16 @@
 	}
 
 	// só altere aqui se souber o que está fazendo!
-	function plotarGrafico(dados, id_dados) {
+	function plotarGrafico(dados, fk_Sensor) {
 		console.log('iniciando plotagem do gráfico...');
-
+		console.log('O que veio de dados:', fk_Sensor)
 		var ctx = canvas_grafico.getContext('2d');
 		window.grafico_linha = Chart.Line(ctx, {
 			data: dados,
 			options: configurarGrafico()
 		});
 
-		setTimeout(() => atualizarGrafico(id_dados, dados), 2000);
+		setTimeout(() => atualizarGrafico(fk_Sensor, dados), 2000);
 	}
 
 
