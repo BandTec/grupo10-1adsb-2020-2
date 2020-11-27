@@ -39,7 +39,7 @@ router.get("/humidity", (request, response, next) => {
 
 router.get("/sendData", (request, response) => {
   let teste = Math.random()* 45;
-  // let temperature = ArduinoDataTemp.List[ArduinoDataTemp.List.length - 1];
+  let temperature = ArduinoDataTemp.List[ArduinoDataTemp.List.length - 1];
   let Humidity = ArduinoDataHumidity.List[ArduinoDataHumidity.List.length - 1];
 
   console.log(temperature);
@@ -50,7 +50,7 @@ router.get("/sendData", (request, response) => {
     .then(() => {
       const sql = `
         INSERT into Dados_sensor(temperatura, umidade, horario_captacao)
-        values (${Math.trunc(teste)}, ${Math.trunc(Humidity)}, '${agora()}');`;
+        values (${Math.trunc(temperature[0])}, ${Math.trunc(temperature[1])}, '${agora()}');`;
       /*INSERT into Dados_sensor (temperatura, umidade, horario_captacao, id_dados)
       values (${temperature-10}, ${Humidity+20}, '${agora()}', 2);
       INSERT into Dados_sensor (temperatura, umidade, horario_captacao, id_dados)
