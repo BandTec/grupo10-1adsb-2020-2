@@ -4,22 +4,22 @@ var sequelize = require('../models').sequelize;
 var Leitura = require('../models').Dados_sensor;
 
 /* Recuperar as últimas N leituras */
-router.get('/ultimas/:id_dados', function (req, res, next) {
+router.get('/ultimas/:fk_Sensor', function (req, res, next) {
 
 	// quantas são as últimas leituras que quer? 8 está bom?
 	const limite_linhas = 7;
 
-	var id_dados = req.params.id_dados;
+	var fk_Sensor = req.params.fk_Sensor;
 
 	console.log(`Recuperando as ultimas ${limite_linhas} leituras`);
 
 	const instrucaoSql = `select top ${limite_linhas} 
 						temperatura, 
 						umidade, 
-						horario_captacao
+						horario_captacao as momento_grafico
 						from Dados_sensor
-						where id_dados = ${id_dados}
-						order by id_dados desc`;
+						where fk_Sensor = ${fk_Sensor}
+						order by fk_Sensor desc`;
 // FORMAT(momento,'HH:mm:ss') as momento_grafico
 	sequelize.query(instrucaoSql, {
 		model: Leitura,
@@ -40,7 +40,7 @@ router.get('/ultimas/:id_dados', function (req, res, next) {
 	
 	console.log(`Recuperando a ultima leitura`);
 
-	const instrucaoSql = `select top 4 temperatura, umidade, FORMAT(momento,'HH:mm:ss') as momento_grafico, id_dados from leitura order by id desc`;
+	const instrucaoSql = `select top 4 temperatura, umidade, FORMAT(momento,'HH:mm:ss') as momento_grafico, fk_Sensor from leitura order by id desc`;
 
 	sequelize.query(instrucaoSql, { type: sequelize.QueryTypes.SELECT })
 		.then(resultado => {
@@ -53,15 +53,15 @@ router.get('/ultimas/:id_dados', function (req, res, next) {
 });
 */
 
-router.get('/tempo-real/:id_dados', function (req, res, next) {
+router.get('/tempo-real/:fk_Sensor', function (req, res, next) {
 	console.log('Recuperando caminhões');
 
-	//var id_dados = req.body.id_dados; // depois de .body, use o nome (name) do campo em seu formulário de login
+	//var fk_Sensor = req.body.fk_Sensor; // depois de .body, use o nome (name) do campo em seu formulário de login
 	
-	var id_dados = req.params.id_dados;
+	var fk_Sensor = req.params.fk_Sensor;
 
 	// FORMAT(momento,'HH:mm:ss') as momento_grafico,
-	let instrucaoSql = `select top 1 temperatura, umidade, id_dados from Dados_sensor where id_dados = ${id_dados} order by id_dados desc`;
+	let instrucaoSql = `select top 1 temperatura, umidade, fk_Sensor from Dados_sensor where fk_Sensor = ${fk_Sensor} order by fk_Sensor desc`;
 
 	console.log(instrucaoSql);
 
