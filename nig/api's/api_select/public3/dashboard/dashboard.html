@@ -127,10 +127,10 @@
 
 
 
-	function chamargraficos(fk_Sensor) {
+	function chamargraficos(id_Sensor) {
 
-		obterDadosGraficoPrimeiraVez(fk_Sensor)
-		atualizarGrafico(fk_Sensor)
+		obterDadosGraficoPrimeiraVez(id_Sensor)
+		// atualizarGrafico(id_Sensor)
 
 	}
 
@@ -195,13 +195,13 @@
 
 	// altere aqui como os dados serão exibidos
 	// e como são recuperados do BackEnd
-	function obterDadosGraficoPrimeiraVez(fk_Sensor) {
+	function obterDadosGraficoPrimeiraVez(id_Sensor) {
 
 		if (proximaAtualizacao != undefined) {
 			clearTimeout(proximaAtualizacao);
 		}
 
-		fetch(`/leituras/ultimas/${fk_Sensor}`, { cache: 'no-store' }).then(function (response) {
+		fetch(`/leituras/ultimas/${id_Sensor}`, { cache: 'no-store' }).then(function (response) {
 			if (response.ok) {
 				response.json().then(function (resposta) {
 					console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
@@ -237,7 +237,7 @@
 					}
 					console.log(JSON.stringify(dados));
 					// div_aguarde.style.display = 'none';
-					plotarGrafico(dados, fk_Sensor);
+					plotarGrafico(dados, id_Sensor);
 				});
 			} else {
 				console.error('Nenhum dado encontrado ou erro na API');
@@ -253,10 +253,10 @@
 
 	// só mexer se quiser alterar o tempo de atualização
 	// ou se souber o que está fazendo!
-	function atualizarGrafico(fk_Sensor, dados) {
+	function atualizarGrafico(id_Sensor, dados) {
 
-		fetch(`/leituras/tempo-real/${fk_Sensor}`, { cache: 'no-store' }).then(function (response) {
-			console.log("Estou tentando pegar id = ", fk_Sensor)
+		fetch(`/leituras/tempo-real/${id_Sensor}`, { cache: 'no-store' }).then(function (response) {
+			console.log("Estou tentando pegar id = ", id_Sensor)
 			if (response.ok) {
 				response.json().then(function (novoRegistro) {
 
@@ -271,16 +271,16 @@
 					dados.datasets[0].data.push(novoRegistro.temperatura); // incluir uma nova leitura de temperatura
 					dados.datasets[1].data.push(novoRegistro.umidade); // incluir uma nova leitura de umidade
 
-					console.log("meu sensor é o " + fk_Sensor)
+					console.log("meu sensor é o " + id_Sensor)
 
 					window.grafico_linha.update();
 
 
-					proximaAtualizacao = setTimeout(() => atualizarGrafico(fk_Sensor, dados), 5000);
+					proximaAtualizacao = setTimeout(() => atualizarGrafico(id_Sensor, dados), 5000);
 				});
 			} else {
 				console.error('Nenhum dado encontrado ou erro na API');
-				proximaAtualizacao = setTimeout(() => atualizarGrafico(fk_Sensor, dados), 5000);
+				proximaAtualizacao = setTimeout(() => atualizarGrafico(id_Sensor, dados), 5000);
 			}
 		})
 			.catch(function (error) {
@@ -290,16 +290,16 @@
 	}
 
 	// só altere aqui se souber o que está fazendo!
-	function plotarGrafico(dados, fk_Sensor) {
+	function plotarGrafico(dados, id_Sensor) {
 		console.log('iniciando plotagem do gráfico...');
-		console.log('O que veio de dados:', fk_Sensor)
+		console.log('O que veio de dados:', id_Sensor)
 		var ctx = canvas_grafico.getContext('2d');
 		window.grafico_linha = Chart.Line(ctx, {
 			data: dados,
 			options: configurarGrafico()
 		});
 
-		setTimeout(() => atualizarGrafico(fk_Sensor, dados), 2000);
+		setTimeout(() => atualizarGrafico(id_Sensor, dados), 2000);
 	}
 
 

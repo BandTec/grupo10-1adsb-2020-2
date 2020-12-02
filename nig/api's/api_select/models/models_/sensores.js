@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
 			type: DataTypes.BOOLEAN,
 			allowNull: false
         },
-        horaio_parada:{
+        horario_parada:{
             field: 'horario_parada',
             type: DataTypes.DATE,
             allowNull: false

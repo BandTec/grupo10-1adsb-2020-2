@@ -7,8 +7,8 @@ https://codewithhugo.com/sequelize-data-types-a-practical-guide/
 
 module.exports = (sequelize, DataTypes) => {
     let Dados_sensor = sequelize.define('Dados_sensor',{
-		fk_Sensor: {
-			field: 'fk_Sensor',
+		id_Sensor: {
+			field: 'id_Sensor',
 			type: DataTypes.INTEGER,
 			primaryKey: true,
 			autoIncrement: true
@@ -23,8 +23,8 @@ module.exports = (sequelize, DataTypes) => {
 			type: DataTypes.INTEGER,
 			allowNull: false
         },
-        horaio_captacao:{
-            field: 'horario_captacao',
+        horario_Captacao:{
+            field: 'horario_Captacao',
             type: DataTypes.DATE,
             allowNull: false
         }
