@@ -231,3 +231,32 @@ table {
     margin-left: 5%;
     text-align: center;
 }
+
+/* ANIMAÇÃO DOS BOTOES */
+
+@-webkit-keyframes fadeinout {
+    0%,
+    100% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeinout {
+    0%,
+    100% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.animacao:hover {
+    cursor: pointer;
+    animation: fadeinout 1s linear forwards;
+    -webkit-animation: fadeinout 1s linear forwards;
+    color: #a9927f;
+}
