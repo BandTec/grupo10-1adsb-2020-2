@@ -206,6 +206,10 @@ table {
     text-align: center;
     align-items: center;
 }
+
+.icone_status{
+    width: 34px;
+}
 /* FIM TABELA */
 
 /* FIM CONTAINERS */

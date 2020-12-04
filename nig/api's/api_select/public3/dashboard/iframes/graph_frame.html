@@ -8,6 +8,7 @@
 	<script src="http://www.chartjs.org/samples/latest/utils.js"></script>
 	<link rel="stylesheet" href="../../css/dashboard.css">
 	<script src="../../js/autenticar.js"></script>
+	<script src="../../js/status_sensor.js"></script>
 	<style>
 		canvas {
 			-moz-user-select: none;
@@ -46,35 +47,35 @@
 				<tbody>
 					<tr onclick="atualizarGrafico(1)" class="animacao">
 						<td>Gleba Oeste 1</td>
-						<td><img src="../../images/status/" alt="status_gleba"></td>
+						<td><img class="icone_status" id="status_gleba_oeste" src="../../images/status/ideal.png" alt="status_gleba"></td>
 						<td>30ºC</td>
 						<td>35%</td>
 						<td>5</td>
-						<td><img src="../../images/status/" alt="status_sensor"></td>
+						<td><img class="icone_status" id="status_sensor_oeste" src="../../images/status/desconnected_white.png" alt="status_sensor"></td>
 					</tr>
 					<tr onclick="atualizarGrafico(2)" class="animacao">
 						<td>Gleba Sul 1</td>
-						<td><img src="../../images/status/" alt="status_gleba"></td>
+						<td><img class="icone_status" id="status_gleba_sul" src="../../images/status/ideal.png" alt="status_gleba"></td>
 						<td>23ºC</td>
 						<td>60%</td>
 						<td>2</td>
-						<td><img src="../../images/status/" alt="status_sensor"></td>
+						<td><img class="icone_status" id="status_sensor_sul" src="../../images/status/desconnected_white.png" alt="status_sensor"></td>
 					</tr>
 					<tr onclick="atualizarGrafico(3)" class="animacao">
 						<td>Gleba Norte 1</td>
-						<td><img src="../../images/status/" alt="status_gleba"></td>
+						<td><img class="icone_status" id="status_gleba_norte" src="../../images/status/ideal.png" alt="status_gleba"></td>
 						<td>25ºC</td>
 						<td>28%</td>
 						<td>4</td>
-						<td><img src="../../images/status/" alt="status_sensor"></td>
+						<td><img class="icone_status" id="status_sensor_norte" src="../../images/status/desconnected_white.png" alt="status_sensor"></td>
 					</tr>
 					<tr onclick="atualizarGrafico(4)" class="animacao">
 						<td>Gleba Leste 1</td>
-						<td><img src="../../images/status/" alt="status_gleba"></td>
+						<td><img class="icone_status" id="status_gleba_leste" src="../../images/status/ideal.png" alt="status_gleba"></td>
 						<td>23ºC</td>
 						<td>80%</td>
 						<td>20</td>
-						<td><img src="../../images/status/" alt="status_sensor"></td>
+						<td><img class="icone_status" id="status_sensor_leste" src="../../images/status/desconnected_white.png" alt="status_sensor"></td>
 					</tr>
 				</tbody>
 			</table>
@@ -247,14 +248,14 @@
 		console.log('O que veio de dados:')
 		var ctx_temp = canvas_grafico_temp.getContext('2d');
 		window.grafico_linha = new Chart(ctx_temp, config_temp)
-		atualizarGrafico(1);
+		atualizarGrafico();
 	}
 
 	function plotarGrafico_umid() {
 		console.log('iniciando plotagem do gráfico de umidade../...');
 		var ctx_umid = canvas_grafico_umid.getContext('2d');
 		window.grafico_linha = new Chart(ctx_umid, config_umid)
-		atualizarGrafico(1); 
+		atualizarGrafico(); 
 	}
 
 
@@ -266,6 +267,7 @@
 
 	setInterval(() => {
 		sendData();
+		// change_status_sensor();
 	}, 10000);
 
 	window.onload = plotarGrafico_temp(), plotarGrafico_umid();
