@@ -29,14 +29,14 @@ router.get("/sendData", (request, response) => {
   db.conectar()
     .then(() => {
       const sql = `
-        INSERT into Dados_sensor(temperatura, umidade, horario_Captacao)
-        values (${Math.trunc(temperature[0])}, ${Math.trunc(temperature[1])}, '${agora()}')
-        INSERT into Dados_sensor (temperatura, umidade, horario_Captacao)
-        values (${Math.trunc(temperature[0])*0.2}, ${Math.trunc(temperature[1])*0.4}, '${agora()}');
-        INSERT into Dados_sensor (temperatura, umidade, horario_Captacao)
-        values (${Math.trunc(temperature[0])*0.7+3}, ${Math.trunc(temperature[1])*1.3}, '${agora()}');
-        INSERT into Dados_sensor (temperatura, umidade, horario_Captacao)
-        values (${Math.trunc(temperature[0])*0.2+2}, ${Math.trunc(temperature[1])*0.3}, '${agora()}');`
+        INSERT into Dados_sensor(temperatura, umidade, horario_Captacao, fk_Sensor)
+        values (${Math.trunc(temperature[0])}, ${Math.trunc(temperature[1])}, '${agora()}', 1)
+        INSERT into Dados_sensor (temperatura, umidade, horario_Captacao, fk_Sensor)
+        values (${Math.trunc(temperature[0])*0.2}, ${Math.trunc(temperature[1])*0.4}, '${agora()}', 2);
+        INSERT into Dados_sensor (temperatura, umidade, horario_Captacao, fk_Sensor)
+        values (${Math.trunc(temperature[0])*0.7+3}, ${Math.trunc(temperature[1])*1.3}, '${agora()}', 3);
+        INSERT into Dados_sensor (temperatura, umidade, horario_Captacao, fk_Sensor)
+        values (${Math.trunc(temperature[0])*0.2+2}, ${Math.trunc(temperature[1])*0.3}, '${agora()}', 4);`
 
       console.log(sql);
       return db.sql.query(sql).then(() => {
