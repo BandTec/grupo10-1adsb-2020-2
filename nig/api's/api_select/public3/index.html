@@ -314,8 +314,7 @@
             </div>
         </div>
         <div class="container" id="contato">
-            <form class="form_contact" action="/contato" method="POST" onsubmit="return contato()" name="form_contato"
-                novalidate>
+            <form class="form_contact" action="/contato" method="POST" novalidate>
                 <label for="inp_email">Insira seu email:</label>
                 <input type="email" id="inp_email" name="email_cont" class="campoEntradaForm" required>
 
@@ -356,9 +355,9 @@
     var mypsw = document.getElementsByName("senha");
     var conf_mypsw = document.getElementsByName("conf_senha");
     function contato() {
-        var email = form_contato.email_cont.value;
-        var nome = form_contato.nome_cont.value;
-        var mensagem = form_contato.mensagem_cont.value;
+        var email = email_cont.value;
+        var nome = nome_cont.value;
+        var mensagem = mensagem_cont.value;
 
         div_msgEmail.style = "display: none";
         div_msgNome.style = "display: none";

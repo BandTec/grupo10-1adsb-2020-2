@@ -16,24 +16,24 @@ module.exports = (sequelize, DataTypes) => {
 		email_Contato: {
 			field: 'email_Contato',
 			type: DataTypes.STRING,
-			allowNull: true
+			allowNull: false
 		},
 		nome_Contato: {
 			field: 'nome_Contato',
 			type: DataTypes.STRING,
-			allowNull: true
+			allowNull: false
 		},
 		mensagem_Contato: {
 			field: 'mensagem_Contato',
 			type: DataTypes.STRING,
-			allowNull: true
+			allowNull: false
 		}
 	},
 		{
 			tableName: 'Contato',
 			freezeTableName: true,
 			underscored: true,
-			timestamps: true,
+			timestamps: false,
 			attributes: {
 				exclude: ['created_at', 'updated_at']
 			}
