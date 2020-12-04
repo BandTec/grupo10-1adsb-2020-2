@@ -11,7 +11,7 @@ router.get('/ultimas/:fk_Sensor', function (req, res, next) {
 
 	var fk_Sensor = req.params.fk_Sensor;
 
-	console.log(`Recuperando as ultimas ${limite_linhas} leituras`);
+	console.log(`Recuperando as ultimas ${limite_linhas} leituras \n`);
 
 	const instrucaoSql = `select top ${limite_linhas} 
 						temperatura, 
@@ -19,7 +19,7 @@ router.get('/ultimas/:fk_Sensor', function (req, res, next) {
 						horario_Captacao as momento_grafico
 						from Dados_sensor
 						where fk_Sensor = ${fk_Sensor}
-						order by id_Dados desc`;
+						order by id_Dados desc; \n`;
 // FORMAT(momento,'HH:mm:ss') as momento_grafico
 	sequelize.query(instrucaoSql, {
 		model: Leitura,
@@ -54,14 +54,14 @@ router.get('/ultimas/:fk_Sensor', function (req, res, next) {
 */
 
 router.get('/tempo-real/:fk_Sensor', function (req, res, next) {
-	console.log('Recuperando caminhões');
+	console.log('Recuperando Dados \n');
 
 	//var fk_Sensor = req.body.fk_Sensor; // depois de .body, use o nome (name) do campo em seu formulário de login
 	
 	var fk_Sensor = req.params.fk_Sensor;
 
 	// FORMAT(momento,'HH:mm:ss') as momento_grafico,
-	let instrucaoSql = `select top 1 temperatura, umidade, fk_Sensor from Dados_sensor where fk_Sensor = ${fk_Sensor} order by fk_Sensor desc`;
+	let instrucaoSql = `select top 7 temperatura, umidade, fk_Sensor from Dados_sensor where fk_Sensor = ${fk_Sensor} order by id_Dados desc; \n`;
 
 	console.log(instrucaoSql);
 
@@ -81,7 +81,7 @@ router.get('/tempo-real/:fk_Sensor', function (req, res, next) {
 // estatísticas (max, min, média, mediana, quartis etc)
 router.get('/estatisticas', function (req, res, next) {
 
-	console.log(`Recuperando as estatísticas atuais`);
+	console.log(`Recuperando as estatísticas atuais \n`);
 
 	const instrucaoSql = `select 
 							max(temperatura) as temp_maxima, 
@@ -90,7 +90,7 @@ router.get('/estatisticas', function (req, res, next) {
 							max(umidade) as umidade_maxima, 
 							min(umidade) as umidade_minima, 
 							avg(umidade) as umidade_media 
-						from Dados_sensor`;
+						from Dados_sensor; 	\n`;
 
 	sequelize.query(instrucaoSql, { type: sequelize.QueryTypes.SELECT })
 		.then(resultado => {
