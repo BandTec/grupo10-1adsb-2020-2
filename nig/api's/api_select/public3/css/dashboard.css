@@ -112,16 +112,19 @@ table {
 .logo_icons .icons img{
     width: 40%;
 }
+
 #config{
     float: left;
 }
 #graph{
     float: left;
 }
+#graph_umid{
+    float: left;
+}
 #home{
     float: left;
 }
-
 #help{
     float: left;
 }
@@ -205,6 +208,18 @@ table {
     background-color: transparent;
     text-align: center;
     align-items: center;
+}
+
+.icone_status{
+    width: 34px;
+}
+
+.icone_status_analytics{
+    height: 33px;
+}
+
+.grafico_atual{
+    background-color: #4169e152;
 }
 /* FIM TABELA */
 

@@ -33,10 +33,7 @@ module.exports = (sequelize, DataTypes) => {
 			tableName: 'contato',
 			freezeTableName: true,
 			underscored: true,
-			timestamps: false,
-			attributes: {
-				exclude: ['created_at', 'updated_at']
-			}
+			timestamps: false
 		});
 
 	return Contato;
