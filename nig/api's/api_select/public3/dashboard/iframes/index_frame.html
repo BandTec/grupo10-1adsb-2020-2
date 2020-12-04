@@ -1,61 +1,25 @@
-<!DOCTYPE html>
-<html lang="pt">
+<!doctype html>
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projeto IoT - Tempo Real</title>
-    <link rel="stylesheet" href="css/dashboards.css">
-
-    <!-- script do google charts -->
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript" src="funcoes.js"></script>
-
+    <title>Dashboard - configurações</title>
+    <link rel="shortcut icon" href="images/logo2.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../css/dashboard.css">
+    <script src="../../js/autenticar.js"></script>
     <style>
-        /* Classes CSS para exemplos de alertas */
-
-        .normal {
-            background-color: white;
-        }
-
-        .alerta-alto {
-            color: tomato;
-            
-        }
-
-        .alerta-baixo {
-            color: rgb(38, 0, 255);
-            
+        canvas {
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
         }
     </style>
 </head>
 
 <body onload="atualizacaoPeriodica()">
-    <!--header inicio-->
-
-    <div class="header">
-        <div class="container">
-            <h1 class="titulo"><span class="highlight">Projeto</span> IoT Revolucionário</h1>
-            <div class="usuario">
-                <h3>Olá, <b id="b_usuario"></b></h3>
-            </div>
-            <div class="nav">
-                <ul>
-                    <li><a href="grafico-chartjs.html">Gráfico de histórico recente</a></li>
-                    <li><a href="#" class="highlight" onclick="logoff()">LOGOUT</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <!--header fim-->
-
     <div class="dashboard">
         <div class="container">
-
-
-
-            <div class="caminhao">
-                <h4>Caminhão <span name="namecaminhao" id="idcaminhao" value="1">1</span></h4>
+            <div class="grafico">
+                <h4>Caminhão <span name="namecaminhao" id="fk_Sensor" value="1">1</span></h4>
                 <div class="valores">
                     <div class="valor" id="div_temperatura">Temperatura sendo obtida...</div>
                     <div class="valor" id="div_umidade">Umidade sendo obtida...</div>
@@ -66,8 +30,8 @@
                 </div>
             </div>
 
-            <div class="caminhao">
-                <h4>Caminhão <span name="namecaminhao" id="idcaminhao" value="2">2</span></h4>
+            <div class="grafico">
+                <h4>Caminhão <span name="namecaminhao" id="fk_Sensor" value="2">2</span></h4>
                 <div class="valores">
                     <div class="valor" id="div_temperatura2">Temperatura sendo obtida...</div>
                     <div class="valor" id="div_umidade2">Umidade sendo obtida...</div>
@@ -79,8 +43,8 @@
                 </div>
             </div>
 
-            <div class="caminhao">
-                <h4>Caminhão <span name="namecaminhao" id="idcaminhao" value="3">3</span></h4>
+            <div class="grafico">
+                <h4>Caminhão <span name="namecaminhao" id="fk_Sensor" value="3">3</span></h4>
                 <div class="valores">
                     <div class="valor" id="div_temperatura3">Temperatura sendo obtida...</div>
                     <div class="valor" id="div_umidade3">Umidade sendo obtida...</div>
@@ -91,8 +55,8 @@
                 </div>
             </div>
 
-            <div class="caminhao">
-                <h4>Caminhão <span name="namecaminhao" id="idcaminhao" value="4">4</span></h4>
+            <div class="grafico">
+                <h4>Caminhão <span name="namecaminhao" id="fk_Sensor" value="4">4</span></h4>
                 <div class="valores">
                     <div class="valor" id="div_temperatura4">Temperatura sendo obtida...</div>
                     <div class="valor" id="div_umidade4">Umidade sendo obtida...</div>
@@ -123,46 +87,46 @@
     // só mexer se quiser alterar o tempo de atualização
     // ou se souber o que está fazendo!
     function atualizacaoPeriodica() {
-        obterdadosporcaminhao(1);
-        obterdadosporcaminhao(2);
-        obterdadosporcaminhao(3);
-        obterdadosporcaminhao(4);
+        obter_dados_por_gleba(1);
+        obter_dados_por_gleba(2);
+        obter_dados_por_gleba(3);
+        obter_dados_por_gleba(4);
         setTimeout(atualizacaoPeriodica, 5000);
     }
 
-    
 
-    function obterdadosporcaminhao(idcaminhao) {
+
+    function obter_dados_por_gleba(fk_Sensor) {
         //aguardar();
-        fetch(`/leituras/tempo-real/${idcaminhao}`)
-        .then(resposta => {
+        fetch(`/leituras/tempo-real/${fk_Sensor}`)
+            .then(resposta => {
 
-            if (resposta.ok) {
-                resposta.json().then(function (resposta) {
+                if (resposta.ok) {
+                    resposta.json().then(function (resposta) {
 
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
-                    // aqui, após registro. use os nomes 
-                    // dos atributos que vem no JSON 
-                    var dados = {
-                        temperatura: resposta.temperatura,
-                        umidade: resposta.umidade
-                    }
+                        // aqui, após registro. use os nomes 
+                        // dos atributos que vem no JSON 
+                        var dados = {
+                            temperatura: resposta.temperatura,
+                            umidade: resposta.umidade
+                        }
 
-                    alertar(resposta.temperatura, resposta.umidade, idcaminhao);
-                    atualizarTela(dados, idcaminhao);
-                });
-            } else {
+                        alertar(resposta.temperatura, resposta.umidade, fk_Sensor);
+                        atualizarTela(dados, fk_Sensor);
+                    });
+                } else {
 
-                console.error('Nenhum dado encontrado ou erro na API');
-            }
-        })
-        .catch(function (error) {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
                 console.error(`Erro na obtenção dos dados do caminhao p/ gráfico: ${error.message}`);
             });
     }
 
-    function alertar(temperatura, umidade, idcaminhao) {
+    function alertar(temperatura, umidade, fk_Sensor) {
         // padrão para meu alerta
         var limites = {
             max_temperatura: 40,
@@ -199,16 +163,16 @@
         var div_temperatura_alterar
         var div_umidade_alterar
 
-        if (idcaminhao == 1) {
+        if (fk_Sensor == 1) {
             div_temperatura_alterar = div_alerta_temperatura
             div_umidade_alterar = div_alerta_umidade
-        } else if (idcaminhao == 2) {
+        } else if (fk_Sensor == 2) {
             div_temperatura_alterar = div_alerta_temperatura2
             div_umidade_alterar = div_alerta_umidade2
-        } else if (idcaminhao == 3) {
+        } else if (fk_Sensor == 3) {
             div_temperatura_alterar = div_alerta_temperatura3
             div_umidade_alterar = div_alerta_umidade3
-        } else if (idcaminhao == 4) {
+        } else if (fk_Sensor == 4) {
             div_temperatura_alterar = div_alerta_temperatura4
             div_umidade_alterar = div_alerta_umidade4
         }
@@ -222,23 +186,23 @@
     }
 
     // só altere aqui se souber o que está fazendo!
-    function atualizarTela(dados, idcaminhao) {
+    function atualizarTela(dados, fk_Sensor) {
         console.log('iniciando atualização da tela...');
 
         // escolhendo qual alterar
         var div_temperatura_alterar
         var div_umidade_alterar
 
-        if (idcaminhao == 1) {
+        if (fk_Sensor == 1) {
             div_temperatura_alterar = div_temperatura
             div_umidade_alterar = div_umidade
-        } else if (idcaminhao == 2) {
+        } else if (fk_Sensor == 2) {
             div_temperatura_alterar = div_temperatura2
             div_umidade_alterar = div_umidade2
-        } else if (idcaminhao == 3) {
+        } else if (fk_Sensor == 3) {
             div_temperatura_alterar = div_temperatura3
             div_umidade_alterar = div_umidade3
-        } else if (idcaminhao == 4) {
+        } else if (fk_Sensor == 4) {
             div_temperatura_alterar = div_temperatura4
             div_umidade_alterar = div_umidade4
         }
@@ -247,11 +211,9 @@
 
         div_umidade_alterar.innerHTML = `Umidade: ${dados.umidade}%`;
 
-        
+
 
     }
-
-
     function sendData() {
         var http = new XMLHttpRequest();
         http.open('GET', 'http://localhost:9000/api/sendData', false);
@@ -260,5 +222,7 @@
 
     setInterval(() => {
         sendData();
-    }, 5000);
+    }, 10000);
 </script>
+
+</html>

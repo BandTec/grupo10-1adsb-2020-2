@@ -1,5 +1,52 @@
 /* GLOBAL */
 
+
+/* ANIMAÇÃO DOS BOTOES */
+
+@-webkit-keyframes fadeinout {
+    0%,
+    100% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeinout {
+    0%,
+    100% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.animacao:hover {
+    cursor: pointer;
+    animation: fadeinout 1s linear forwards;
+    -webkit-animation: fadeinout 1s linear forwards;
+    color: #a9927f;
+}
+
+
+/* ESTILIZAÇÃO IFRAMES */
+
+.atual {
+    display: block;
+}
+
+
+.frame {
+    overflow: auto;
+    border-radius: 0.7%;
+    scroll-behavior: smooth;
+    width: 98vw;
+    margin-top: -8.2px;
+    height: 99vh;
+}
+
 /* BARRA DE ROLAGEM */
 ::-webkit-scrollbar-track {
     
@@ -136,7 +183,9 @@ table {
     width: 95%;
     margin-left: 2.5%;
     height: 250px;
+    border-collapse: collapse;
     left: 120px;
+    margin-top: 21px;
 }
 
 #tbStatus tr th{
@@ -232,31 +281,80 @@ table {
     text-align: center;
 }
 
-/* ANIMAÇÃO DOS BOTOES */
+/* ----------------PAGINA INDEX------------------- */
 
-@-webkit-keyframes fadeinout {
-    0%,
-    100% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
+
+.dashboard {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    float: right;
+    width: 95%;
+    color: white;
+    height: 100%;
 }
 
-@keyframes fadeinout {
-    0%,
-    100% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
+.dashboard h1 {
+    margin-bottom: 40px;
 }
 
-.animacao:hover {
-    cursor: pointer;
-    animation: fadeinout 1s linear forwards;
-    -webkit-animation: fadeinout 1s linear forwards;
-    color: #a9927f;
+.dashboard .input-padrao {
+    width: 50%;
+    display: inline-block;
+}
+
+
+.extra {
+    margin: 10px;
+}
+
+.extra img {
+  height: 50px;
+   visibility: hidden;
+}
+
+.extra .msg_erro {
+    background-color: sandybrown; 
+    color: black; 
+    visibility: hidden;
+}
+
+.grafico {
+    margin-top: 3px;
+    width: 99%;
+    height: 187px;
+    left: 112.02px;
+    background-color: #282C31;
+    border: 1px solid #448C64;
+    border-radius: 10px;
+}
+
+.grafico .valores {
+    margin:auto;
+    overflow: auto;
+}
+
+.grafico .valores .valor {
+    margin-left: 13%;
+    width: 30%;
+    float: left;
+}
+
+.grafico .alertas {
+    width:100%;
+    margin:auto;
+    margin-top: 5px;
+    overflow: auto;
+}
+
+.grafico .alertas .alerta {
+    margin-left: 13%;
+    width: 30%;
+    float: left;
+}
+.grafico .alertas .alerta_umidd {
+    margin-right: 13%;
+    width: 30%;
+    float: right;
 }

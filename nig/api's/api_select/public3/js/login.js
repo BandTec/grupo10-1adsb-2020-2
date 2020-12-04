@@ -48,7 +48,7 @@ function entrar() {
                 sessionStorage.login_usuario_meuapp = json.email;
                 sessionStorage.nome_usuario_meuapp = json.nome;
 
-                window.location.href = '../dashboard/dashboard.html';
+                window.location.href = '../dashboard/dash.html';
             });
 
         } else {

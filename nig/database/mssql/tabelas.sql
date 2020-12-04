@@ -37,7 +37,7 @@ CREATE TABLE tb_Area (
 );
 
 CREATE TABLE tb_Sensor_Dht11 (
-  id_Sensor INT PRIMARY KEY IDENTITY,
+  id_Dados INT PRIMARY KEY IDENTITY,
   nome_Sensor VARCHAR(20) NOT NULL,
   inicio_Funcionamento DATETIME2(0) NOT NULL,
   estado_Sensor BIT,
@@ -52,7 +52,7 @@ CREATE TABLE tb_Dados_Dht11 (
   umidade INT NOT NULL,
   horario_Captacao DATETIME2(0) NOT NULL,
   fk_Sensor int,
-  foreign key (fk_Sensor) references tb_Sensor_Dht11(id_Sensor)
+  foreign key (fk_Sensor) references tb_Sensor_Dht11(id_Dados)
 );
 
 CREATE TABLE tb_Contato (
