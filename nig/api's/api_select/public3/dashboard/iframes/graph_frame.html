@@ -17,73 +17,81 @@
 		}
 	</style>
 </head>
-	<div class="containers">
-		<!-- GRAFICO TEMPERATURA -->
-		<div class="container_chart1">
-			<section>
-				<canvas id="canvas_grafico_temp"></canvas>
-			</section>
-		</div>
-		<!-- GRAFICO UMIDADE -->
+<div class="containers">
+	<!-- GRAFICO TEMPERATURA -->
+	<div class="container_chart1">
+		<section>
+			<canvas id="canvas_grafico_temp"></canvas>
+		</section>
+	</div>
+	<!-- GRAFICO UMIDADE -->
 
-		<div class="container_chart2" style="padding-top: 20px; float: right;">
-			<section>
-				<canvas id="canvas_grafico_umid"></canvas>
-			</section>
-		</div>
-		<!-- TABELA -->
-		<div class="container_table" style=" float: right;">
-			<table id="tbStatus">
-				<thead>
-					<tr>
-						<th>Gleba</th>
-						<th>Status Geral</th>
-						<th>Status Temperatura</th>
-						<th>Status Umidade</th>
-						<th>Número de Alertas</th>
-						<th>Status Sensor</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr onclick="atualizarGrafico(1)" class="animacao">
-						<td>Gleba Oeste 1</td>
-						<td><img class="icone_status" id="status_gleba_oeste" src="../../images/status/ideal.png" alt="status_gleba"></td>
-						<td>30ºC</td>
-						<td>35%</td>
-						<td>5</td>
-						<td><img class="icone_status" id="status_sensor_oeste" src="../../images/status/desconnected_white.png" alt="status_sensor"></td>
-					</tr>
-					<tr onclick="atualizarGrafico(2)" class="animacao">
-						<td>Gleba Sul 1</td>
-						<td><img class="icone_status" id="status_gleba_sul" src="../../images/status/ideal.png" alt="status_gleba"></td>
-						<td>23ºC</td>
-						<td>60%</td>
-						<td>2</td>
-						<td><img class="icone_status" id="status_sensor_sul" src="../../images/status/desconnected_white.png" alt="status_sensor"></td>
-					</tr>
-					<tr onclick="atualizarGrafico(3)" class="animacao">
-						<td>Gleba Norte 1</td>
-						<td><img class="icone_status" id="status_gleba_norte" src="../../images/status/ideal.png" alt="status_gleba"></td>
-						<td>25ºC</td>
-						<td>28%</td>
-						<td>4</td>
-						<td><img class="icone_status" id="status_sensor_norte" src="../../images/status/desconnected_white.png" alt="status_sensor"></td>
-					</tr>
-					<tr onclick="atualizarGrafico(4)" class="animacao">
-						<td>Gleba Leste 1</td>
-						<td><img class="icone_status" id="status_gleba_leste" src="../../images/status/ideal.png" alt="status_gleba"></td>
-						<td>23ºC</td>
-						<td>80%</td>
-						<td>20</td>
-						<td><img class="icone_status" id="status_sensor_leste" src="../../images/status/desconnected_white.png" alt="status_sensor"></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+	<div class="container_chart2" style="padding-top: 20px; float: right;">
+		<section>
+			<canvas id="canvas_grafico_umid"></canvas>
+		</section>
 	</div>
+	<!-- TABELA -->
+	<div class="container_table" style=" float: right;">
+		<table id="tbStatus">
+			<thead>
+				<tr>
+					<th>Gleba</th>
+					<th>Status Geral</th>
+					<th>Status Temperatura</th>
+					<th>Status Umidade</th>
+					<th>Número de Alertas</th>
+					<th>Status Sensor</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr onclick="atualizarGrafico(1)" class="animacao">
+					<td>Gleba Oeste 1</td>
+					<td><img class="icone_status" id="status_gleba_oeste" src="../../images/status/ideal.png"
+							alt="status_gleba"></td>
+					<td>30ºC</td>
+					<td>35%</td>
+					<td>5</td>
+					<td><img class="icone_status" id="status_sensor_oeste"
+							src="../../images/status/desconnected_white.png" alt="status_sensor"></td>
+				</tr>
+				<tr onclick="atualizarGrafico(2)" class="animacao">
+					<td>Gleba Sul 1</td>
+					<td><img class="icone_status" id="status_gleba_sul" src="../../images/status/ideal.png"
+							alt="status_gleba"></td>
+					<td>23ºC</td>
+					<td>60%</td>
+					<td>2</td>
+					<td><img class="icone_status" id="status_sensor_sul"
+							src="../../images/status/desconnected_white.png" alt="status_sensor"></td>
+				</tr>
+				<tr onclick="atualizarGrafico(3)" class="animacao">
+					<td>Gleba Norte 1</td>
+					<td><img class="icone_status" id="status_gleba_norte" src="../../images/status/ideal.png"
+							alt="status_gleba"></td>
+					<td>25ºC</td>
+					<td>28%</td>
+					<td>4</td>
+					<td><img class="icone_status" id="status_sensor_norte"
+							src="../../images/status/desconnected_white.png" alt="status_sensor"></td>
+				</tr>
+				<tr onclick="atualizarGrafico(4)" class="animacao">
+					<td>Gleba Leste 1</td>
+					<td><img class="icone_status" id="status_gleba_leste" src="../../images/status/ideal.png"
+							alt="status_gleba"></td>
+					<td>23ºC</td>
+					<td>80%</td>
+					<td>20</td>
+					<td><img class="icone_status" id="status_sensor_leste"
+							src="../../images/status/desconnected_white.png" alt="status_sensor"></td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
+</div>
+</div>
 
-	</div>
+</div>
 </body>
 
 </html>
@@ -103,12 +111,12 @@
 	var config_umid = {
 		type: 'line',
 		data: {
-			labels: ["Fevereiro", "Março", "Abril"],
+			labels: [ "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho"],
 			datasets: [{
 				label: 'Umidade',
 				backgroundColor: window.chartColors.blue,
 				borderColor: window.chartColors.blue,
-				data: [0, 0, 0],
+				data:[0, 0, 0, 0, 0, 0, 0],
 				fill: false,
 			}]
 		},
@@ -138,7 +146,7 @@
 					display: true,
 					scaleLabel: {
 						display: true,
-						labelString: 'ºC'
+						labelString: '%'
 					}
 				}]
 			}
@@ -149,12 +157,12 @@
 	var config_temp = {
 		type: 'line',
 		data: {
-			labels: ["Fevereiro", "Março", "Abril"],
+			labels: [ "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho"],
 			datasets: [{
 				label: 'Temperatura',
 				backgroundColor: window.chartColors.red,
 				borderColor: window.chartColors.red,
-				data: [0, 0, 0],
+				data: [0, 0, 0, 0, 0, 0, 0],
 				fill: false,
 			}]
 		},
@@ -196,67 +204,70 @@
 
 	function atualizarGrafico(fk_Sensor) {
 		setTimeout(() => {
-			fetch(`/leituras/tempo-real/${fk_Sensor}`, {cache: 'no-store'}).then(function (response) {
-				console.log("Estou tentando pegar id = ", fk_Sensor)
+			fetch(`/leituras/tempo-real/${fk_Sensor}`, { cache: 'no-store' }).then(function (response) {
+				console.log("Estou tentando pegar id = ", fk_Sensor )
 				if (response.ok) {
 					response.json().then(function (novoRegistro) {
 
-						console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+						console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)} \n`);
 						// console.log(`Dados atuais do gráfico: ${dados}`);
 
 						// tirando e colocando valores no gráfico
 
 						config_temp.data.labels.shift(); // apagar o primeiro
 
-						config_temp.data.labels.push(novoRegistro.momento_grafico); // incluir um novo momento
+						config_temp.data.labels.push(novoRegistro.horario_Captacao); // incluir um novo momento
 
 						config_temp.data.datasets[0].data.shift();  // apagar o primeiro de temperatura
 
 						config_temp.data.datasets[0].data.push(novoRegistro.temperatura); // incluir uma nova leitura de temperatura
 
-						config_umid.data.labels.shift();
+						// config_umid.data.labels.shift();
 
-						config_umid.data.labels.push(novoRegistro.momento_grafico);
+						// config_umid.data.labels.push(novoRegistro.horario_Captacao);
 
-						config_umid.data.datasets[1].data.shift();  // apagar o primeiro de umidade
+						// config_umid.data.datasets[1].data.shift();  // apagar o primeiro de umidade
 
-						config_umid.data.datasets[1].data.push(novoRegistro.umidade); // incluir uma nova leitura de umidade
+						// config_umid.data.datasets[1].data.push(novoRegistro.umidade); // incluir uma nova leitura de umidade
 
-						// console.log("meu sensor é o " + fk_Sensor)
+						console.log("meu sensor é o " + fk_Sensor)
 
 						window.grafico_linha.update();
 						atualizarGrafico(fk_Sensor);
 
 						// proximaAtualizacao = setTimeout(() => atualizarGrafico(fk_Sensor, dados), 5000);
 					});
+					for (let contador = 0; contador < novoRegistro.length; contador++) {
+						console.log("ta chegando aqui \n");
+
+					}
 				} else {
-					console.error('Nenhum dado encontrado ou erro na API');
+					console.error('Nenhum dado encontrado ou erro na API \n');
 					// proximaAtualizacao = setTimeout(() => atualizarGrafico(fk_Sensor, dados), 5000);
 				}
-			})
-				.catch(function (error) {
-					console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-				});
+			}).catch(function (error) {
+				console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message} \n`);
+			});
 
-		}, 5000)
+		}, 4000)
 
 	}
 
 	// só altere aqui se souber o que está fazendo!
 	function plotarGrafico_temp() {
-		console.log('iniciando plotagem do gráfico de temperatura../...');
+		console.log('iniciando plotagem do gráfico de temperatura../... \n');
 		console.log('O que veio de dados:')
 		var ctx_temp = canvas_grafico_temp.getContext('2d');
 		window.grafico_linha = new Chart(ctx_temp, config_temp)
 		atualizarGrafico(1);
 	}
 
-	function plotarGrafico_umid() {
-		console.log('iniciando plotagem do gráfico de umidade../...');
-		var ctx_umid = canvas_grafico_umid.getContext('2d');
-		window.grafico_linha = new Chart(ctx_umid, config_umid)
-		atualizarGrafico(1); 
-	}
+	// function plotarGrafico_umid() {
+	// 	console.log('iniciando plotagem do gráfico de umidade../... \n');
+	// 	var ctx_umid = canvas_grafico_umid.getContext('2d');
+	// 	window.grafico_linha = new Chart(ctx_umid, config_umid)
+	// 	atualizarGrafico(1);
+	// }
 
 
 	function sendData() {
@@ -268,7 +279,7 @@
 	setInterval(() => {
 		sendData();
 		// change_status_sensor();
-	}, 10000);
+	}, 5000);
 
 	window.onload = plotarGrafico_temp(), plotarGrafico_umid();
 
