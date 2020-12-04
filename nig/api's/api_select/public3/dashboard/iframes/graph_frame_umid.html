@@ -18,12 +18,6 @@
 	</style>
 </head>
 <div class="containers">
-	<!-- GRAFICO TEMPERATURA -->
-	<div class="container_chart1">
-		<section>
-			<canvas id="canvas_grafico_temp"></canvas>
-		</section>
-	</div>
 	<!-- GRAFICO UMIDADE -->
 
 	<div class="container_chart2" style="padding-top: 20px; float: right;">
@@ -45,45 +39,45 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr onclick="atualizarGrafico(1)" class="animacao">
+				<tr onclick="atualizarGrafico(1)" id="oeste" class="animacao">
 					<td>Gleba Oeste 1</td>
 					<td><img class="icone_status" id="status_gleba_oeste" src="../../images/status/ideal.png"
 							alt="status_gleba"></td>
-					<td>30ºC</td>
-					<td>35%</td>
-					<td>5</td>
-					<td><img class="icone_status" id="status_sensor_oeste"
-							src="../../images/status/desconnected_white.png" alt="status_sensor"></td>
+					<td>ºC</td>
+					<td>%</td>
+					<td></td>
+					<td><img class="icone_status" id="status_sensor_oeste" src="../../images/status/connected_white.png"
+							alt="status_sensor"></td>
 				</tr>
-				<tr onclick="atualizarGrafico(2)" class="animacao">
+				<tr onclick="atualizarGrafico(2)" id="sul" class="animacao">
 					<td>Gleba Sul 1</td>
 					<td><img class="icone_status" id="status_gleba_sul" src="../../images/status/ideal.png"
 							alt="status_gleba"></td>
-					<td>23ºC</td>
-					<td>60%</td>
-					<td>2</td>
-					<td><img class="icone_status" id="status_sensor_sul"
-							src="../../images/status/desconnected_white.png" alt="status_sensor"></td>
+					<td>ºC</td>
+					<td>%</td>
+					<td></td>
+					<td><img class="icone_status" id="status_sensor_sul" src="../../images/status/connected_white.png"
+							alt="status_sensor"></td>
 				</tr>
-				<tr onclick="atualizarGrafico(3)" class="animacao">
+				<tr onclick="atualizarGrafico(3)" id="norte" class="animacao">
 					<td>Gleba Norte 1</td>
 					<td><img class="icone_status" id="status_gleba_norte" src="../../images/status/ideal.png"
 							alt="status_gleba"></td>
-					<td>25ºC</td>
-					<td>28%</td>
-					<td>4</td>
-					<td><img class="icone_status" id="status_sensor_norte"
-							src="../../images/status/desconnected_white.png" alt="status_sensor"></td>
+					<td>ºC</td>
+					<td>%</td>
+					<td></td>
+					<td><img class="icone_status" id="status_sensor_norte" src="../../images/status/connected_white.png"
+							alt="status_sensor"></td>
 				</tr>
-				<tr onclick="atualizarGrafico(4)" class="animacao">
+				<tr onclick="atualizarGrafico(4)" id="leste" class="animacao">
 					<td>Gleba Leste 1</td>
 					<td><img class="icone_status" id="status_gleba_leste" src="../../images/status/ideal.png"
 							alt="status_gleba"></td>
-					<td>23ºC</td>
-					<td>80%</td>
-					<td>20</td>
-					<td><img class="icone_status" id="status_sensor_leste"
-							src="../../images/status/desconnected_white.png" alt="status_sensor"></td>
+					<td>ºC</td>
+					<td>%</td>
+					<td></td>
+					<td><img class="icone_status" id="status_sensor_leste" src="../../images/status/connected_white.png"
+							alt="status_sensor"></td>
 				</tr>
 			</tbody>
 		</table>
@@ -102,21 +96,18 @@
 
 	// verificar_autenticacao();
 
-	// neste JSON tem que ser 'labels', 'datasets' etc, 
-	// porque é o padrão do Chart.js
-
 	// altere aqui as configurações do gráfico
 	// (tamanhos, cores, textos, etc)
 
 	var config_umid = {
 		type: 'line',
 		data: {
-			labels: [ "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho"],
+			labels: ["0", "0", "0", "0", "0", "0", "0"],
 			datasets: [{
 				label: 'Umidade',
 				backgroundColor: window.chartColors.blue,
 				borderColor: window.chartColors.blue,
-				data:[0, 0, 0, 0, 0, 0, 0],
+				data: [0, 0, 0, 0, 0, 0, 0],
 				fill: false,
 			}]
 		},
@@ -153,59 +144,36 @@
 		}
 	};
 
-
-	var config_temp = {
-		type: 'line',
-		data: {
-			labels: [ "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho"],
-			datasets: [{
-				label: 'Temperatura',
-				backgroundColor: window.chartColors.red,
-				borderColor: window.chartColors.red,
-				data: [0, 0, 0, 0, 0, 0, 0],
-				fill: false,
-			}]
-		},
-		options: {
-			responsive: true,
-			title: {
-				display: true,
-				text: 'Gráfico de histórico de temperatura'
-			},
-			tooltips: {
-				mode: 'index',
-				intersect: false,
-			},
-			hover: {
-				mode: 'nearest',
-				intersect: true
-			},
-			scales: {
-				xAxes: [{
-					display: true,
-					scaleLabel: {
-						display: true,
-						labelString: 'Horário da Leitura'
-					}
-				}],
-				yAxes: [{
-					display: true,
-					scaleLabel: {
-						display: true,
-						labelString: 'ºC'
-					}
-				}]
-			}
-		}
-	};
-
 	// só mexer se quiser alterar o tempo de atualização
 	// ou se souber o que está fazendo!
 
 	function atualizarGrafico(fk_Sensor) {
+
+		if (fk_Sensor == 1) {
+			oeste.classList.add('grafico_atual')
+			sul.classList.remove('grafico_atual')
+			norte.classList.remove('grafico_atual')
+			leste.classList.remove('grafico_atual')
+		} else if (fk_Sensor == 2) {
+			oeste.classList.remove('grafico_atual')
+			sul.classList.add('grafico_atual')
+			norte.classList.remove('grafico_atual')
+			leste.classList.remove('grafico_atual')
+		} else if (fk_Sensor == 3) {
+			oeste.classList.remove('grafico_atual')
+			sul.classList.remove('grafico_atual')
+			norte.classList.add('grafico_atual')
+			leste.classList.remove('grafico_atual')
+		} else if (fk_Sensor == 4) {
+			oeste.classList.remove('grafico_atual')
+			sul.classList.remove('grafico_atual')
+			norte.classList.remove('grafico_atual')
+			leste.classList.add('grafico_atual')
+		}
+
 		setTimeout(() => {
-			fetch(`/leituras/tempo-real/${fk_Sensor}`, { cache: 'no-store' }).then(function (response) {
-				console.log("Estou tentando pegar id = ", fk_Sensor )
+			fetch(`/leituras/tempo-real/${fk_Sensor}`, {cache: 'no-store'}).then(function (response) {
+				console.log("Estou tentando pegar id = ", fk_Sensor)
 				if (response.ok) {
 					response.json().then(function (novoRegistro) {
 
@@ -214,21 +182,13 @@
 
 						// tirando e colocando valores no gráfico
 
-						config_temp.data.labels.shift(); // apagar o primeiro
+						config_umid.data.labels.shift();
 
-						config_temp.data.labels.push(novoRegistro.horario_Captacao); // incluir um novo momento
+						config_umid.data.labels.push(novoRegistro.horario_Captacao);
 
-						config_temp.data.datasets[0].data.shift();  // apagar o primeiro de temperatura
+						config_umid.data.datasets[0].data.shift();  // apagar o primeiro de umidade
 
-						config_temp.data.datasets[0].data.push(novoRegistro.temperatura); // incluir uma nova leitura de temperatura
-
-						// config_umid.data.labels.shift();
-
-						// config_umid.data.labels.push(novoRegistro.horario_Captacao);
-
-						// config_umid.data.datasets[1].data.shift();  // apagar o primeiro de umidade
-
-						// config_umid.data.datasets[1].data.push(novoRegistro.umidade); // incluir uma nova leitura de umidade
+						config_umid.data.datasets[0].data.push(novoRegistro.umidade); // incluir uma nova leitura de umidade
 
 						console.log("meu sensor é o " + fk_Sensor)
 
@@ -237,10 +197,6 @@
 
 						// proximaAtualizacao = setTimeout(() => atualizarGrafico(fk_Sensor, dados), 5000);
 					});
-					for (let contador = 0; contador < novoRegistro.length; contador++) {
-						console.log("ta chegando aqui \n");
-
-					}
 				} else {
 					console.error('Nenhum dado encontrado ou erro na API \n');
 					// proximaAtualizacao = setTimeout(() => atualizarGrafico(fk_Sensor, dados), 5000);
@@ -254,20 +210,13 @@
 	}
 
 	// só altere aqui se souber o que está fazendo!
-	function plotarGrafico_temp() {
-		console.log('iniciando plotagem do gráfico de temperatura../... \n');
-		console.log('O que veio de dados:')
-		var ctx_temp = canvas_grafico_temp.getContext('2d');
-		window.grafico_linha = new Chart(ctx_temp, config_temp)
-		atualizarGrafico(1);
-	}
 
-	// function plotarGrafico_umid() {
-	// 	console.log('iniciando plotagem do gráfico de umidade../... \n');
-	// 	var ctx_umid = canvas_grafico_umid.getContext('2d');
-	// 	window.grafico_linha = new Chart(ctx_umid, config_umid)
-	// 	atualizarGrafico(1);
-	// }
+	function plotarGrafico_umid() {
+		console.log('iniciando plotagem do gráfico de umidade../... \n');
+		var ctx_umid = canvas_grafico_umid.getContext('2d');
+		window.grafico_linha = new Chart(ctx_umid, config_umid)
+		atualizarGrafico();
+	}
 
 
 	function sendData() {
@@ -281,6 +230,6 @@
 		// change_status_sensor();
 	}, 5000);
 
-	window.onload = plotarGrafico_temp(), plotarGrafico_umid();
+	window.onload = plotarGrafico_umid();
 
 </script>
