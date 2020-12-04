@@ -16,17 +16,17 @@ module.exports = (sequelize, DataTypes) => {
 		email_Contato: {
 			field: 'email_Contato',
 			type: DataTypes.STRING,
-			allowNull: false
+			allowNull: true
 		},
 		nome_Contato: {
 			field: 'nome_Contato',
 			type: DataTypes.STRING,
-			allowNull: false
+			allowNull: true
 		},
 		mensagem_Contato: {
 			field: 'mensagem_Contato',
 			type: DataTypes.STRING,
-			allowNull: false
+			allowNull: true
 		}
 	},
 		{
