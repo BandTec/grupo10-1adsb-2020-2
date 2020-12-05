@@ -38,7 +38,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr onclick="atualizarGrafico(1)" id="oeste" class="animacao">
+				<tr onclick="chamargraficos(1)" id="oeste" class="animacao">
 					<td>Gleba Oeste 1</td>
 					<td><img class="icone_status" id="status_gleba_oeste" src="../../images/status/ideal.png"
 							alt="status_gleba"></td>
@@ -48,7 +48,7 @@
 					<td><img class="icone_status" id="status_sensor_oeste" src="../../images/status/connected_white.png"
 							alt="status_sensor"></td>
 				</tr>
-				<tr onclick="atualizarGrafico(2)" id="sul" class="animacao">
+				<tr onclick="chamargraficos(2)" id="sul" class="animacao">
 					<td>Gleba Sul 1</td>
 					<td><img class="icone_status" id="status_gleba_sul" src="../../images/status/ideal.png"
 							alt="status_gleba"></td>
@@ -58,7 +58,7 @@
 					<td><img class="icone_status" id="status_sensor_sul" src="../../images/status/connected_white.png"
 							alt="status_sensor"></td>
 				</tr>
-				<tr onclick="atualizarGrafico(3)" id="norte" class="animacao">
+				<tr onclick="chamargraficos(3)" id="norte" class="animacao">
 					<td>Gleba Norte 1</td>
 					<td><img class="icone_status" id="status_gleba_norte" src="../../images/status/ideal.png"
 							alt="status_gleba"></td>
@@ -68,7 +68,7 @@
 					<td><img class="icone_status" id="status_sensor_norte" src="../../images/status/connected_white.png"
 							alt="status_sensor"></td>
 				</tr>
-				<tr onclick="atualizarGrafico(4)" id="leste" class="animacao">
+				<tr onclick="chamargraficos(4)" id="leste" class="animacao">
 					<td>Gleba Leste 1</td>
 					<td><img class="icone_status" id="status_gleba_leste" src="../../images/status/ideal.png"
 							alt="status_gleba"></td>
@@ -93,6 +93,13 @@
 
 <script>
 
+	function chamargraficos(fk_Sensor) {
+
+		// obterDadosGraficoPrimeiraVez(fk_Sensor)
+		atualizarGrafico(fk_Sensor)
+
+	}
+
 	// verificar_autenticacao();
 
 	// altere aqui as configurações do gráfico
@@ -101,12 +108,12 @@
 	var config_temp = {
 		type: 'line',
 		data: {
-			labels: ["0", "0", "0", "0", "0", "0", "0"],
+			labels: [],
 			datasets: [{
 				label: 'Temperatura',
 				backgroundColor: window.chartColors.red,
 				borderColor: window.chartColors.red,
-				data: [0, 0, 0, 0, 0, 0, 0],
+				data: [],
 				fill: false,
 			}]
 		},
@@ -145,6 +152,33 @@
 
 	// só mexer se quiser alterar o tempo de atualização
 	// ou se souber o que está fazendo!
+
+	function obterDadosGraficoPrimeiraVez(fk_Sensor) {
+
+		fetch(`/leituras/ultimas/${fk_Sensor}`, {cache: 'no-store'}).then(function (response) {
+			if (response.ok) {
+				response.json().then(function (resposta) {
+					console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+					resposta.reverse();
+
+					for (i = 0; i < resposta.length; i++) {
+						var registro = resposta[i];
+						config_temp.data.labels.push(registro.horario_Captacao);
+						config_temp.data.datasets[0].data.push(registro.temperatura);
+					}
+
+					console.log(JSON.stringify(config_temp));
+					plotarGrafico_temp(config_temp, fk_Sensor);
+				});
+			} else {
+				console.error('Nenhum dado encontrado ou erro na API');
+			}
+		})
+			.catch(function (error) {
+				console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+			});
+
+	}
 
 	function atualizarGrafico(fk_Sensor) {
 
@@ -194,11 +228,11 @@
 						window.grafico_linha.update();
 						atualizarGrafico(fk_Sensor);
 
-						// proximaAtualizacao = setTimeout(() => atualizarGrafico(fk_Sensor, dados), 5000);
+						// proximaAtualizacao = setTimeout(() => atualizarGrafico(fk_Sensor), 5000);
 					});
 				} else {
 					console.error('Nenhum dado encontrado ou erro na API \n');
-					// proximaAtualizacao = setTimeout(() => atualizarGrafico(fk_Sensor, dados), 5000);
+					// proximaAtualizacao = setTimeout(() => atualizarGrafico(fk_Sensor), 5000);
 				}
 			}).catch(function (error) {
 				console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message} \n`);
@@ -211,9 +245,9 @@
 	// só altere aqui se souber o que está fazendo!
 	function plotarGrafico_temp() {
 		console.log('iniciando plotagem do gráfico de temperatura../... \n');
-		console.log('O que veio de dados:')
+		console.log('O que veio de dados:');
 		var ctx_temp = canvas_grafico_temp.getContext('2d');
-		window.grafico_linha = new Chart(ctx_temp, config_temp)
+		window.grafico_linha = new Chart(ctx_temp, config_temp);
 		atualizarGrafico();
 	}
 
@@ -228,5 +262,5 @@
 		// change_status_sensor();
 	}, 5000);
 
-	window.onload = plotarGrafico_temp();
+	window.onload = obterDadosGraficoPrimeiraVez(1);
 </script>
