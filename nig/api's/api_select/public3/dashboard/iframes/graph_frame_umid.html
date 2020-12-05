@@ -32,7 +32,7 @@
 				<tr>
 					<th>Gleba</th>
 					<th>Status Geral</th>
-					<th>Status Temperatura</th>
+					<th>Status umidade</th>
 					<th>Status Umidade</th>
 					<th>Número de Alertas</th>
 					<th>Status Sensor</th>
@@ -94,6 +94,13 @@
 
 <script>
 
+	function chamargraficos(fk_Sensor) {
+
+		// obterDadosGraficoPrimeiraVez(fk_Sensor)
+		atualizarGrafico(fk_Sensor)
+
+	}
+
 	// verificar_autenticacao();
 
 	// altere aqui as configurações do gráfico
@@ -102,12 +109,12 @@
 	var config_umid = {
 		type: 'line',
 		data: {
-			labels: ["0", "0", "0", "0", "0", "0", "0"],
+			labels: [],
 			datasets: [{
 				label: 'Umidade',
 				backgroundColor: window.chartColors.blue,
 				borderColor: window.chartColors.blue,
-				data: [0, 0, 0, 0, 0, 0, 0],
+				data: [],
 				fill: false,
 			}]
 		},
@@ -143,6 +150,33 @@
 			}
 		}
 	};
+
+	function obterDadosGraficoPrimeiraVez(fk_Sensor) {
+
+		fetch(`/leituras/ultimas/${fk_Sensor}`, {cache: 'no-store'}).then(function (response) {
+			if (response.ok) {
+				response.json().then(function (resposta) {
+					console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+					resposta.reverse();
+
+					for (i = 0; i < resposta.length; i++) {
+						var registro = resposta[i];
+						config_umid.data.labels.push(registro.horario_Captacao);
+						config_umid.data.datasets[0].data.push(registro.umidade);
+					}
+
+					console.log(JSON.stringify(config_umid));
+					plotarGrafico_umid(config_umid, fk_Sensor);
+				});
+			} else {
+				console.error('Nenhum dado encontrado ou erro na API');
+			}
+		})
+			.catch(function (error) {
+				console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+			});
+
+	}
 
 	// só mexer se quiser alterar o tempo de atualização
 	// ou se souber o que está fazendo!
@@ -230,6 +264,6 @@
 		// change_status_sensor();
 	}, 5000);
 
-	window.onload = plotarGrafico_umid();
+	window.onload = obterDadosGraficoPrimeiraVez(1);
 
 </script>
