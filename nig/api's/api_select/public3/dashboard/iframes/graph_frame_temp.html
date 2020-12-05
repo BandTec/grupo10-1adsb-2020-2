@@ -93,10 +93,20 @@
 
 <script>
 
-	function chamargraficos(fk_Sensor) {
+	let teste = [];
 
+	window.onload = obterDadosGraficoPrimeiraVez(1);
+
+	function chamargraficos(fk_Sensor) {
+		// fk[0].shift();
+		// teste[0] = fk_Sensor;
+		if (teste >= 2) {
+			teste.shift(1);
+		}
+		teste.push(fk_Sensor);
 		// obterDadosGraficoPrimeiraVez(fk_Sensor)
-		atualizarGrafico(fk_Sensor)
+		atualizarGrafico(teste[0]);
+ 		// console.log(teste);
 
 	}
 
@@ -155,10 +165,10 @@
 
 	function obterDadosGraficoPrimeiraVez(fk_Sensor) {
 
-		fetch(`/leituras/ultimas/${fk_Sensor}`, {cache: 'no-store'}).then(function (response) {
+		fetch(`/leituras/ultimas/${fk_Sensor}`, { cache: 'no-store' }).then(function (response) {
 			if (response.ok) {
 				response.json().then(function (resposta) {
-					console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+					console.log(`Dados recebidos: ${JSON.stringify(resposta)} \n`);
 					resposta.reverse();
 
 					for (i = 0; i < resposta.length; i++) {
@@ -171,12 +181,11 @@
 					plotarGrafico_temp(config_temp, fk_Sensor);
 				});
 			} else {
-				console.error('Nenhum dado encontrado ou erro na API');
+				console.error('Nenhum dado encontrado ou erro na API \n');
 			}
-		})
-			.catch(function (error) {
-				console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-			});
+		}).catch(function (error) {
+			console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message} \n`);
+		});
 
 	}
 
@@ -202,10 +211,12 @@
 			sul.classList.remove('grafico_atual')
 			norte.classList.remove('grafico_atual')
 			leste.classList.add('grafico_atual')
+		}else if(teste.length >= 1) {
+			teste.splice(0);
 		}
 
 		setTimeout(() => {
-			fetch(`/leituras/tempo-real/${fk_Sensor}`, {cache: 'no-store'}).then(function (response) {
+			fetch(`/leituras/tempo-real/${teste[0]}`, { cache: 'no-store' }).then(function (response) {
 				console.log("Estou tentando pegar id = ", fk_Sensor)
 				if (response.ok) {
 					response.json().then(function (novoRegistro) {
@@ -240,6 +251,7 @@
 
 		}, 4000)
 
+
 	}
 
 	// só altere aqui se souber o que está fazendo!
@@ -262,5 +274,5 @@
 		// change_status_sensor();
 	}, 5000);
 
-	window.onload = obterDadosGraficoPrimeiraVez(1);
+
 </script>

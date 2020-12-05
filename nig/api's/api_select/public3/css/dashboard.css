@@ -3,7 +3,7 @@
 
 /* ANIMAÇÃO DOS BOTOES */
 
-@-webkit-keyframes fadeinout {
+/* @-webkit-keyframes fadeinout {
     0%,
     100% {
         opacity: 0;
@@ -28,7 +28,7 @@
     animation: fadeinout 1s linear forwards;
     -webkit-animation: fadeinout 1s linear forwards;
     color: #a9927f;
-}
+} */
 
 
 /* ESTILIZAÇÃO IFRAMES */
