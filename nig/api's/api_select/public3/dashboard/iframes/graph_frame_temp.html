@@ -99,14 +99,14 @@
 
 	function chamargraficos(fk_Sensor) {
 		// fk[0].shift();
-		// teste[0] = fk_Sensor;
 		if (teste >= 2) {
 			teste.shift(1);
 		}
 		teste.push(fk_Sensor);
 		// obterDadosGraficoPrimeiraVez(fk_Sensor)
 		atualizarGrafico(teste[0]);
- 		// console.log(teste);
+		teste[0] = fk_Sensor;
+		// console.log(teste);
 
 	}
 
@@ -160,8 +160,8 @@
 		}
 	};
 
-	// só mexer se quiser alterar o tempo de atualização
-	// ou se souber o que está fazendo!
+	/* só mexer se quiser alterar o tempo de atualização
+	 ou se souber o que está fazendo!*/
 
 	function obterDadosGraficoPrimeiraVez(fk_Sensor) {
 
@@ -189,7 +189,11 @@
 
 	}
 
+	var time;
+	
 	function atualizarGrafico(fk_Sensor) {
+
+
 
 		if (fk_Sensor == 1) {
 			oeste.classList.add('grafico_atual')
@@ -211,13 +215,13 @@
 			sul.classList.remove('grafico_atual')
 			norte.classList.remove('grafico_atual')
 			leste.classList.add('grafico_atual')
-		}else if(teste.length >= 1) {
-			teste.splice(0);
 		}
 
-		setTimeout(() => {
+		clearTimeout(time);
+
+		time = setTimeout(() => {
 			fetch(`/leituras/tempo-real/${teste[0]}`, { cache: 'no-store' }).then(function (response) {
-				console.log("Estou tentando pegar id = ", fk_Sensor)
+				console.log("Estou tentando pegar id = ", fk_Sensor);
 				if (response.ok) {
 					response.json().then(function (novoRegistro) {
 
@@ -242,7 +246,7 @@
 						// proximaAtualizacao = setTimeout(() => atualizarGrafico(fk_Sensor), 5000);
 					});
 				} else {
-					console.error('Nenhum dado encontrado ou erro na API \n');
+					console.error('Nenhum dado encontrado ou erro na Aplicação \n');
 					// proximaAtualizacao = setTimeout(() => atualizarGrafico(fk_Sensor), 5000);
 				}
 			}).catch(function (error) {
@@ -251,7 +255,7 @@
 
 		}, 4000)
 
-
+		// clearTimeout(t); 
 	}
 
 	// só altere aqui se souber o que está fazendo!
