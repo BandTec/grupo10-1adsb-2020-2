@@ -226,6 +226,10 @@ table {
 .grafico_atual{
     background-color: #4169e152;
 }
+
+tr {
+    cursor: pointer;
+}
 /* FIM TABELA */
 
 /* FIM CONTAINERS */
