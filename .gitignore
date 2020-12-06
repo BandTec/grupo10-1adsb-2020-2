@@ -62,3 +62,6 @@ typings/
 
 .directory
 package-lock.json
+
+.vscode/
+.vscode
