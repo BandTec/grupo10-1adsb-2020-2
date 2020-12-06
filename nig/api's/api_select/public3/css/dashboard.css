@@ -115,18 +115,23 @@ table {
 
 #config{
     float: left;
+    cursor: pointer;
 }
 #graph{
     float: left;
+    cursor: pointer;
 }
 #graph_umid{
     float: left;
+    cursor: pointer;
 }
 #home{
     float: left;
+    cursor: pointer;
 }
 #help{
     float: left;
+    cursor: pointer;
 }
 
 .icon_logout img{

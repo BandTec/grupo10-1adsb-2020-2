@@ -94,10 +94,18 @@
 
 <script>
 
+	let fk = [];
+
+	window.onload = obterDadosGraficoPrimeiraVez(1);
+
 	function chamargraficos(fk_Sensor) {
 
-		// obterDadosGraficoPrimeiraVez(fk_Sensor)
-		atualizarGrafico(fk_Sensor)
+		if (fk >= 2) {
+			fk.shift(1);
+		}
+		teste.push(fk_Sensor);
+		atualizarGrafico(fk[0]);
+		fk[0] = fk_Sensor;
 
 	}
 
@@ -153,7 +161,7 @@
 
 	function obterDadosGraficoPrimeiraVez(fk_Sensor) {
 
-		fetch(`/leituras/ultimas/${fk_Sensor}`, {cache: 'no-store'}).then(function (response) {
+		fetch(`/leituras/ultimas/${fk_Sensor}`, { cache: 'no-store' }).then(function (response) {
 			if (response.ok) {
 				response.json().then(function (resposta) {
 					console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
@@ -181,6 +189,8 @@
 	// só mexer se quiser alterar o tempo de atualização
 	// ou se souber o que está fazendo!
 
+	var time;
+
 	function atualizarGrafico(fk_Sensor) {
 
 		if (fk_Sensor == 1) {
@@ -205,8 +215,10 @@
 			leste.classList.add('grafico_atual')
 		}
 
-		setTimeout(() => {
-			fetch(`/leituras/tempo-real/${fk_Sensor}`, {cache: 'no-store'}).then(function (response) {
+		clearTimeout(time);
+
+		time = setTimeout(() => {
+			fetch(`/leituras/tempo-real/${fk_Sensor}`, { cache: 'no-store' }).then(function (response) {
 				console.log("Estou tentando pegar id = ", fk_Sensor)
 				if (response.ok) {
 					response.json().then(function (novoRegistro) {
@@ -264,6 +276,5 @@
 		// change_status_sensor();
 	}, 5000);
 
-	window.onload = obterDadosGraficoPrimeiraVez(1);
 
 </script>
