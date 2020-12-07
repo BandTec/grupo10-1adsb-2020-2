@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="../../css/dashboard.css">
 	<script src="../../js/autenticar.js"></script>
 	<script src="../../js/status_sensor.js"></script>
+	<script src="../../js/alerts.js"></script>
 	<style>
 		canvas {
 			-moz-user-select: none;
@@ -27,7 +28,7 @@
 	<!-- TABELA -->
 	<div class="container_table" style=" float: right;">
 		<table id="tbStatus">
-			<thead>
+			<thead class="header_table">
 				<tr>
 					<th>Gleba</th>
 					<th>Status Geral</th>
@@ -40,7 +41,7 @@
 			<tbody>
 				<tr onclick="chamargraficos(1)" id="oeste" class="animacao">
 					<td>Gleba Oeste 1</td>
-					<td><img class="icone_status" id="status_gleba_oeste" src="../../images/status/ideal.png"
+					<td><img class="icone_status_analytics" id="status_gleba_oeste" src="../../images/status/ideal.png"
 							alt="status_gleba"></td>
 					<td>ºC</td>
 					<td>%</td>
@@ -50,7 +51,7 @@
 				</tr>
 				<tr onclick="chamargraficos(2)" id="sul" class="animacao">
 					<td>Gleba Sul 1</td>
-					<td><img class="icone_status" id="status_gleba_sul" src="../../images/status/ideal.png"
+					<td><img class="icone_status_analytics" id="status_gleba_sul" src="../../images/status/ideal.png"
 							alt="status_gleba"></td>
 					<td>ºC</td>
 					<td>%</td>
@@ -60,7 +61,7 @@
 				</tr>
 				<tr onclick="chamargraficos(3)" id="norte" class="animacao">
 					<td>Gleba Norte 1</td>
-					<td><img class="icone_status" id="status_gleba_norte" src="../../images/status/ideal.png"
+					<td><img class="icone_status_analytics" id="status_gleba_norte" src="../../images/status/ideal.png"
 							alt="status_gleba"></td>
 					<td>ºC</td>
 					<td>%</td>
@@ -68,9 +69,9 @@
 					<td><img class="icone_status" id="status_sensor_norte" src="../../images/status/connected_white.png"
 							alt="status_sensor"></td>
 				</tr>
-				<tr onclick="chamargraficos(4)" id="leste" class="animacao">
+				<tr onclick="chamargraficos(4)" id="leste" class="animacao ending_tr">
 					<td>Gleba Leste 1</td>
-					<td><img class="icone_status" id="status_gleba_leste" src="../../images/status/ideal.png"
+					<td><img class="icone_status_analytics" id="status_gleba_leste" src="../../images/status/ideal.png"
 							alt="status_gleba"></td>
 					<td>ºC</td>
 					<td>%</td>
@@ -94,7 +95,9 @@
 <script>
 
 	let teste = [];
-
+	let temp_alert = 0;
+	let umid_alert = 0;
+	
 	window.onload = obterDadosGraficoPrimeiraVez(1);
 
 	function chamargraficos(fk_Sensor) {
@@ -237,8 +240,9 @@
 						config_temp.data.datasets[0].data.shift();  // apagar o primeiro de temperatura
 
 						config_temp.data.datasets[0].data.push(novoRegistro.temperatura); // incluir uma nova leitura de temperatura
-
-						console.log("meu sensor é o " + fk_Sensor)
+						temp_alert= novoRegistro.temperatura;
+						umid_alert= novoRegistro.umidade;
+						alert_analytics(temp_alert, umid_alert, fk_Sensor)
 
 						window.grafico_linha.update();
 						atualizarGrafico(fk_Sensor);

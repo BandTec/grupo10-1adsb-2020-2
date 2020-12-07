@@ -1,12 +1,12 @@
 function dht11(){
 
-    minHumidity = 20;
+    minHumidity = 60;
     maxHumidity = 80;
 
-    minTemperature = 0;
-    maxTemperature = 50;
+    minTemperature = 25;
+    maxTemperature = 35;
 
-    if (minHumidity < 20 || maxHumidity > 100) {
+    if (minHumidity < 20 || maxHumidity > 80) {
         throw new Error('Os valores minímos e máximos para umidade são 20% e 100% respectivamente.')
     }
 
@@ -25,7 +25,7 @@ function dht11(){
     
     let randomTemperature = Math.random() * (maxTemperature - minTemperature) + minTemperature;
     
-    return [randomHumidity, randomTemperature]
+    return [randomTemperature, randomHumidity]
 }
 
 

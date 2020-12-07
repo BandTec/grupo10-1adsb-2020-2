@@ -187,6 +187,13 @@ table {
 }
 
 /* TABELA */
+
+.header_table{
+    background: linear-gradient(180deg, rgba(51,60,64,1) 25%, rgba(0,0,0,1) 50%, rgba(51,60,64,1) 75%);
+    height: 250px;
+}
+
+
 #tbStatus{
     width: 95%;
     margin-left: 2.5%;
@@ -194,19 +201,16 @@ table {
     border-collapse: collapse;
     left: 120px;
     margin-top: 21px;
+    color: whitesmoke;
 }
 
-#tbStatus tr th{
-    border: rgba(255, 255, 255, 0.644) 2px solid;
+#tbStatus th{
+    height: 50px;
+    border-top: none;
 }
-#tbStatus tr td{
-    border-left: rgba(255, 255, 255, 0.644) 2px solid;
-    border-right: rgba(255, 255, 255, 0.644) 2px solid;
-    border-bottom: rgba(255, 255, 255, 0.644) 2px solid;
-    color: white;
-}
-#tbStatus thead {
-    color: rgba(255, 255, 255, 0.644);
+
+#tbStatus td{
+    background-color: rgba(0, 0, 0, 0.400);
 }
 
 #tbStatus tbody {
@@ -224,7 +228,7 @@ table {
 }
 
 .grafico_atual{
-    background-color: #4169e152;
+    background-color: #a7bbf76e;
 }
 
 tr {
