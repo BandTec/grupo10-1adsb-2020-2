@@ -94,7 +94,7 @@
 
 <script>
 
-	let teste = [];
+	let fk = [];
 	let temp_alert = 0;
 	let umid_alert = 0;
 	
@@ -102,14 +102,14 @@
 
 	function chamargraficos(fk_Sensor) {
 		// fk[0].shift();
-		if (teste >= 2) {
-			teste.shift(1);
+		if (fk >= 2) {
+			fk.shift(1);
 		}
-		teste.push(fk_Sensor);
+		fk.push(fk_Sensor);
 		// obterDadosGraficoPrimeiraVez(fk_Sensor)
-		atualizarGrafico(teste[0]);
-		teste[0] = fk_Sensor;
-		// console.log(teste);
+		atualizarGrafico(fk[0]);
+		fk[0] = fk_Sensor;
+		// console.log(fk);
 
 	}
 
@@ -223,7 +223,7 @@
 		clearTimeout(time);
 
 		time = setTimeout(() => {
-			fetch(`/leituras/tempo-real/${teste[0]}`, { cache: 'no-store' }).then(function (response) {
+			fetch(`/leituras/tempo-real/${fk[0]}`, { cache: 'no-store' }).then(function (response) {
 				console.log("Estou tentando pegar id = ", fk_Sensor);
 				if (response.ok) {
 					response.json().then(function (novoRegistro) {
