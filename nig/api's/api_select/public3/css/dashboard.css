@@ -1,6 +1,8 @@
 /* GLOBAL */
 
-
+body{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
 /* ANIMAÇÃO DOS BOTOES */
 
 /* @-webkit-keyframes fadeinout {
@@ -169,7 +171,7 @@ table {
     background-color: #282C31;
     border: 1px solid #448c648f;
     border-radius: 10px;
-    padding: 3%;
+    padding: 3% 3% 2% 3%;
 }
 
 #canvas_grafico_temp{
@@ -190,13 +192,12 @@ table {
 
 /* CONTAINER MEIO */
 .container_chart2{
-    margin-top:5px;
     min-height: 290px;
     left: 112.02px;
     background-color: #282C31;
     border: 1px solid #448c648f;
     border-radius: 10px;
-    padding: 3%;
+    padding: 3% 3% 2% 3%;
 }
 
 /* CONTAINER INFERIOR */

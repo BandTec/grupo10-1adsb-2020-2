@@ -8,7 +8,7 @@
 	<script src="http://www.chartjs.org/samples/latest/utils.js"></script>
 	<link rel="stylesheet" href="../../css/dashboard.css">
 	<script src="../../js/autenticar.js"></script>
-	<script src="../../js/status_sensor.js"></script>
+	<script src="../../js/alerts.js"></script>
 	<style>
 		canvas {
 			-moz-user-select: none;
@@ -39,42 +39,42 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr onclick="atualizarGrafico(1)" id="oeste" class="animacao">
+				<tr onclick="chamargraficos(1)" id="oeste" class="animacao">
 					<td>Gleba Oeste</td>
 					<td><img class="icone_status_analytics" id="status_gleba_oeste" src="../../images/status/ideal.png"
 							alt="status_gleba"></td>
-					<td>ºC</td>
-					<td>%</td>
+					<td id="temp_gleba_oeste">ºC</td>
+					<td id="umid_gleba_oeste">%</td>
 					<td></td>
 					<td><img class="icone_status" id="status_sensor_oeste" src="../../images/status/connected_white.png"
 							alt="status_sensor"></td>
 				</tr>
-				<tr onclick="atualizarGrafico(2)" id="sul" class="animacao">
+				<tr onclick="chamargraficos(2)" id="sul" class="animacao">
 					<td>Gleba Sul</td>
 					<td><img class="icone_status_analytics" id="status_gleba_sul" src="../../images/status/ideal.png"
 							alt="status_gleba"></td>
-					<td>ºC</td>
-					<td>%</td>
+					<td id="temp_gleba_sul">ºC</td>
+					<td id="umid_gleba_sul">%</td>
 					<td></td>
 					<td><img class="icone_status" id="status_sensor_sul" src="../../images/status/connected_white.png"
 							alt="status_sensor"></td>
 				</tr>
-				<tr onclick="atualizarGrafico(3)" id="norte" class="animacao">
+				<tr onclick="chamargraficos(3)" id="norte" class="animacao">
 					<td>Gleba Norte</td>
 					<td><img class="icone_status_analytics" id="status_gleba_norte" src="../../images/status/ideal.png"
 							alt="status_gleba"></td>
-					<td>ºC</td>
-					<td>%</td>
+					<td id="temp_gleba_norte">ºC</td>
+					<td id="umid_gleba_norte">%</td>
 					<td></td>
 					<td><img class="icone_status" id="status_sensor_norte" src="../../images/status/connected_white.png"
 							alt="status_sensor"></td>
 				</tr>
-				<tr onclick="atualizarGrafico(4)" id="leste" class="animacao">
+				<tr onclick="chamargraficos(4)" id="leste" class="animacao ending_tr">
 					<td>Gleba Leste</td>
 					<td><img class="icone_status_analytics" id="status_gleba_leste" src="../../images/status/ideal.png"
 							alt="status_gleba"></td>
-					<td>ºC</td>
-					<td>%</td>
+					<td id="temp_gleba_leste">ºC</td>
+					<td id="umid_gleba_leste">%</td>
 					<td></td>
 					<td><img class="icone_status" id="status_sensor_leste" src="../../images/status/connected_white.png"
 							alt="status_sensor"></td>
@@ -96,7 +96,7 @@
 
 	let fk = [];
 
-	window.onload = obterDadosGraficoPrimeiraVez(1);
+	window.onload = obterDadosGraficoPrimeiraVez(1), atualizacaoPeriodica();
 
 	function chamargraficos(fk_Sensor) {
 
@@ -108,6 +108,55 @@
 		fk[0] = fk_Sensor;
 
 	}
+
+
+	function atualizacaoPeriodica() {
+        obter_dados_por_gleba(1);
+        obter_dados_por_gleba(2);
+        obter_dados_por_gleba(3);
+        obter_dados_por_gleba(4);
+        setTimeout(atualizacaoPeriodica, 5000);
+    }
+
+	function obter_dados_por_gleba(fk_Sensor) {
+        //aguardar();
+        fetch(`/leituras/tempo-real/${fk_Sensor}`)
+            .then(resposta => {
+
+                if (resposta.ok) {
+                    resposta.json().then(function (resposta) {
+
+                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+                        // aqui, após registro. use os nomes 
+                        // dos atributos que vem no JSON 
+                        var dados = {
+                            temperatura: resposta.temperatura,
+                            umidade: resposta.umidade
+                        }
+                    
+						alert_analytics(dados.temperatura, dados.umidade, fk_Sensor);
+
+						temp_gleba_oeste.innerHTML = `${dados.temperatura} ºC`;
+						temp_gleba_sul.innerHTML = `${dados.temperatura} ºC`;
+						temp_gleba_norte.innerHTML = `${dados.temperatura} ºC`;
+						temp_gleba_leste.innerHTML = `${dados.temperatura} ºC`;
+
+						umid_gleba_oeste.innerHTML = `${dados.umidade} %`;
+						umid_gleba_sul.innerHTML = `${dados.umidade} %`;
+						umid_gleba_norte.innerHTML = `${dados.umidade} %`;
+						umid_gleba_leste.innerHTML = `${dados.umidade} %`;
+
+					});
+                } else {
+
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados do caminhao p/ gráfico: ${error.message}`);
+            });
+    }
 
 	// verificar_autenticacao();
 
