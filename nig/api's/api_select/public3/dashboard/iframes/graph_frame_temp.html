@@ -110,7 +110,6 @@
 		atualizarGrafico(fk[0]);
 		fk[0] = fk_Sensor;
 		// console.log(fk);
-
 	}
 
 	// verificar_autenticacao();
@@ -196,8 +195,6 @@
 	
 	function atualizarGrafico(fk_Sensor) {
 
-
-
 		if (fk_Sensor == 1) {
 			oeste.classList.add('grafico_atual')
 			sul.classList.remove('grafico_atual')
@@ -240,11 +237,15 @@
 						config_temp.data.datasets[0].data.shift();  // apagar o primeiro de temperatura
 
 						config_temp.data.datasets[0].data.push(novoRegistro.temperatura); // incluir uma nova leitura de temperatura
+						
 						temp_alert= novoRegistro.temperatura;
+						
 						umid_alert= novoRegistro.umidade;
+						
 						alert_analytics(temp_alert, umid_alert, fk_Sensor)
 
 						window.grafico_linha.update();
+						
 						atualizarGrafico(fk_Sensor);
 
 						// proximaAtualizacao = setTimeout(() => atualizarGrafico(fk_Sensor), 5000);
