@@ -55,10 +55,10 @@
 ::-webkit-scrollbar {
     width: 3px;
 
-    background: #448c64;
+    background: #448c648f;
 }
 ::-webkit-scrollbar-thumb {
-    background: #448c64;
+    background: #448c648f;
     border-radius: 100px;
 }
 /* FIM BARRA DE ROLAGEM */
@@ -167,9 +167,25 @@ table {
     min-height: 290px;
     left: 112.02px;
     background-color: #282C31;
-    border: 1px solid #448C64;
+    border: 1px solid #448c648f;
     border-radius: 10px;
     padding: 3%;
+}
+
+#canvas_grafico_temp{
+    display: block;
+    width: 1206px;
+    border-radius: 2px;
+    background-color: #181a1d81;
+    height: 603px;
+}
+
+#canvas_grafico_umid{
+    display: block;
+    width: 1206px;
+    border-radius: 2px;
+    background-color: #181a1d81;
+    height: 603px;
 }
 
 /* CONTAINER MEIO */
@@ -178,7 +194,7 @@ table {
     min-height: 290px;
     left: 112.02px;
     background-color: #282C31;
-    border: 1px solid #448C64;
+    border: 1px solid #448c648f;
     border-radius: 10px;
     padding: 3%;
 }
@@ -191,7 +207,7 @@ table {
     height: 290px;
     left: 112.02px;
     background-color: #282C31;
-    border: 1px solid #448C64;
+    border: 1px solid #448c648f;
     border-radius: 10px;
 }
 
@@ -218,7 +234,7 @@ table {
 }
 
 #tbStatus td{
-    background-color: rgba(0, 0, 0, 0.400);
+    background-color: #181a1d81;
 }
 
 #tbStatus tbody {
@@ -256,7 +272,7 @@ tr {
     margin-top:5px;
     width: 100%;
     background-color: #282C31;
-    border: 2px solid #448C64;
+    border: 2px solid #448c648f;
     border-radius: 10px;
 }
 
@@ -360,7 +376,7 @@ tr {
     height: 187px;
     left: 112.02px;
     background-color: #282C31;
-    border: 1px solid #448C64;
+    border: 1px solid #448c648f;
     border-radius: 10px;
 }
 
