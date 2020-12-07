@@ -1,0 +1,47 @@
+<html>
+
+<head>
+    <title>Dashboard</title>
+    <link rel="shortcut icon" href="../images/logo3.png" type="image/x-icon">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="http://www.chartjs.org/dist/2.7.1/Chart.js"></script>
+    <script src="http://www.chartjs.org/samples/latest/utils.js"></script>
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <script src="../js/autenticar.js"></script>
+    <script src="../js/frames.js"></script>
+    <style>
+        canvas {
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="logo_icons">
+            <div class="logo">
+                <img src="../images/logo4.png" alt=""></img>
+            </div>
+            <div class="icons">
+                <a onclick="change_frame('home')" class="animacao atual" id="home"><img id="home_icon"
+                        src="../images/home-icon-red.png" alt="home-icone"></a>
+                <a onclick="change_frame('graph')" class="animacao" id="graph"><img id="graph_icon"
+                        src="../images/chart-green.png" alt="grafico-icone"></a>
+                <a onclick="change_frame('graph_umid')" class="animacao" id="graph_umid"><img id="graph_icon_umid"
+                        src="../images/chart-green.png" alt="grafico-icone"></a>
+                <a onclick="change_frame('config')" class="animacao" id="config"><img id="sett_icon"
+                        src="../images/settings-green.png" alt="configurações-icone"></a>
+                <a onclick="change_frame('help')" class="animacao" id="help"><img id="help_icon"
+                        src="../images/help-green.png" alt="help-ícone"></a>
+            </div>
+            <div class="icon_logout">
+                <a class="animacao" href="../index.html" onclick="logoff()"><img src="../images/logout.png" alt=""></a>
+            </div>
+        </div>
+    </div>
+
+    <iframe class="frame" id="frame_change" src="iframes/index_frame.html" frameborder="0"></iframe>
+
+</body>

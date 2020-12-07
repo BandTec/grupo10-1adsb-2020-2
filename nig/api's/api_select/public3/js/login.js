@@ -48,14 +48,14 @@ function entrar() {
                 sessionStorage.login_usuario_meuapp = json.email;
                 sessionStorage.nome_usuario_meuapp = json.nome;
 
-                window.location.href = '../dashboard/dashboard.html';
+                window.location.href = '../dashboard/dash.html';
             });
 
         } else {
 
             console.log('Erro de login!');
 
-            response.text().then(texto => {
+            resposta.text().then(texto => {
                 console.error(texto);
                 finalizar_aguardar(texto);
             });

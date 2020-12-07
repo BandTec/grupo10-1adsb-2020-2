@@ -1,0 +1,228 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Dashboard - configurações</title>
+    <link rel="shortcut icon" href="images/logo2.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../css/dashboard.css">
+    <script src="../../js/autenticar.js"></script>
+    <style>
+        canvas {
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+        }
+    </style>
+</head>
+
+<body onload="atualizacaoPeriodica()">
+    <div class="dashboard">
+        <div class="container">
+            <div class="grafico">
+                <h4>Gleba <span name="namecaminhao" id="fk_Sensor" value="1">Oeste</span></h4>
+                <div class="valores">
+                    <div class="valor" id="div_temperatura">Temperatura sendo obtida...</div>
+                    <div class="valor" id="div_umidade">Umidade sendo obtida...</div>
+                </div>
+                <div class="alertas">
+                    <div class="alerta" id="div_alerta_temperatura"> </div>
+                    <div class="alerta_umidd" id="div_alerta_umidade"></div>
+                </div>
+            </div>
+
+            <div class="grafico">
+                <h4>Gleba <span name="namecaminhao" id="fk_Sensor" value="2">Sul</span></h4>
+                <div class="valores">
+                    <div class="valor" id="div_temperatura2">Temperatura sendo obtida...</div>
+                    <div class="valor" id="div_umidade2">Umidade sendo obtida...</div>
+                </div>
+
+                <div class="alertas">
+                    <div class="alerta" id="div_alerta_temperatura2"></div>
+                    <div class="alerta_umidd" id="div_alerta_umidade2"></div>
+                </div>
+            </div>
+
+            <div class="grafico">
+                <h4>Gleba <span name="namecaminhao" id="fk_Sensor" value="3">Leste</span></h4>
+                <div class="valores">
+                    <div class="valor" id="div_temperatura3">Temperatura sendo obtida...</div>
+                    <div class="valor" id="div_umidade3">Umidade sendo obtida...</div>
+                </div>
+                <div class="alertas">
+                    <div class="alerta" id="div_alerta_temperatura3"></div>
+                    <div class="alerta_umidd" id="div_alerta_umidade3"></div>
+                </div>
+            </div>
+
+            <div class="grafico">
+                <h4>Gleba <span name="namecaminhao" id="fk_Sensor" value="4">Norte</span></h4>
+                <div class="valores">
+                    <div class="valor" id="div_temperatura4">Temperatura sendo obtida...</div>
+                    <div class="valor" id="div_umidade4">Umidade sendo obtida...</div>
+                </div>
+
+                <div class="alertas">
+                    <div class="alerta" id="div_alerta_temperatura4"></div>
+                    <div class="alerta_umidd" id="div_alerta_umidade4"></div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+
+</body>
+
+
+<script>
+
+    let usuario;
+
+    // verificar_autenticacao();
+
+    // só mexer se quiser alterar o tempo de atualização
+    // ou se souber o que está fazendo!
+    function atualizacaoPeriodica() {
+        obter_dados_por_gleba(1);
+        obter_dados_por_gleba(2);
+        obter_dados_por_gleba(3);
+        obter_dados_por_gleba(4);
+        setTimeout(atualizacaoPeriodica, 5000);
+    }
+
+
+
+    function obter_dados_por_gleba(fk_Sensor) {
+        //aguardar();
+        fetch(`/leituras/tempo-real/${fk_Sensor}`)
+            .then(resposta => {
+
+                if (resposta.ok) {
+                    resposta.json().then(function (resposta) {
+
+                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+                        // aqui, após registro. use os nomes 
+                        // dos atributos que vem no JSON 
+                        var dados = {
+                            temperatura: resposta.temperatura,
+                            umidade: resposta.umidade
+                        }
+
+                        alertar(resposta.temperatura, resposta.umidade, fk_Sensor);
+                        atualizarTela(dados, fk_Sensor);
+                    });
+                } else {
+
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados do caminhao p/ gráfico: ${error.message}`);
+            });
+    }
+
+    function alertar(temperatura, umidade, fk_Sensor) {
+        // padrão para meu alerta
+        var limites = {
+            max_temperatura: 40,
+            min_temperatura: 20,
+            max_umidade: 80,
+            min_umidade: 50,
+        };
+
+        // zerar aviso de mensagem
+        var mensagem_temperatura = '';
+        var mensagem_umidade = '';
+        var classe_temperatura = 'alerta';
+        var classe_umidade = 'alerta_umidd';
+
+        // comparando
+        if (temperatura > limites.max_temperatura) {
+            mensagem_temperatura += 'Temperatura alta demais! <br>';
+            classe_temperatura = 'alerta alerta-alto';
+        }
+        if (umidade > limites.max_umidade) {
+            mensagem_umidade += 'Umidade alta demais! <br>';
+            classe_umidade = 'alerta_umidd alerta-alto';
+        }
+        if (temperatura < limites.min_temperatura) {
+            mensagem_temperatura = 'Temperatura baixa demais! <br>';
+            classe_temperatura = 'alerta alerta-baixo';
+        }
+        if (umidade < limites.min_umidade) {
+            mensagem_umidade = 'Umidade baixa demais! <br>';
+            classe_umidade = 'alerta_umidd alerta-baixo';
+        }
+
+        // escolhendo qual alterar
+        var div_temperatura_alterar
+        var div_umidade_alterar
+
+        if (fk_Sensor == 1) {
+            div_temperatura_alterar = div_alerta_temperatura
+            div_umidade_alterar = div_alerta_umidade
+        } else if (fk_Sensor == 2) {
+            div_temperatura_alterar = div_alerta_temperatura2
+            div_umidade_alterar = div_alerta_umidade2
+        } else if (fk_Sensor == 3) {
+            div_temperatura_alterar = div_alerta_temperatura3
+            div_umidade_alterar = div_alerta_umidade3
+        } else if (fk_Sensor == 4) {
+            div_temperatura_alterar = div_alerta_temperatura4
+            div_umidade_alterar = div_alerta_umidade4
+        }
+
+        // alterando
+        div_temperatura_alterar.innerHTML = mensagem_temperatura;
+        div_temperatura_alterar.className = classe_temperatura;
+
+        div_umidade_alterar.innerHTML = mensagem_umidade;
+        div_umidade_alterar.className = classe_umidade;
+    }
+
+    // só altere aqui se souber o que está fazendo!
+    function atualizarTela(dados, fk_Sensor) {
+        console.log('iniciando atualização da tela...');
+
+        // escolhendo qual alterar
+        var div_temperatura_alterar
+        var div_umidade_alterar
+
+        if (fk_Sensor == 1) {
+            div_temperatura_alterar = div_temperatura
+            div_umidade_alterar = div_umidade
+        } else if (fk_Sensor == 2) {
+            div_temperatura_alterar = div_temperatura2
+            div_umidade_alterar = div_umidade2
+        } else if (fk_Sensor == 3) {
+            div_temperatura_alterar = div_temperatura3
+            div_umidade_alterar = div_umidade3
+        } else if (fk_Sensor == 4) {
+            div_temperatura_alterar = div_temperatura4
+            div_umidade_alterar = div_umidade4
+        }
+
+        div_temperatura_alterar.innerHTML = `Temperatura: ${dados.temperatura}º`;
+
+        div_umidade_alterar.innerHTML = `Umidade: ${dados.umidade}%`;
+
+
+
+    }
+    function sendData() {
+        var http = new XMLHttpRequest();
+        http.open('GET', 'http://localhost:9000/api/sendData', false);
+        http.send(null);
+    }
+
+    setInterval(() => {
+        sendData();
+    }, 10000);
+</script>
+
+</html>

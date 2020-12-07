@@ -46,8 +46,8 @@
     to{left: -100%;}
     from{left: 0;}
 }
-@keyframes aparecer{
+/* @keyframes aparecer{
     from{opacity: 0%;}
     to{opacity: 100%;}
-}
+} */
 

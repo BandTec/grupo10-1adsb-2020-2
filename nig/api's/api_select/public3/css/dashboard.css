@@ -1,15 +1,65 @@
 /* GLOBAL */
 
+
+/* ANIMAÇÃO DOS BOTOES */
+
+/* @-webkit-keyframes fadeinout {
+    0%,
+    100% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeinout {
+    0%,
+    100% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.animacao:hover {
+    cursor: pointer;
+    animation: fadeinout 1s linear forwards;
+    -webkit-animation: fadeinout 1s linear forwards;
+    color: #a9927f;
+} */
+
+
+/* ESTILIZAÇÃO IFRAMES */
+
+.atual {
+    display: block;
+}
+
+
+.frame {
+    overflow: auto;
+    border-radius: 0.7%;
+    scroll-behavior: smooth;
+    width: 98vw;
+    margin-top: -8.2px;
+    height: 99vh;
+}
+
 /* BARRA DE ROLAGEM */
 ::-webkit-scrollbar-track {
+    
     background-color: #000000;
 }
 ::-webkit-scrollbar {
-    width: 6px;
-    background: #e22626;
+    width: 3px;
+
+    background: #448c64;
 }
 ::-webkit-scrollbar-thumb {
-    background: #b34933;
+    background: #448c64;
+    border-radius: 100px;
 }
 /* FIM BARRA DE ROLAGEM */
 
@@ -26,68 +76,67 @@ table {
 }
 /* FIM GLOBAL */
 
-/* INICIO LOGO */
-
-.logo_icons .logo img {
-    width: 90%;
-    box-sizing: border-box;
-}
-
-.logo {
-    position: absolute;
-    top: 1%;
-    margin-left: 5%;
-}
-
-/* FIM LOGO */
-
-
 /* INICIO DAS BARRA LATERAL */
 .sidebar {
-    background-color:#282C31;
+    background-color: #282C31;
     position: fixed;
-    width: 91px;
+    width: 5%;    
     height: 100%;
     left: 0px;
     top: 0px;
-    border-right: 2px solid #41805E;
+    border-right: 2px solid #09090952;
+    display: flex;
+    text-align: center;
+    flex-flow: wrap;
+    align-content: flex-start;
+    align-content: space-evenly;
+    white-space: break-spaces;
 }
 
 /* INICIO ICONES */
 
+/* INICIO LOGO */
+
+.logo_icons img {
+    width: 90%;
+}
+
+.logo_icons{
+    display: flex;
+    flex-direction: column;
+    font: message-box;
+}
+
+/* FIM LOGO */
+
 .logo_icons .icons img{
     width: 40%;
-    margin-left: 24px;
-    margin-top: 40%;
-    margin-bottom: 40%;
 }
 
-.icons {
-    margin-top: 3%;    
-    margin-left: 1px;
-}
 #config{
-    position: absolute;
-    bottom: 35%;
+    float: left;
+    cursor: pointer;
 }
 #graph{
-    position: absolute;
-    top: 35%;
+    float: left;
+    cursor: pointer;
+}
+#graph_umid{
+    float: left;
+    cursor: pointer;
 }
 #home{
-    position: absolute;
-    top: 20%;
+    float: left;
+    cursor: pointer;
+}
+#help{
+    float: left;
+    cursor: pointer;
 }
 
-#help{
-    position: absolute;
-    bottom: 20%;
-}
-.logo_icons .icon_logout img{
-    position: absolute;
+.icon_logout img{
     width: 50%;
-    margin-left: 27px;
-    bottom: 10px;
+    margin-bottom: 35px;
 }
 
 /* FIM ICONES */
@@ -97,30 +146,32 @@ table {
 /* INICIO CONTAIERNS */
 
 .containers{
-    margin-top: 10px;
-    margin-left:95px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    float: right;
+    width: 95%;
 }
 
 /* CONTAINER SUPERIOR */
 .container_chart1{
-    margin-top:5px;
-    width: 100%;
     min-height: 290px;
     left: 112.02px;
     background-color: #282C31;
-    border: 2px solid #448C64;
+    border: 1px solid #448C64;
     border-radius: 10px;
+    padding: 3%;
 }
 
 /* CONTAINER MEIO */
 .container_chart2{
     margin-top:5px;
-    width: 100%;
     min-height: 290px;
     left: 112.02px;
     background-color: #282C31;
-    border: 2px solid #448C64;
+    border: 1px solid #448C64;
     border-radius: 10px;
+    padding: 3%;
 }
 
 /* CONTAINER INFERIOR */
@@ -131,35 +182,57 @@ table {
     height: 290px;
     left: 112.02px;
     background-color: #282C31;
-    border: 2px solid #448C64;
+    border: 1px solid #448C64;
     border-radius: 10px;
 }
 
 /* TABELA */
+
+.header_table{
+    background: linear-gradient(180deg, rgba(51,60,64,1) 25%, rgba(0,0,0,1) 50%, rgba(51,60,64,1) 75%);
+    height: 250px;
+}
+
+
 #tbStatus{
     width: 95%;
     margin-left: 2.5%;
     height: 250px;
+    border-collapse: collapse;
     left: 120px;
+    margin-top: 21px;
+    color: whitesmoke;
 }
 
-#tbStatus tr th{
-    border: rgba(255, 255, 255, 0.644) 2px solid;
+#tbStatus th{
+    height: 50px;
+    border-top: none;
 }
-#tbStatus tr td{
-    border-left: rgba(255, 255, 255, 0.644) 2px solid;
-    border-right: rgba(255, 255, 255, 0.644) 2px solid;
-    border-bottom: rgba(255, 255, 255, 0.644) 2px solid;
-    color: white;
-}
-#tbStatus thead {
-    color: rgba(255, 255, 255, 0.644);
+
+#tbStatus td{
+    background-color: rgba(0, 0, 0, 0.400);
 }
 
 #tbStatus tbody {
     background-color: transparent;
     text-align: center;
     align-items: center;
+}
+
+.icone_status{
+    width: 34px;
+}
+
+.icone_status_analytics{
+    height: 33px;
+}
+
+.grafico_atual{
+    background-color: #a7bbf76e;
+}
+
+tr {
+    cursor: pointer;
 }
 /* FIM TABELA */
 
@@ -234,4 +307,82 @@ table {
     font-size: 20px;
     margin-left: 5%;
     text-align: center;
+}
+
+/* ----------------PAGINA INDEX------------------- */
+
+
+.dashboard {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    float: right;
+    width: 95%;
+    color: white;
+    height: 100%;
+}
+
+.dashboard h1 {
+    margin-bottom: 40px;
+}
+
+.dashboard .input-padrao {
+    width: 50%;
+    display: inline-block;
+}
+
+
+.extra {
+    margin: 10px;
+}
+
+.extra img {
+  height: 50px;
+   visibility: hidden;
+}
+
+.extra .msg_erro {
+    background-color: sandybrown; 
+    color: black; 
+    visibility: hidden;
+}
+
+.grafico {
+    margin-top: 3px;
+    width: 99%;
+    height: 187px;
+    left: 112.02px;
+    background-color: #282C31;
+    border: 1px solid #448C64;
+    border-radius: 10px;
+}
+
+.grafico .valores {
+    margin:auto;
+    overflow: auto;
+}
+
+.grafico .valores .valor {
+    margin-left: 13%;
+    width: 30%;
+    float: left;
+}
+
+.grafico .alertas {
+    width:100%;
+    margin:auto;
+    margin-top: 5px;
+    overflow: auto;
+}
+
+.grafico .alertas .alerta {
+    margin-left: 13%;
+    width: 30%;
+    float: left;
+}
+.grafico .alertas .alerta_umidd {
+    margin-right: 13%;
+    width: 30%;
+    float: right;
 }

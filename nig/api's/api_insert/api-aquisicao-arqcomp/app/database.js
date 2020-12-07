@@ -1,14 +1,14 @@
 var configuracoes = {
-    server: "bd-grupo10.database.windows.net",
-    user: "nig",
-    password: "#Gfgrupo10",
-    database: "bd-grupo10",
+    server: "nigteste.database.windows.net",
+    user: "nigteste",
+    password: "#Grupo10",
+    database: "bd-nig-testes",
     options: {
       encrypt: true,
       enableArithAbort: true,
     },
     pool: {
-      max: 4,
+      max: 5,
       min: 1,
       idleTimeoutMillis: 90000,
       connectionTimeout: 5000,

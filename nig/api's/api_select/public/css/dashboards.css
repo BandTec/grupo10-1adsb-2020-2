@@ -2,7 +2,6 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     padding: 0;
     margin: 0;
-        background-color: #ecf0f1;
 }
 
 
@@ -96,24 +95,6 @@ a {
 
 /* dashboard */
 
-.dashboard {
-    background-color: #ecf0f1;
-    text-align: center;
-    padding: 50px 0;
-    width: 80%;
-    height: 100%;
-    margin-left: auto;
-}
-
-.dashboard h1 {
-    margin-bottom: 40px;
-}
-
-.dashboard .input-padrao {
-    width: 50%;
-    display: inline-block;
-}
-
 .box-login {
     display: inline-block;
     background-color: white;
@@ -130,6 +111,7 @@ a {
 }
 
 /* EXTRA */
+
 
 .extra {
     margin: 10px;
@@ -161,6 +143,23 @@ a {
     
 }
 
+.dashboard {
+    text-align: center;
+    padding: 50px 0;
+    width: 80%;
+    height: 100%;
+    margin-left: auto;
+}
+
+.dashboard h1 {
+    margin-bottom: 40px;
+}
+
+.dashboard .input-padrao {
+    width: 50%;
+    display: inline-block;
+}
+
 .caminhao .valores {
     margin:auto;
     overflow: auto;
@@ -189,4 +188,3 @@ a {
     width: 30%;
     float: right;
 }
-

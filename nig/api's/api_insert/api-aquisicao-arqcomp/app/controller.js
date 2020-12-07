@@ -1,6 +1,5 @@
 const express = require("express");
 const { ArduinoDataTemp } = require("./newserial");
-const { ArduinoDataHumidity } = require("./serialHumidity");
 const db = require("./database");
 const router = express.Router();
 
@@ -21,59 +20,43 @@ router.get("/", (request, response, next) => {
   });
 });
 
-router.get("/humidity", (request, response, next) => {
-  let sum = ArduinoDataHumidity.List.reduce((a, b) => a + b, 0);
-  let average = (sum / ArduinoDataHumidity.List.length).toFixed(2);
-  let sumHour = ArduinoDataHumidity.ListHour.reduce((a, b) => a + b, 0);
-  let averageHour = (sumHour / ArduinoDataHumidity.ListHour.length).toFixed(2);
-
-  response.json({
-    data: ArduinoDataHumidity.List,
-    total: ArduinoDataHumidity.List.length,
-    average: isNaN(average) ? 0 : average,
-    dataHour: ArduinoDataHumidity.ListHour,
-    totalHour: ArduinoDataHumidity.ListHour.length,
-    averageHour: isNaN(averageHour) ? 0 : averageHour,
-  });
-});
-
 router.get("/sendData", (request, response) => {
-const temperature = ArduinoDataTemp.List[ArduinoDataTemp.List.length - 1];
-const Humidity = ArduinoDataHumidity.List[ArduinoDataHumidity.List.length - 1];
 
-console.log(temperature)
-console.log(Humidity);
+  let temperature = ArduinoDataTemp.List[ArduinoDataTemp.List.length - 1];
 
-db.conectar()
+  console.log(temperature);
+
+  db.conectar()
     .then(() => {
-        const sql = `
-        INSERT into dbo.leitura (temperatura, umidade, horario_captacao, idcaminhao)
-        values (${temperature+10}, ${Humidity+20}, '${agora()}', 1);
-        INSERT into dbo.leitura (temperatura, umidade, horario_captacao, idcaminhao)
-        values (${temperature-10}, ${Humidity+20}, '${agora()}', 2);
-        INSERT into dbo.leitura (temperatura, umidade, horario_captacao, idcaminhao)
-        values (${temperature+5}, ${Humidity-20}, '${agora()}', 3);
-        INSERT into dbo.leitura (temperatura, umidade, horario_captacao, idcaminhao)
-        values (${temperature-5}, ${Humidity-20}, '${agora()}', 4);`;
-        console.log(sql);
-    return db.sql.query(sql).then(()=>{
+      const sql = `
+        INSERT into Dados_sensor(temperatura, umidade, horario_Captacao, fk_Sensor)
+        values (${Math.trunc(temperature[0])}, ${Math.trunc(temperature[1])}, '${agora()}', 1)
+        INSERT into Dados_sensor (temperatura, umidade, horario_Captacao, fk_Sensor)
+        values (${Math.trunc(temperature[0])+10}, ${Math.trunc(temperature[1])-20}, '${agora()}', 2);
+        INSERT into Dados_sensor (temperatura, umidade, horario_Captacao, fk_Sensor)
+        values (${Math.trunc(temperature[0])*0.7+3}, ${Math.trunc(temperature[1])*1.3}, '${agora()}', 3);
+        INSERT into Dados_sensor (temperatura, umidade, horario_Captacao, fk_Sensor)
+        values (${Math.trunc(temperature[0])+15}, ${Math.trunc(temperature[1])-30}, '${agora()}', 4);`
+
+      console.log(sql);
+      return db.sql.query(sql).then(() => {
         console.log("Registro inserido com sucesso! \n");
-    });;
+      });
     })
     .catch((erro) => {
-    console.error(`Erro ao tentar registrar aquisição na base: ${erro}`);
+      console.error(`Erro ao tentar registrar aquisição na base: ${erro} \n`);
     })
     .finally(() => {
-    db.sql.close();
+      db.sql.close();
     });
 
-response.sendStatus(200);
+  response.sendStatus(200);
 });
 
 
 function agora() {
-    const agora_d = new Date();
-    return `${agora_d.getFullYear()}-${agora_d.getMonth()+1}-${agora_d.getDate()} ${agora_d.getHours()}:${agora_d.getMinutes()}:${agora_d.getSeconds()}`;
+  const agora_d = new Date();
+  return `${agora_d.getFullYear()}-${agora_d.getMonth() + 1}-${agora_d.getDate()} ${agora_d.getHours()}:${agora_d.getMinutes()}:${agora_d.getSeconds()}`;
 }
 
 module.exports = router;

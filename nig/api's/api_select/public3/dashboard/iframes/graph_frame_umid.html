@@ -1,0 +1,280 @@
+<html>
+
+<head>
+	<title>Dashboard</title>
+	<link rel="shortcut icon" href="../../images/logo3.png" type="image/x-icon">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+	<script src="http://www.chartjs.org/dist/2.7.1/Chart.js"></script>
+	<script src="http://www.chartjs.org/samples/latest/utils.js"></script>
+	<link rel="stylesheet" href="../../css/dashboard.css">
+	<script src="../../js/autenticar.js"></script>
+	<script src="../../js/status_sensor.js"></script>
+	<style>
+		canvas {
+			-moz-user-select: none;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+		}
+	</style>
+</head>
+<div class="containers">
+	<!-- GRAFICO UMIDADE -->
+
+	<div class="container_chart2" style="padding-top: 20px; float: right;">
+		<section>
+			<canvas id="canvas_grafico_umid"></canvas>
+		</section>
+	</div>
+	<!-- TABELA -->
+	<div class="container_table" style=" float: right;">
+		<table id="tbStatus">
+			<thead>
+				<tr>
+					<th>Gleba</th>
+					<th>Status Geral</th>
+					<th>Status umidade</th>
+					<th>Status Umidade</th>
+					<th>Número de Alertas</th>
+					<th>Status Sensor</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr onclick="atualizarGrafico(1)" id="oeste" class="animacao">
+					<td>Gleba Oeste 1</td>
+					<td><img class="icone_status_analytics" id="status_gleba_oeste" src="../../images/status/ideal.png"
+							alt="status_gleba"></td>
+					<td>ºC</td>
+					<td>%</td>
+					<td></td>
+					<td><img class="icone_status" id="status_sensor_oeste" src="../../images/status/connected_white.png"
+							alt="status_sensor"></td>
+				</tr>
+				<tr onclick="atualizarGrafico(2)" id="sul" class="animacao">
+					<td>Gleba Sul 1</td>
+					<td><img class="icone_status_analytics" id="status_gleba_sul" src="../../images/status/ideal.png"
+							alt="status_gleba"></td>
+					<td>ºC</td>
+					<td>%</td>
+					<td></td>
+					<td><img class="icone_status" id="status_sensor_sul" src="../../images/status/connected_white.png"
+							alt="status_sensor"></td>
+				</tr>
+				<tr onclick="atualizarGrafico(3)" id="norte" class="animacao">
+					<td>Gleba Norte 1</td>
+					<td><img class="icone_status_analytics" id="status_gleba_norte" src="../../images/status/ideal.png"
+							alt="status_gleba"></td>
+					<td>ºC</td>
+					<td>%</td>
+					<td></td>
+					<td><img class="icone_status" id="status_sensor_norte" src="../../images/status/connected_white.png"
+							alt="status_sensor"></td>
+				</tr>
+				<tr onclick="atualizarGrafico(4)" id="leste" class="animacao">
+					<td>Gleba Leste 1</td>
+					<td><img class="icone_status_analytics" id="status_gleba_leste" src="../../images/status/ideal.png"
+							alt="status_gleba"></td>
+					<td>ºC</td>
+					<td>%</td>
+					<td></td>
+					<td><img class="icone_status" id="status_sensor_leste" src="../../images/status/connected_white.png"
+							alt="status_sensor"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+</div>
+
+</div>
+</body>
+
+</html>
+
+<!-- NOVA API ABAIXO -->
+
+<script>
+
+	let fk = [];
+
+	window.onload = obterDadosGraficoPrimeiraVez(1);
+
+	function chamargraficos(fk_Sensor) {
+
+		if (fk >= 2) {
+			fk.shift(1);
+		}
+		teste.push(fk_Sensor);
+		atualizarGrafico(fk[0]);
+		fk[0] = fk_Sensor;
+
+	}
+
+	// verificar_autenticacao();
+
+	// altere aqui as configurações do gráfico
+	// (tamanhos, cores, textos, etc)
+
+	var config_umid = {
+		type: 'line',
+		data: {
+			labels: [],
+			datasets: [{
+				label: 'Umidade',
+				backgroundColor: window.chartColors.blue,
+				borderColor: window.chartColors.blue,
+				data: [],
+				fill: false,
+			}]
+		},
+		options: {
+			responsive: true,
+			title: {
+				display: true,
+				text: 'Gráfico de histórico de umidade'
+			},
+			tooltips: {
+				mode: 'index',
+				intersect: false,
+			},
+			hover: {
+				mode: 'nearest',
+				intersect: true
+			},
+			scales: {
+				xAxes: [{
+					display: true,
+					scaleLabel: {
+						display: true,
+						labelString: 'Horário da Leitura'
+					}
+				}],
+				yAxes: [{
+					display: true,
+					scaleLabel: {
+						display: true,
+						labelString: '%'
+					}
+				}]
+			}
+		}
+	};
+
+	function obterDadosGraficoPrimeiraVez(fk_Sensor) {
+
+		fetch(`/leituras/ultimas/${fk_Sensor}`, { cache: 'no-store' }).then(function (response) {
+			if (response.ok) {
+				response.json().then(function (resposta) {
+					console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+					resposta.reverse();
+
+					for (i = 0; i < resposta.length; i++) {
+						var registro = resposta[i];
+						config_umid.data.labels.push(registro.horario_Captacao);
+						config_umid.data.datasets[0].data.push(registro.umidade);
+					}
+
+					console.log(JSON.stringify(config_umid));
+					plotarGrafico_umid(config_umid, fk_Sensor);
+				});
+			} else {
+				console.error('Nenhum dado encontrado ou erro na API');
+			}
+		})
+			.catch(function (error) {
+				console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+			});
+
+	}
+
+	// só mexer se quiser alterar o tempo de atualização
+	// ou se souber o que está fazendo!
+
+	var time;
+
+	function atualizarGrafico(fk_Sensor) {
+
+		if (fk_Sensor == 1) {
+			oeste.classList.add('grafico_atual')
+			sul.classList.remove('grafico_atual')
+			norte.classList.remove('grafico_atual')
+			leste.classList.remove('grafico_atual')
+		} else if (fk_Sensor == 2) {
+			oeste.classList.remove('grafico_atual')
+			sul.classList.add('grafico_atual')
+			norte.classList.remove('grafico_atual')
+			leste.classList.remove('grafico_atual')
+		} else if (fk_Sensor == 3) {
+			oeste.classList.remove('grafico_atual')
+			sul.classList.remove('grafico_atual')
+			norte.classList.add('grafico_atual')
+			leste.classList.remove('grafico_atual')
+		} else if (fk_Sensor == 4) {
+			oeste.classList.remove('grafico_atual')
+			sul.classList.remove('grafico_atual')
+			norte.classList.remove('grafico_atual')
+			leste.classList.add('grafico_atual')
+		}
+
+		clearTimeout(time);
+
+		time = setTimeout(() => {
+			fetch(`/leituras/tempo-real/${fk_Sensor}`, { cache: 'no-store' }).then(function (response) {
+				console.log("Estou tentando pegar id = ", fk_Sensor)
+				if (response.ok) {
+					response.json().then(function (novoRegistro) {
+
+						console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)} \n`);
+						// console.log(`Dados atuais do gráfico: ${dados}`);
+
+						// tirando e colocando valores no gráfico
+
+						config_umid.data.labels.shift();
+
+						config_umid.data.labels.push(novoRegistro.horario_Captacao);
+
+						config_umid.data.datasets[0].data.shift();  // apagar o primeiro de umidade
+
+						config_umid.data.datasets[0].data.push(novoRegistro.umidade); // incluir uma nova leitura de umidade
+
+						console.log("meu sensor é o " + fk_Sensor)
+
+						window.grafico_linha.update();
+						atualizarGrafico(fk_Sensor);
+
+						// proximaAtualizacao = setTimeout(() => atualizarGrafico(fk_Sensor, dados), 5000);
+					});
+				} else {
+					console.error('Nenhum dado encontrado ou erro na API \n');
+					// proximaAtualizacao = setTimeout(() => atualizarGrafico(fk_Sensor, dados), 5000);
+				}
+			}).catch(function (error) {
+				console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message} \n`);
+			});
+
+		}, 4000)
+
+	}
+
+	// só altere aqui se souber o que está fazendo!
+
+	function plotarGrafico_umid() {
+		console.log('iniciando plotagem do gráfico de umidade../... \n');
+		var ctx_umid = canvas_grafico_umid.getContext('2d');
+		window.grafico_linha = new Chart(ctx_umid, config_umid)
+		atualizarGrafico();
+	}
+
+
+	function sendData() {
+		var http = new XMLHttpRequest();
+		http.open('GET', 'http://localhost:9000/api/sendData', false);
+		http.send(null);
+	}
+
+	setInterval(() => {
+		sendData();
+		// change_status_sensor();
+	}, 5000);
+
+
+</script>

@@ -34,25 +34,45 @@ function cadastrar_animacao() {
 function cadastrar() {
     aguardar();
     var formulario = new URLSearchParams(new FormData(form_cadastro));
-    fetch("../usuarios/cadastrar", {
-        method: "POST",
-        body: formulario
-    }).then(function (response) {
-        
-        if (response.ok) {
+    var lowerCaseLetters = /[a-z]/g;
+    var upperCaseLetters = /[A-Z]/g;
+    var numbers = /[0-9]/g;
+    var myPsw = document.getElementById("psw");
+    if (myPsw.value.match(lowerCaseLetters)) {
+        if (myPsw.value.match(upperCaseLetters)) {
+            if (myPsw.value.match(numbers)) {
+                if (myPsw.value.length >= 8) {
+                    fetch("../usuarios/cadastrar", {
+                        method: "POST",
+                        body: formulario
+                    })
+                        .then(function (response) {
+                            if (response.ok) {
 
-            // window.location.href='../index.html';
-            logar();
+                                // window.location.href='../index.html';
+                                logar();
 
+                            } else {
+
+                                console.log('Erro de cadastro!');
+                                response.text().then(function (resposta) {
+                                    div_erro.innerHTML = resposta;
+                                });
+                                finalizar_aguardar();
+                            }
+                        });
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
         } else {
-
-            console.log('Erro de cadastro!');
-            response.text().then(function (resposta) {
-                div_erro.innerHTML = resposta;
-            });
-            finalizar_aguardar();
+            return false;
         }
-    });
+    } else {
+        return false;
+    }
 
     return false;
 }
