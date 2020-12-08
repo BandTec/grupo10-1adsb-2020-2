@@ -408,3 +408,15 @@ tr {
     width: 30%;
     float: right;
 }
+
+#home_index{
+    padding: 63px;
+}
+
+.home_index_none{
+    display: none;
+}
+
+.home_index_block{
+    display: block;
+}
