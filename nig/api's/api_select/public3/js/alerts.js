@@ -1,3 +1,25 @@
+console.log(Notification.permission);
+
+function mostrarNotificacao() {
+    const notificacao = new Notification("Nova mensagem de NIG!", {
+        body: "ALERTA DE INCÊNDIO!!!",
+        icon: 'https://image.flaticon.com/icons/png/128/426/426833.png',
+    });
+    notificacao.onclick = () =>{
+        window.location.href = "../../index.html"
+    }
+}
+
+if (Notification.permission === "granted") {
+    mostrarNotificacao();
+}else if (Notification.permission !== "denied") {
+    Notification.requestPermission().then(permission => {
+        if (permission === "granted") {
+            mostrarNotificacao();
+        }
+    })
+}
+
 function alert_analytics(valorTemperatura, valorUmidade, sensor_gleba, tela) {
     if (sensor_gleba == 1) {
         if (valorTemperatura >= 40 && valorTemperatura <= 45 && valorUmidade < 60){
