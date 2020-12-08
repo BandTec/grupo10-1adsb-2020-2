@@ -153,25 +153,25 @@
 							div_umidade_alterar = umid_gleba_oeste;
 							temp_gleba_oeste.innerHTML = `${temp} ºC`;
 							umid_gleba_oeste.innerHTML = `${umid} %`;
-							alert_analytics(temp, umid, 1);
+							alert_analytics(temp, umid, 1, 'dash_frame');
 						} else if (fk_Sensor == 2) {
 							div_temperatura_alterar = temp_gleba_sul;
 							div_umidade_alterar = umid_gleba_sul;
 							temp_gleba_sul.innerHTML = `${temp} ºC`;
 							umid_gleba_sul.innerHTML = `${umid} %`;
-							alert_analytics(temp, umid, 2);
+							alert_analytics(temp, umid, 2, 'dash_frame');
 						} else if (fk_Sensor == 3) {
 							div_temperatura_alterar = temp_gleba_norte;
 							div_umidade_alterar = umid_gleba_norte;
 							temp_gleba_norte.innerHTML = `${temp} ºC`;
 							umid_gleba_norte.innerHTML = `${umid} %`;
-							alert_analytics(temp, umid, 3);
+							alert_analytics(temp, umid, 3, 'dash_frame');
 						} else if (fk_Sensor == 4) {
 							div_temperatura_alterar = temp_gleba_leste;
 							div_umidade_alterar = umid_gleba_leste;
 							temp_gleba_leste.innerHTML = `${temp} ºC`;
 							umid_gleba_leste.innerHTML = `${umid} %`;
-							alert_analytics(temp, umid, 4);
+							alert_analytics(temp, umid, 4, 'dash_frame');
 						}
 
 						// div_temperatura_alterar.innerHTML = `Temperatura: ${dados.temperatura}º`;

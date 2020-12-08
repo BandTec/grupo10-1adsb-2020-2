@@ -6,6 +6,7 @@
     <link rel="shortcut icon" href="images/logo2.png" type="image/x-icon">
     <link rel="stylesheet" href="../../css/dashboard.css">
     <script src="../../js/autenticar.js"></script>
+    <script src="../../js/alerts.js"></script>
     <style>
         canvas {
             -moz-user-select: none;
@@ -18,7 +19,7 @@
 <body onload="atualizacaoPeriodica()">
     <div class="dashboard">
         <div class="container">
-            <div class="grafico">
+            <div class="home_info" id="oeste">
                 <h4>Gleba <span id="fk_Sensor" value="1">Oeste</span></h4>
                 <div class="valores">
                     <div class="valor" id="div_temperatura">Temperatura sendo obtida...</div>
@@ -26,24 +27,29 @@
                 </div>
                 <div class="alertas">
                     <div class="alerta" id="div_alerta_temperatura"> </div>
-                    <div class="alerta_umidd" id="div_alerta_umidade"></div>
+                    <div class="alerta_umid" id="div_alerta_umidade"></div>
                 </div>
+                <img class="icone_status_analytics" id="status_gleba_oeste" src="../../images/status/ideal.png"
+                    alt="status_gleba">
             </div>
 
-            <div class="grafico">
+            <div class="home_info" id="sul">
                 <h4>Gleba <span id="fk_Sensor" value="2">Sul</span></h4>
                 <div class="valores">
                     <div class="valor" id="div_temperatura2">Temperatura sendo obtida...</div>
                     <div class="valor" id="div_umidade2">Umidade sendo obtida...</div>
+
                 </div>
 
                 <div class="alertas">
                     <div class="alerta" id="div_alerta_temperatura2"></div>
-                    <div class="alerta_umidd" id="div_alerta_umidade2"></div>
+                    <div class="alerta_umid" id="div_alerta_umidade2"></div>
                 </div>
+                <img class="icone_status_analytics" id="status_gleba_sul" src="../../images/status/ideal.png"
+                    alt="status_gleba">
             </div>
 
-            <div class="grafico">
+            <div class="home_info" id="leste">
                 <h4>Gleba <span id="fk_Sensor" value="3">Leste</span></h4>
                 <div class="valores">
                     <div class="valor" id="div_temperatura3">Temperatura sendo obtida...</div>
@@ -51,11 +57,13 @@
                 </div>
                 <div class="alertas">
                     <div class="alerta" id="div_alerta_temperatura3"></div>
-                    <div class="alerta_umidd" id="div_alerta_umidade3"></div>
+                    <div class="alerta_umid" id="div_alerta_umidade3"></div>
                 </div>
+                <img class="icone_status_analytics" id="status_gleba_leste" src="../../images/status/ideal.png"
+                    alt="status_gleba">
             </div>
 
-            <div class="grafico">
+            <div class="home_info" id="norte">
                 <h4>Gleba <span id="fk_Sensor" value="4">Norte</span></h4>
                 <div class="valores">
                     <div class="valor" id="div_temperatura4">Temperatura sendo obtida...</div>
@@ -64,12 +72,11 @@
 
                 <div class="alertas">
                     <div class="alerta" id="div_alerta_temperatura4"></div>
-                    <div class="alerta_umidd" id="div_alerta_umidade4"></div>
+                    <div class="alerta_umid" id="div_alerta_umidade4"></div>
                 </div>
+                <img class="icone_status_analytics" id="status_gleba_norte" src="../../images/status/ideal.png"
+                    alt="status_gleba">
             </div>
-
-
-
         </div>
     </div>
 
@@ -113,7 +120,8 @@
                             umidade: resposta.umidade
                         }
 
-                        alertar(resposta.temperatura, resposta.umidade, fk_Sensor);
+                        alert_analytics(resposta.temperatura, resposta.umidade, fk_Sensor, 'home_frame');
+                        alertas(resposta.temperatura, resposta.umidade, fk_Sensor);
                         atualizarTela(dados, fk_Sensor);
                     });
                 } else {
@@ -126,7 +134,7 @@
             });
     }
 
-    function alertar(temperatura, umidade, fk_Sensor) {
+    function alertas(temperatura, umidade, fk_Sensor) {
         // padrão para meu alerta
         var limites = {
             max_temperatura: 40,
@@ -139,7 +147,7 @@
         var mensagem_temperatura = '';
         var mensagem_umidade = '';
         var classe_temperatura = 'alerta';
-        var classe_umidade = 'alerta_umidd';
+        var classe_umidade = 'alerta_umid';
 
         // comparando
         if (temperatura > limites.max_temperatura) {
@@ -148,7 +156,7 @@
         }
         if (umidade > limites.max_umidade) {
             mensagem_umidade += 'Umidade alta demais! <br>';
-            classe_umidade = 'alerta_umidd alerta-alto';
+            classe_umidade = 'alerta_umid alerta-alto';
         }
         if (temperatura < limites.min_temperatura) {
             mensagem_temperatura = 'Temperatura baixa demais! <br>';
@@ -156,7 +164,7 @@
         }
         if (umidade < limites.min_umidade) {
             mensagem_umidade = 'Umidade baixa demais! <br>';
-            classe_umidade = 'alerta_umidd alerta-baixo';
+            classe_umidade = 'alerta_umid alerta-baixo';
         }
 
         // escolhendo qual alterar
@@ -222,7 +230,7 @@
 
     setInterval(() => {
         sendData();
-    }, 5000);
+    }, 3000);
 </script>
 
 </html>
