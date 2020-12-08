@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../../css/dashboard.css">
     <script src="../../js/autenticar.js"></script>
     <script src="../../js/alerts.js"></script>
+    <script src="../../js/redirecionar_home.js"></script>
     <style>
         canvas {
             -moz-user-select: none;
@@ -29,8 +30,14 @@
                     <div class="alerta" id="div_alerta_temperatura"> </div>
                     <div class="alerta_umid" id="div_alerta_umidade"></div>
                 </div>
+                <a class="animacao" onclick="redirecionar_gleba('temp', 'oeste')">
+                    <img src="../../images/" alt="icone-grafico-temp">
+                </a>
                 <img class="icone_status_analytics" id="status_gleba_oeste" src="../../images/status/ideal.png"
                     alt="status_gleba">
+                <a class="animacao" onclick="redirecionar_gleba('umid', 'oeste')">
+                    <img src="../../images/" alt="icone-grafico-umid">
+                </a>
             </div>
 
             <div class="home_info" id="sul">
@@ -38,15 +45,20 @@
                 <div class="valores">
                     <div class="valor" id="div_temperatura2">Temperatura sendo obtida...</div>
                     <div class="valor" id="div_umidade2">Umidade sendo obtida...</div>
-
                 </div>
 
                 <div class="alertas">
                     <div class="alerta" id="div_alerta_temperatura2"></div>
                     <div class="alerta_umid" id="div_alerta_umidade2"></div>
                 </div>
+                <a class="animacao" onclick="redirecionar_gleba('temp', 'sul')">
+                    <img src="../../images/" alt="icone-grafico-temp">
+                </a>
                 <img class="icone_status_analytics" id="status_gleba_sul" src="../../images/status/ideal.png"
                     alt="status_gleba">
+                <a class="animacao" onclick="redirecionar_gleba('umid', 'sul')">
+                    <img src="../../images/" alt="icone-grafico-umid">
+                </a>
             </div>
 
             <div class="home_info" id="leste">
@@ -59,8 +71,14 @@
                     <div class="alerta" id="div_alerta_temperatura3"></div>
                     <div class="alerta_umid" id="div_alerta_umidade3"></div>
                 </div>
+                <a class="animacao" onclick="redirecionar_gleba('temp', 'leste')">
+                    <img src="../../images/" alt="icone-grafico-temp">
+                </a>
                 <img class="icone_status_analytics" id="status_gleba_leste" src="../../images/status/ideal.png"
                     alt="status_gleba">
+                <a class="animacao" onclick="redirecionar_gleba('umid', 'leste')">
+                    <img src="../../images/" alt="icone-grafico-umid">
+                </a>
             </div>
 
             <div class="home_info" id="norte">
@@ -74,8 +92,14 @@
                     <div class="alerta" id="div_alerta_temperatura4"></div>
                     <div class="alerta_umid" id="div_alerta_umidade4"></div>
                 </div>
+                <a class="animacao" onclick="redirecionar_gleba('temp', 'norte')">
+                    <img src="../../images/" alt="icone-grafico-temp">
+                </a>
                 <img class="icone_status_analytics" id="status_gleba_norte" src="../../images/status/ideal.png"
                     alt="status_gleba">
+                <a class="animacao" onclick="redirecionar_gleba('umid', 'norte')">
+                    <img src="../../images/" alt="icone-grafico-umid">
+                </a>
             </div>
         </div>
     </div>
@@ -135,37 +159,12 @@
     }
 
     function alertas(temperatura, umidade, fk_Sensor) {
-        // padrão para meu alerta
-        var limites = {
-            max_temperatura: 40,
-            min_temperatura: 20,
-            max_umidade: 80,
-            min_umidade: 50,
-        };
 
-        // zerar aviso de mensagem
+        // // zerar aviso de mensagem
         var mensagem_temperatura = '';
         var mensagem_umidade = '';
         var classe_temperatura = 'alerta';
         var classe_umidade = 'alerta_umid';
-
-        // comparando
-        if (temperatura > limites.max_temperatura) {
-            mensagem_temperatura += 'Temperatura alta demais! <br>';
-            classe_temperatura = 'alerta alerta-alto';
-        }
-        if (umidade > limites.max_umidade) {
-            mensagem_umidade += 'Umidade alta demais! <br>';
-            classe_umidade = 'alerta_umid alerta-alto';
-        }
-        if (temperatura < limites.min_temperatura) {
-            mensagem_temperatura = 'Temperatura baixa demais! <br>';
-            classe_temperatura = 'alerta alerta-baixo';
-        }
-        if (umidade < limites.min_umidade) {
-            mensagem_umidade = 'Umidade baixa demais! <br>';
-            classe_umidade = 'alerta_umid alerta-baixo';
-        }
 
         // escolhendo qual alterar
         var div_temperatura_alterar
@@ -208,11 +207,11 @@
             div_temperatura_alterar = div_temperatura2
             div_umidade_alterar = div_umidade2
         } else if (fk_Sensor == 3) {
-            div_temperatura_alterar = div_temperatura3
-            div_umidade_alterar = div_umidade3
-        } else if (fk_Sensor == 4) {
             div_temperatura_alterar = div_temperatura4
             div_umidade_alterar = div_umidade4
+        } else if (fk_Sensor == 4) {
+            div_temperatura_alterar = div_temperatura3
+            div_umidade_alterar = div_umidade3
         }
 
         div_temperatura_alterar.innerHTML = `Temperatura: ${dados.temperatura}º`;
@@ -230,7 +229,7 @@
 
     setInterval(() => {
         sendData();
-    }, 3000);
+    }, 5000);
 </script>
 
 </html>
