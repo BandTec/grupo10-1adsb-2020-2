@@ -19,7 +19,7 @@
     <div class="dashboard">
         <div class="container">
             <div class="grafico">
-                <h4>Gleba <span name="namecaminhao" id="fk_Sensor" value="1">Oeste</span></h4>
+                <h4>Gleba <span id="fk_Sensor" value="1">Oeste</span></h4>
                 <div class="valores">
                     <div class="valor" id="div_temperatura">Temperatura sendo obtida...</div>
                     <div class="valor" id="div_umidade">Umidade sendo obtida...</div>
@@ -31,7 +31,7 @@
             </div>
 
             <div class="grafico">
-                <h4>Gleba <span name="namecaminhao" id="fk_Sensor" value="2">Sul</span></h4>
+                <h4>Gleba <span id="fk_Sensor" value="2">Sul</span></h4>
                 <div class="valores">
                     <div class="valor" id="div_temperatura2">Temperatura sendo obtida...</div>
                     <div class="valor" id="div_umidade2">Umidade sendo obtida...</div>
@@ -44,7 +44,7 @@
             </div>
 
             <div class="grafico">
-                <h4>Gleba <span name="namecaminhao" id="fk_Sensor" value="3">Leste</span></h4>
+                <h4>Gleba <span id="fk_Sensor" value="3">Leste</span></h4>
                 <div class="valores">
                     <div class="valor" id="div_temperatura3">Temperatura sendo obtida...</div>
                     <div class="valor" id="div_umidade3">Umidade sendo obtida...</div>
@@ -56,7 +56,7 @@
             </div>
 
             <div class="grafico">
-                <h4>Gleba <span name="namecaminhao" id="fk_Sensor" value="4">Norte</span></h4>
+                <h4>Gleba <span id="fk_Sensor" value="4">Norte</span></h4>
                 <div class="valores">
                     <div class="valor" id="div_temperatura4">Temperatura sendo obtida...</div>
                     <div class="valor" id="div_umidade4">Umidade sendo obtida...</div>
@@ -222,7 +222,7 @@
 
     setInterval(() => {
         sendData();
-    }, 10000);
+    }, 5000);
 </script>
 
 </html>

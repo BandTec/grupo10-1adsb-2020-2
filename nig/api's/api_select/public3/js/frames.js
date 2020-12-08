@@ -10,14 +10,13 @@ function change_frame(local) {
         home.classList.add('atual')
         graph.classList.remove('atual')
         graph_umid.classList.remove('atual')
-        config.classList.remove('atual')
+    
         help.classList.remove('atual')
         
         // ALTERAR ICONES SELECIONADOS
         home_icon.src = '../images/home-icon-red.png';
-        graph_icon.src = '../images/chart-green.png';
-        graph_icon_umid.src = '../images/chart-green.png';
-        sett_icon.src = '../images/settings-green.png';
+        graph_icon.src = '../images/chart-temp-green.png';
+        graph_icon_umid.src = '../images/chart-umid-green.png';
         help_icon.src = '../images/help-green.png';    
     } else if(local == 'graph_umid'){
 frame.src = '../dashboard/iframes/graph_frame_umid.html'
@@ -27,14 +26,13 @@ frame.src = '../dashboard/iframes/graph_frame_umid.html'
         home.classList.remove('atual')
         graph.classList.remove('atual')
         graph_umid.classList.add('atual')
-        config.classList.remove('atual')
+    
         help.classList.remove('atual')
         
         // ALTERAR ICONES SELECIONADOS
         home_icon.src = '../images/home-icon.png';
-        graph_icon.src = '../images/chart-green.png';
-        graph_icon_umid.src = '../images/chart-red.png';
-        sett_icon.src = '../images/settings-green.png';
+        graph_icon.src = '../images/chart-temp-green.png';
+        graph_icon_umid.src = '../images/chart-umid-red.png';
         help_icon.src = '../images/help-green.png';    
     } else if (local == 'graph'){
     frame.src = '../dashboard/iframes/graph_frame_temp.html'
@@ -44,31 +42,13 @@ frame.src = '../dashboard/iframes/graph_frame_umid.html'
         home.classList.remove('atual')
         graph.classList.add('atual')
         graph_umid.classList.remove('atual')
-        config.classList.remove('atual')
+    
         help.classList.remove('atual')
         
         // ALTERAR ICONES SELECIONADOS
         home_icon.src = '../images/home-icon.png';
-        graph_icon.src = '../images/chart-red.png';
-        graph_icon_umid.src = '../images/chart-green.png';
-        sett_icon.src = '../images/settings-green.png';
-        help_icon.src = '../images/help-green.png';    
-    } else if (local == 'config'){
-    frame.src = '../dashboard/iframes/config_frame.html'
-        
-        // ALTERAR IFRAMES
-        
-        home.classList.remove('atual')
-        graph.classList.remove('atual')
-        graph_umid.classList.remove('atual')
-        config.classList.add('atual')
-        help.classList.remove('atual')
-        
-        // ALTERAR ICONES SELECIONADOS
-        home_icon.src = '../images/home-icon.png';
-        graph_icon.src = '../images/chart-green.png';
-        graph_icon_umid.src = '../images/chart-green.png';
-        sett_icon.src = '../images/settings-red.png';
+        graph_icon.src = '../images/chart-temp-red.png';
+        graph_icon_umid.src = '../images/chart-umid-green.png';
         help_icon.src = '../images/help-green.png';    
     } else if (local == 'help'){
     frame.src = '../dashboard/iframes/help_frame.html'
@@ -78,14 +58,13 @@ frame.src = '../dashboard/iframes/graph_frame_umid.html'
         home.classList.remove('atual')
         graph.classList.remove('atual')
         graph_umid.classList.remove('atual')
-        config.classList.remove('atual')
+    
         help.classList.add('atual')
         
         // ALTERAR ICONES SELECIONADOS
         home_icon.src = '../images/home-icon.png';
-        graph_icon.src = '../images/chart-green.png';
-        graph_icon_umid.src = '../images/chart-green.png';
-        sett_icon.src = '../images/settings-green.png';
+        graph_icon.src = '../images/chart-temp-green.png';
+        graph_icon_umid.src = '../images/chart-umid-green.png';
         help_icon.src = '../images/help-red.png';    
     } else {
         console.error('erro inesperado');

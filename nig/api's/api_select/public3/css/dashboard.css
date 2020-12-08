@@ -1,6 +1,8 @@
 /* GLOBAL */
 
-
+body{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
 /* ANIMAÇÃO DOS BOTOES */
 
 /* @-webkit-keyframes fadeinout {
@@ -55,10 +57,10 @@
 ::-webkit-scrollbar {
     width: 3px;
 
-    background: #448c64;
+    background: #448c648f;
 }
 ::-webkit-scrollbar-thumb {
-    background: #448c64;
+    background: #448c648f;
     border-radius: 100px;
 }
 /* FIM BARRA DE ROLAGEM */
@@ -84,7 +86,7 @@ table {
     height: 100%;
     left: 0px;
     top: 0px;
-    border-right: 2px solid #09090952;
+    border-right: 4px solid #09090952;
     display: flex;
     text-align: center;
     flex-flow: wrap;
@@ -105,6 +107,15 @@ table {
     display: flex;
     flex-direction: column;
     font: message-box;
+}
+
+.icons{
+    margin-top: 12vh;
+    margin-bottom: 2vh;
+}
+
+.icon_logout{
+    margin-top: 12vh;
 }
 
 /* FIM LOGO */
@@ -158,20 +169,35 @@ table {
     min-height: 290px;
     left: 112.02px;
     background-color: #282C31;
-    border: 1px solid #448C64;
+    border: 1px solid #448c648f;
     border-radius: 10px;
-    padding: 3%;
+    padding: 3% 3% 2% 3%;
+}
+
+#canvas_grafico_temp{
+    display: block;
+    width: 1206px;
+    border-radius: 2px;
+    background-color: #181a1d81;
+    height: 603px;
+}
+
+#canvas_grafico_umid{
+    display: block;
+    width: 1206px;
+    border-radius: 2px;
+    background-color: #181a1d81;
+    height: 603px;
 }
 
 /* CONTAINER MEIO */
 .container_chart2{
-    margin-top:5px;
     min-height: 290px;
     left: 112.02px;
     background-color: #282C31;
-    border: 1px solid #448C64;
+    border: 1px solid #448c648f;
     border-radius: 10px;
-    padding: 3%;
+    padding: 3% 3% 2% 3%;
 }
 
 /* CONTAINER INFERIOR */
@@ -182,14 +208,13 @@ table {
     height: 290px;
     left: 112.02px;
     background-color: #282C31;
-    border: 1px solid #448C64;
+    border: 1px solid #448c648f;
     border-radius: 10px;
 }
 
 /* TABELA */
 
 .header_table{
-    background: linear-gradient(180deg, rgba(51,60,64,1) 25%, rgba(0,0,0,1) 50%, rgba(51,60,64,1) 75%);
     height: 250px;
 }
 
@@ -210,7 +235,7 @@ table {
 }
 
 #tbStatus td{
-    background-color: rgba(0, 0, 0, 0.400);
+    background-color: #181a1d81;
 }
 
 #tbStatus tbody {
@@ -247,10 +272,8 @@ tr {
 .cont_faq {
     margin-top:5px;
     width: 100%;
-    height: 2240px;
-    left: 112.02px;
     background-color: #282C31;
-    border: 2px solid #448C64;
+    border: 2px solid #448c648f;
     border-radius: 10px;
 }
 
@@ -354,7 +377,7 @@ tr {
     height: 187px;
     left: 112.02px;
     background-color: #282C31;
-    border: 1px solid #448C64;
+    border: 1px solid #448c648f;
     border-radius: 10px;
 }
 

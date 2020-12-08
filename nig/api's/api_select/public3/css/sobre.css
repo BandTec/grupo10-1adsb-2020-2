@@ -1,6 +1,9 @@
 /* ÍNICIO GLOBAL */
 
-body{scroll-behavior: smooth;}
+body{
+    scroll-behavior: smooth;     
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
 p {margin-top: 0;}
 a {color: azure; text-decoration: none;}
 
