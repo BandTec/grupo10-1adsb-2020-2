@@ -78,7 +78,7 @@ function cadastrar() {
 }
 
 function aguardar() {
-    btn_entrar.disabled = true;
+    btn_entrar.disabled = false;
     // img_aguarde.style.display='block';
     // div_erro.style.display='none';
 }
