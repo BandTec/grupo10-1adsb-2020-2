@@ -8,7 +8,6 @@
 	<script src="http://www.chartjs.org/samples/latest/utils.js"></script>
 	<link rel="stylesheet" href="../../css/dashboard.css">
 	<script src="../../js/autenticar.js"></script>
-	<script src="../../js/status_sensor.js"></script>
 	<script src="../../js/alerts.js"></script>
 	<style>
 		canvas {
@@ -24,12 +23,6 @@
 </body>
 
 <div class="containers">
-	<!-- GRAFICO TEMPERATURA -->
-	<div class="container_chart1">
-		<section>
-			<canvas id="canvas_grafico_temp"></canvas>
-		</section>
-	</div>
 	<!-- TABELA -->
 	<div class="container_table" style=" float: right;">
 		<table id="tbStatus">
@@ -50,7 +43,7 @@
 							alt="status_gleba"></td>
 					<td id="temp_gleba_oeste">ºC</td>
 					<td id="umid_gleba_oeste">%</td>
-					<td></td>
+					<td id="num_alert_oeste">0</td>
 					<td><img class="icone_status" id="status_sensor_oeste" src="../../images/status/connected_white.png"
 							alt="status_sensor"></td>
 				</tr>
@@ -60,7 +53,7 @@
 							alt="status_gleba"></td>
 					<td id="temp_gleba_sul">ºC</td>
 					<td id="umid_gleba_sul">%</td>
-					<td></td>
+					<td id="num_alert_sul">0</td>
 					<td><img class="icone_status" id="status_sensor_sul" src="../../images/status/connected_white.png"
 							alt="status_sensor"></td>
 				</tr>
@@ -70,7 +63,7 @@
 							alt="status_gleba"></td>
 					<td id="temp_gleba_norte">ºC</td>
 					<td id="umid_gleba_norte">%</td>
-					<td></td>
+					<td id="num_alert_norte">0</td>
 					<td><img class="icone_status" id="status_sensor_norte" src="../../images/status/connected_white.png"
 							alt="status_sensor"></td>
 				</tr>
@@ -80,12 +73,18 @@
 							alt="status_gleba"></td>
 					<td id="temp_gleba_leste">ºC</td>
 					<td id="umid_gleba_leste">%</td>
-					<td></td>
+					<td id="num_alert_leste">0</td>
 					<td><img class="icone_status" id="status_sensor_leste" src="../../images/status/connected_white.png"
 							alt="status_sensor"></td>
 				</tr>
 			</tbody>
 		</table>
+	</div>
+	<!-- GRAFICO TEMPERATURA -->
+	<div class="container_chart1">
+		<section>
+			<canvas id="canvas_grafico_temp"></canvas>
+		</section>
 	</div>
 </div>
 </div>
@@ -100,13 +99,12 @@
 <script>
 
 	let fk = [];
-	let temp_alert = 0;
-	let umid_alert = 0;
+	var num_alert = 0;
 
 	window.onload = obterDadosGraficoPrimeiraVez(1), atualizacaoPeriodica();
 
 	function chamargraficos(fk_Sensor) {
-		// fk[0].shift();
+
 		if (fk >= 2) {
 			fk.shift(1);
 		}
@@ -118,11 +116,18 @@
 	}
 
 	function atualizacaoPeriodica() {
+
 		obter_dados_por_gleba(1);
 		obter_dados_por_gleba(2);
 		obter_dados_por_gleba(3);
 		obter_dados_por_gleba(4);
-		setTimeout(atualizacaoPeriodica, 3000);
+
+		document.getElementById('num_alert_leste').innerHTML = `${localStorage.getItem('leste')}`;
+		document.getElementById('num_alert_norte').innerHTML = `${localStorage.getItem('norte')}`;
+		document.getElementById('num_alert_sul').innerHTML = `${localStorage.getItem('sul')}`;
+		document.getElementById('num_alert_oeste').innerHTML = `${localStorage.getItem('oeste')}`;
+		
+		setTimeout(atualizacaoPeriodica, 5000);
 	}
 
 	function obter_dados_por_gleba(fk_Sensor) {
@@ -141,10 +146,6 @@
 						let temp = resposta.temperatura;
 						let umid = resposta.umidade;
 
-						/*var dados = {
-							temperatura: [],
-							umidade: []
-						}*/
 						var div_temperatura_alterar;
 						var div_umidade_alterar;
 
@@ -153,44 +154,68 @@
 							div_umidade_alterar = umid_gleba_oeste;
 							temp_gleba_oeste.innerHTML = `${temp} ºC`;
 							umid_gleba_oeste.innerHTML = `${umid} %`;
-							alert_analytics(temp, umid, 1);
+
+							analytics(temp, umid, 1, 'dash_frame');;
+
+							let alerta_critico = analytics(temp, umid, 1, 'dash_frame');
+
+							if (alerta_critico == 1) {
+								num_alert = num_alert + 1;
+								localStorage.setItem('oeste', parseInt(num_alert))
+							};
+
 						} else if (fk_Sensor == 2) {
 							div_temperatura_alterar = temp_gleba_sul;
 							div_umidade_alterar = umid_gleba_sul;
 							temp_gleba_sul.innerHTML = `${temp} ºC`;
 							umid_gleba_sul.innerHTML = `${umid} %`;
-							alert_analytics(temp, umid, 2);
+
+							analytics(temp, umid, 2, 'dash_frame');
+
+							let alerta_critico = analytics(temp, umid, 2, 'dash_frame');
+
+							if (alerta_critico == 1) {
+								num_alert = num_alert + 1
+								localStorage.setItem('sul', parseInt(num_alert))
+							};
+
 						} else if (fk_Sensor == 3) {
 							div_temperatura_alterar = temp_gleba_norte;
 							div_umidade_alterar = umid_gleba_norte;
 							temp_gleba_norte.innerHTML = `${temp} ºC`;
 							umid_gleba_norte.innerHTML = `${umid} %`;
-							alert_analytics(temp, umid, 3);
+
+							analytics(temp, umid, 3, 'dash_frame');
+
+							let alerta_critico = analytics(temp, umid, 3, 'dash_frame');
+
+							if (alerta_critico == 1) {
+								num_alert = num_alert + 1
+								localStorage.setItem('norte', parseInt(num_alert))
+							};
+
 						} else if (fk_Sensor == 4) {
 							div_temperatura_alterar = temp_gleba_leste;
 							div_umidade_alterar = umid_gleba_leste;
 							temp_gleba_leste.innerHTML = `${temp} ºC`;
 							umid_gleba_leste.innerHTML = `${umid} %`;
-							alert_analytics(temp, umid, 4);
+
+							analytics(temp, umid, 4, 'dash_frame');
+
+							let alerta_critico = analytics(temp, umid, 4, 'dash_frame');
+
+							if (alerta_critico == 1) {
+								num_alert = num_alert + 1
+								localStorage.setItem('leste', parseInt(num_alert))
+							};
 						}
-
-						// div_temperatura_alterar.innerHTML = `Temperatura: ${dados.temperatura}º`;
-
-						// div_umidade_alterar.innerHTML = `Umidade: ${dados.umidade}%`;
-
-
-						// dados.temperatura.push(temp);
-
-
-
-
 					});
 				} else {
 
 					console.error('Nenhum dado encontrado ou erro na API');
 				}
 			}).catch(function (error) {
-				console.error(`Erro na obtenção dos dados do caminhao p/ gráfico: ${error.message}`);
+				console.error(`Erro na obtenção dos dados do sensor p/ gráfico: ${error.message}`);
 			});
 	}
 
@@ -249,7 +274,7 @@
 
 	function obterDadosGraficoPrimeiraVez(fk_Sensor) {
 
-		fetch(`/leituras/ultimas/${fk_Sensor}`, { cache: 'no-store' }).then(function (response) {
+		fetch(`/leituras/ultimas/${fk_Sensor}`, {cache: 'no-store'}).then(function (response) {
 			if (response.ok) {
 				response.json().then(function (resposta) {
 					// console.log(`Dados recebidos: ${JSON.stringify(resposta)} \n`);
@@ -302,7 +327,7 @@
 		clearTimeout(time);
 
 		time = setTimeout(() => {
-			fetch(`/leituras/tempo-real/${fk[0]}`, { cache: 'no-store' }).then(function (response) {
+			fetch(`/leituras/tempo-real/${fk[0]}`, {cache: 'no-store'}).then(function (response) {
 				// console.log("Estou tentando pegar id = ", fk_Sensor);
 				if (response.ok) {
 					response.json().then(function (novoRegistro) {
@@ -320,12 +345,6 @@
 
 						config_temp.data.datasets[0].data.push(novoRegistro.temperatura); // incluir uma nova leitura de temperatura
 
-						temp_alert = novoRegistro.temperatura;
-
-						umid_alert = novoRegistro.umidade;
-
-
-
 						window.grafico_linha.update();
 
 						atualizarGrafico(fk_Sensor);
@@ -340,7 +359,7 @@
 				console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message} \n`);
 			});
 
-		}, 3000)
+		}, 5000)
 
 		// clearTimeout(t); 
 	}
@@ -363,7 +382,7 @@
 	setInterval(() => {
 		sendData();
 		// change_status_sensor();
-	}, 3000);
+	}, 5000);
 
 
 </script>
