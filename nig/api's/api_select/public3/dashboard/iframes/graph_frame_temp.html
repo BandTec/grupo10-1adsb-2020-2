@@ -24,12 +24,6 @@
 </body>
 
 <div class="containers">
-	<!-- GRAFICO TEMPERATURA -->
-	<div class="container_chart1">
-		<section>
-			<canvas id="canvas_grafico_temp"></canvas>
-		</section>
-	</div>
 	<!-- TABELA -->
 	<div class="container_table" style=" float: right;">
 		<table id="tbStatus">
@@ -86,6 +80,12 @@
 				</tr>
 			</tbody>
 		</table>
+	</div>
+	<!-- GRAFICO TEMPERATURA -->
+	<div class="container_chart1">
+		<section>
+			<canvas id="canvas_grafico_temp"></canvas>
+		</section>
 	</div>
 </div>
 </div>
@@ -249,7 +249,7 @@
 
 	function obterDadosGraficoPrimeiraVez(fk_Sensor) {
 
-		fetch(`/leituras/ultimas/${fk_Sensor}`, { cache: 'no-store' }).then(function (response) {
+		fetch(`/leituras/ultimas/${fk_Sensor}`, {cache: 'no-store'}).then(function (response) {
 			if (response.ok) {
 				response.json().then(function (resposta) {
 					// console.log(`Dados recebidos: ${JSON.stringify(resposta)} \n`);
@@ -302,7 +302,7 @@
 		clearTimeout(time);
 
 		time = setTimeout(() => {
-			fetch(`/leituras/tempo-real/${fk[0]}`, { cache: 'no-store' }).then(function (response) {
+			fetch(`/leituras/tempo-real/${fk[0]}`, {cache: 'no-store'}).then(function (response) {
 				// console.log("Estou tentando pegar id = ", fk_Sensor);
 				if (response.ok) {
 					response.json().then(function (novoRegistro) {

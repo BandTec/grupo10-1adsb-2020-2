@@ -18,13 +18,6 @@
 	</style>
 </head>
 <div class="containers">
-	<!-- GRAFICO UMIDADE -->
-
-	<div class="container_chart2" style="padding-top: 20px; float: right;">
-		<section>
-			<canvas id="canvas_grafico_umid"></canvas>
-		</section>
-	</div>
 	<!-- TABELA -->
 	<div class="container_table" style=" float: right;">
 		<table id="tbStatus">
@@ -82,6 +75,13 @@
 			</tbody>
 		</table>
 	</div>
+
+	<!-- GRAFICO UMIDADE -->
+	<div class="container_chart2" style="padding-top: 20px; float: right;">
+		<section>
+			<canvas id="canvas_grafico_umid"></canvas>
+		</section>
+	</div>
 </div>
 </div>
 
@@ -119,26 +119,26 @@
 	}
 
 	function obter_dados_por_gleba(fk_Sensor) {
-        //aguardar();
-        fetch(`/leituras/tempo-real/${fk_Sensor}`)
-            .then(resposta => {
+		//aguardar();
+		fetch(`/leituras/tempo-real/${fk_Sensor}`)
+			.then(resposta => {
 
-                if (resposta.ok) {
-                    resposta.json().then(function (resposta) {
+				if (resposta.ok) {
+					resposta.json().then(function (resposta) {
 
-                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+						console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
-                        // aqui, após registro. use os nomes 
+						// aqui, após registro. use os nomes 
 						// dos atributos que vem no JSON 
-						
-                        // var dados = {
-                        //     temperatura: resposta.temperatura,
-                        //     umidade: resposta.umidade
+
+						// var dados = {
+						//     temperatura: resposta.temperatura,
+						//     umidade: resposta.umidade
 						// }
-						
+
 						let temp = resposta.temperatura;
 						let umid = resposta.umidade;
-                    
+
 						var div_temperatura_alterar;
 						var div_umidade_alterar;
 
@@ -169,15 +169,15 @@
 						}
 
 					});
-                } else {
+				} else {
 
-                    console.error('Nenhum dado encontrado ou erro na API');
-                }
-            })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados do sensor p/ gráfico: ${error.message}`);
-            });
-    }
+					console.error('Nenhum dado encontrado ou erro na API');
+				}
+			})
+			.catch(function (error) {
+				console.error(`Erro na obtenção dos dados do sensor p/ gráfico: ${error.message}`);
+			});
+	}
 
 	// verificar_autenticacao();
 
@@ -231,7 +231,7 @@
 
 	function obterDadosGraficoPrimeiraVez(fk_Sensor) {
 
-		fetch(`/leituras/ultimas/${fk_Sensor}`, { cache: 'no-store' }).then(function (response) {
+		fetch(`/leituras/ultimas/${fk_Sensor}`, {cache: 'no-store'}).then(function (response) {
 			if (response.ok) {
 				response.json().then(function (resposta) {
 					console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
@@ -288,7 +288,7 @@
 		clearTimeout(time);
 
 		time = setTimeout(() => {
-			fetch(`/leituras/tempo-real/${fk_Sensor}`, { cache: 'no-store' }).then(function (response) {
+			fetch(`/leituras/tempo-real/${fk_Sensor}`, {cache: 'no-store'}).then(function (response) {
 				console.log("Estou tentando pegar id = ", fk_Sensor)
 				if (response.ok) {
 					response.json().then(function (novoRegistro) {
