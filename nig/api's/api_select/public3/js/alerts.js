@@ -1,16 +1,17 @@
 console.log(Notification.permission);
 
 if (Notification.permission === "granted") {
-  mostrarNotificacao;
 } else if (Notification.permission !== "denied") {
   Notification.requestPermission.then((permission) => {
     if (permission === "granted") {
-      mostrarNotificacao;
+  
     }
   });
 }
 
-function alert_analytics(valorTemperatura, valorUmidade, sensor_gleba, tela) {
+function analytics(valorTemperatura, valorUmidade, sensor_gleba, tela) {
+
+  var cont_num_alertas = 0;
 
   // GLEBA  OESTE
   if (sensor_gleba == 1) {
@@ -29,7 +30,7 @@ function alert_analytics(valorTemperatura, valorUmidade, sensor_gleba, tela) {
       status_gleba_oeste.src = "../../images/status/alerta_critico.png";
       
       if (tela == "home_frame") {
-        oeste.style.border = "#570000 1px solid";
+        oeste.style.border = "#FF0000 1px solid";
       }
       
     const notificacaoFogoGleba1 = new Notification("Nova mensagem de NIG!", 
@@ -37,6 +38,8 @@ function alert_analytics(valorTemperatura, valorUmidade, sensor_gleba, tela) {
         body: "ALERTA CRÍTICO NA GLEBA OESTE!",
         icon: "https://image.flaticon.com/icons/png/128/426/426833.png",
       });
+
+    return cont_num_alertas = 1;
 
       setTimeout(() => notificacaoFogoGleba1.close(), 5000);
     
@@ -46,7 +49,7 @@ function alert_analytics(valorTemperatura, valorUmidade, sensor_gleba, tela) {
       status_gleba_oeste.src = "../../images/status/alerta_critico.png";
       
       if (tela == "home_frame") {
-        oeste.style.border = "#570000 1px solid";
+        oeste.style.border = "#FF0000 1px solid";
       }
       
     const notificacaoFogoGleba1 = new Notification("Nova mensagem de NIG!", 
@@ -54,6 +57,8 @@ function alert_analytics(valorTemperatura, valorUmidade, sensor_gleba, tela) {
         body: "ALERTA CRÍTICO NA GLEBA OESTE!",
         icon: "https://image.flaticon.com/icons/png/128/426/426833.png",
       });
+
+    return cont_num_alertas = 1;
 
       setTimeout(() => notificacaoFogoGleba1.close(), 5000);
     
@@ -114,7 +119,7 @@ function alert_analytics(valorTemperatura, valorUmidade, sensor_gleba, tela) {
       status_gleba_sul.src = "../../images/status/alerta_critico.png";
       
       if (tela == "home_frame") {
-        sul.style.border = "#570000 1px solid";
+        sul.style.border = "#FF0000 1px solid";
       }
       
     const notificacaoFogoGleba2 = new Notification("Nova mensagem de NIG!", 
@@ -122,6 +127,8 @@ function alert_analytics(valorTemperatura, valorUmidade, sensor_gleba, tela) {
         body: "ALERTA CRÍTICO NA GLEBA SUL!",
         icon: "https://image.flaticon.com/icons/png/128/426/426833.png",
       });
+
+    return cont_num_alertas = 1;
 
       setTimeout(() => notificacaoFogoGleba2.close(), 5000);
     
@@ -131,7 +138,7 @@ function alert_analytics(valorTemperatura, valorUmidade, sensor_gleba, tela) {
       status_gleba_sul.src = "../../images/status/alerta_critico.png";
       
       if (tela == "home_frame") {
-        sul.style.border = "#570000 1px solid";
+        sul.style.border = "#FF0000 1px solid";
       }
       
     const notificacaoFogoGleba2 = new Notification("Nova mensagem de NIG!", 
@@ -139,6 +146,8 @@ function alert_analytics(valorTemperatura, valorUmidade, sensor_gleba, tela) {
         body: "ALERTA CRÍTICO NA GLEBA SUL!",
         icon: "https://image.flaticon.com/icons/png/128/426/426833.png",
       });
+
+    return cont_num_alertas = 1;
 
       setTimeout(() => notificacaoFogoGleba2.close(), 5000);
     
@@ -199,7 +208,7 @@ function alert_analytics(valorTemperatura, valorUmidade, sensor_gleba, tela) {
       status_gleba_norte.src = "../../images/status/alerta_critico.png";
       
       if (tela == "home_frame") {
-        norte.style.border = "#570000 1px solid";
+        norte.style.border = "#FF0000 1px solid";
       }
       
     const notificacaoFogoGleba3 = new Notification("Nova mensagem de NIG!", 
@@ -207,6 +216,8 @@ function alert_analytics(valorTemperatura, valorUmidade, sensor_gleba, tela) {
         body: "ALERTA CRÍTICO NA GLEBA NORTE!",
         icon: "https://image.flaticon.com/icons/png/128/426/426833.png",
       });
+
+    return cont_num_alertas = 1;
 
       setTimeout(() => notificacaoFogoGleba3.close(), 5000);
     
@@ -216,7 +227,7 @@ function alert_analytics(valorTemperatura, valorUmidade, sensor_gleba, tela) {
       status_gleba_norte.src = "../../images/status/alerta_critico.png";
       
       if (tela == "home_frame") {
-        norte.style.border = "#570000 1px solid";
+        norte.style.border = "#FF0000 1px solid";
       }
       
     const notificacaoFogoGleba3 = new Notification("Nova mensagem de NIG!", 
@@ -224,6 +235,8 @@ function alert_analytics(valorTemperatura, valorUmidade, sensor_gleba, tela) {
         body: "ALERTA CRÍTICO NA GLEBA NORTE!",
         icon: "https://image.flaticon.com/icons/png/128/426/426833.png",
       });
+
+    return cont_num_alertas = 1;
 
       setTimeout(() => notificacaoFogoGleba3.close(), 5000);
     
@@ -284,7 +297,7 @@ function alert_analytics(valorTemperatura, valorUmidade, sensor_gleba, tela) {
       status_gleba_leste.src = "../../images/status/alerta_critico.png";
       
       if (tela == "home_frame") {
-        leste.style.border = "#570000 1px solid";
+        leste.style.border = "#FF0000 1px solid";
       }
       
     const notificacaoFogoGleba4 = new Notification("Nova mensagem de NIG!", 
@@ -292,6 +305,8 @@ function alert_analytics(valorTemperatura, valorUmidade, sensor_gleba, tela) {
         body: "ALERTA CRÍTICO NA GLEBA LESTE!",
         icon: "https://image.flaticon.com/icons/png/128/426/426833.png",
       });
+
+    return cont_num_alertas = 1;
 
       setTimeout(() => notificacaoFogoGleba4.close(), 5000);
     
@@ -301,7 +316,7 @@ function alert_analytics(valorTemperatura, valorUmidade, sensor_gleba, tela) {
       status_gleba_leste.src = "../../images/status/alerta_critico.png";
       
       if (tela == "home_frame") {
-        leste.style.border = "#570000 1px solid";
+        leste.style.border = "#FF0000 1px solid";
       }
       
     const notificacaoFogoGleba4 = new Notification("Nova mensagem de NIG!", 
@@ -309,6 +324,8 @@ function alert_analytics(valorTemperatura, valorUmidade, sensor_gleba, tela) {
         body: "ALERTA CRÍTICO NA GLEBA LESTE!",
         icon: "https://image.flaticon.com/icons/png/128/426/426833.png",
       });
+
+    return cont_num_alertas = 1;
 
       setTimeout(() => notificacaoFogoGleba4.close(), 5000);
     

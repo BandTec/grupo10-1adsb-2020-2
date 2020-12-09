@@ -21,7 +21,7 @@
 	<!-- TABELA -->
 	<div class="container_table" style=" float: right;">
 		<table id="tbStatus">
-			<thead>
+			<thead class="header_table">
 				<tr>
 					<th>Gleba</th>
 					<th>Status Geral</th>
@@ -38,7 +38,7 @@
 							alt="status_gleba"></td>
 					<td id="temp_gleba_oeste">ºC</td>
 					<td id="umid_gleba_oeste">%</td>
-					<td></td>
+					<td id="num_alert_oeste">0</td>
 					<td><img class="icone_status" id="status_sensor_oeste" src="../../images/status/connected_white.png"
 							alt="status_sensor"></td>
 				</tr>
@@ -48,7 +48,7 @@
 							alt="status_gleba"></td>
 					<td id="temp_gleba_sul">ºC</td>
 					<td id="umid_gleba_sul">%</td>
-					<td></td>
+					<td id="num_alert_sul">0</td>
 					<td><img class="icone_status" id="status_sensor_sul" src="../../images/status/connected_white.png"
 							alt="status_sensor"></td>
 				</tr>
@@ -58,7 +58,7 @@
 							alt="status_gleba"></td>
 					<td id="temp_gleba_norte">ºC</td>
 					<td id="umid_gleba_norte">%</td>
-					<td></td>
+					<td id="num_alert_norte">0</td>
 					<td><img class="icone_status" id="status_sensor_norte" src="../../images/status/connected_white.png"
 							alt="status_sensor"></td>
 				</tr>
@@ -68,7 +68,7 @@
 							alt="status_gleba"></td>
 					<td id="temp_gleba_leste">ºC</td>
 					<td id="umid_gleba_leste">%</td>
-					<td></td>
+					<td id="num_alert_leste">0</td>
 					<td><img class="icone_status" id="status_sensor_leste" src="../../images/status/connected_white.png"
 							alt="status_sensor"></td>
 				</tr>
@@ -95,6 +95,7 @@
 <script>
 
 	let fk = [];
+	var num_alert = 0;
 
 	window.onload = obterDadosGraficoPrimeiraVez(1), atualizacaoPeriodica();
 
@@ -111,10 +112,17 @@
 
 
 	function atualizacaoPeriodica() {
+
 		obter_dados_por_gleba(1);
 		obter_dados_por_gleba(2);
 		obter_dados_por_gleba(3);
 		obter_dados_por_gleba(4);
+
+		document.getElementById('num_alert_leste').innerHTML = `${sessionStorage.getItem('leste')}`;
+		document.getElementById('num_alert_norte').innerHTML = `${sessionStorage.getItem('norte')}`;
+		document.getElementById('num_alert_sul').innerHTML = `${sessionStorage.getItem('sul')}`;
+		document.getElementById('num_alert_oeste').innerHTML = `${sessionStorage.getItem('oeste')}`;
+		
 		setTimeout(atualizacaoPeriodica, 5000);
 	}
 
@@ -131,11 +139,6 @@
 						// aqui, após registro. use os nomes 
 						// dos atributos que vem no JSON 
 
-						// var dados = {
-						//     temperatura: resposta.temperatura,
-						//     umidade: resposta.umidade
-						// }
-
 						let temp = resposta.temperatura;
 						let umid = resposta.umidade;
 
@@ -147,27 +150,61 @@
 							div_umidade_alterar = umid_gleba_oeste;
 							temp_gleba_oeste.innerHTML = `${temp} ºC`;
 							umid_gleba_oeste.innerHTML = `${umid} %`;
-							alert_analytics(temp, umid, 1, 'dash_frame');
+
+							analytics(temp, umid, 1, 'dash_frame');;
+
+							let alerta_critico = analytics(temp, umid, 1, 'dash_frame');
+
+							if (alerta_critico == 1) {
+								num_alert = num_alert + 1;
+								sessionStorage.setItem('oeste', parseInt(num_alert))
+							};
+
 						} else if (fk_Sensor == 2) {
 							div_temperatura_alterar = temp_gleba_sul;
 							div_umidade_alterar = umid_gleba_sul;
 							temp_gleba_sul.innerHTML = `${temp} ºC`;
 							umid_gleba_sul.innerHTML = `${umid} %`;
-							alert_analytics(temp, umid, 2, 'dash_frame');
+
+							analytics(temp, umid, 2, 'dash_frame');
+
+							let alerta_critico = analytics(temp, umid, 2, 'dash_frame');
+
+							if (alerta_critico == 1) {
+								num_alert = num_alert + 1
+								sessionStorage.setItem('sul', parseInt(num_alert))
+							};
+
 						} else if (fk_Sensor == 3) {
 							div_temperatura_alterar = temp_gleba_norte;
 							div_umidade_alterar = umid_gleba_norte;
 							temp_gleba_norte.innerHTML = `${temp} ºC`;
 							umid_gleba_norte.innerHTML = `${umid} %`;
-							alert_analytics(temp, umid, 3, 'dash_frame');
+
+							analytics(temp, umid, 3, 'dash_frame');
+
+							let alerta_critico = analytics(temp, umid, 3, 'dash_frame');
+
+							if (alerta_critico == 1) {
+								num_alert = num_alert + 1
+								sessionStorage.setItem('norte', parseInt(num_alert))
+							};
+
 						} else if (fk_Sensor == 4) {
 							div_temperatura_alterar = temp_gleba_leste;
 							div_umidade_alterar = umid_gleba_leste;
 							temp_gleba_leste.innerHTML = `${temp} ºC`;
 							umid_gleba_leste.innerHTML = `${umid} %`;
-							alert_analytics(temp, umid, 4, 'dash_frame');
-						}
 
+							analytics(temp, umid, 4, 'dash_frame');
+
+							let alerta_critico = analytics(temp, umid, 4, 'dash_frame');
+
+							if (alerta_critico == 1) {
+								num_alert = num_alert + 1
+								sessionStorage.setItem('leste', parseInt(num_alert))
+							};
+						}
 					});
 				} else {
 

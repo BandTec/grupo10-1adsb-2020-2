@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="../../css/dashboard.css">
     <script src="../../js/autenticar.js"></script>
     <script src="../../js/alerts.js"></script>
-    <script src="../../js/redirecionar_home.js"></script>
     <style>
         canvas {
             -moz-user-select: none;
@@ -17,7 +16,7 @@
     </style>
 </head>
 
-<body onload="atualizacaoPeriodica()">
+<body style="padding: 20px;" onload="atualizacaoPeriodica()">
     <div class="dashboard">
         <div class="container">
             <div class="home_info" id="oeste">
@@ -27,17 +26,17 @@
                     <div class="valor" id="div_umidade">Umidade sendo obtida...</div>
                 </div>
                 <div class="alertas">
-                    <div class="alerta" id="div_alerta_temperatura"> </div>
+                    <div class="alerta" id="div_alerta_temperatura"></div>
                     <div class="alerta_umid" id="div_alerta_umidade"></div>
                 </div>
-                <a class="animacao" onclick="redirecionar_gleba('temp', 'oeste')">
-                    <img src="../../images/" alt="icone-grafico-temp">
-                </a>
-                <img class="icone_status_analytics" id="status_gleba_oeste" src="../../images/status/ideal.png"
+
+                <img class="home_icone_temp" src="../../images/status/temperatura-icon.png" alt="icone-grafico-temp">
+
+                <img class="icone_status_analytics_home" id="status_gleba_oeste" src="../../images/status/ideal.png"
                     alt="status_gleba">
-                <a class="animacao" onclick="redirecionar_gleba('umid', 'oeste')">
-                    <img src="../../images/" alt="icone-grafico-umid">
-                </a>
+
+                <img class="home_icone_umid" src="../../images/status/umidade-icon.png" alt="icone-grafico-umid">
+
             </div>
 
             <div class="home_info" id="sul">
@@ -48,17 +47,19 @@
                 </div>
 
                 <div class="alertas">
-                    <div class="alerta" id="div_alerta_temperatura2"></div>
+                    <div class="alerta" id="div_alerta_temperatura2">
+
+                    </div>
                     <div class="alerta_umid" id="div_alerta_umidade2"></div>
                 </div>
-                <a class="animacao" onclick="redirecionar_gleba('temp', 'sul')">
-                    <img src="../../images/" alt="icone-grafico-temp">
-                </a>
-                <img class="icone_status_analytics" id="status_gleba_sul" src="../../images/status/ideal.png"
+
+                <img class="home_icone_temp" src="../../images/status/temperatura-icon.png" alt="icone-grafico-temp">
+
+                <img class="icone_status_analytics_home" id="status_gleba_sul" src="../../images/status/ideal.png"
                     alt="status_gleba">
-                <a class="animacao" onclick="redirecionar_gleba('umid', 'sul')">
-                    <img src="../../images/" alt="icone-grafico-umid">
-                </a>
+
+                <img class="home_icone_umid" src="../../images/status/umidade-icon.png" alt="icone-grafico-umid">
+
             </div>
 
             <div class="home_info" id="leste">
@@ -68,17 +69,19 @@
                     <div class="valor" id="div_umidade3">Umidade sendo obtida...</div>
                 </div>
                 <div class="alertas">
-                    <div class="alerta" id="div_alerta_temperatura3"></div>
+                    <div class="alerta" id="div_alerta_temperatura3">
+
+                    </div>
                     <div class="alerta_umid" id="div_alerta_umidade3"></div>
                 </div>
-                <a class="animacao" onclick="redirecionar_gleba('temp', 'leste')">
-                    <img src="../../images/" alt="icone-grafico-temp">
-                </a>
-                <img class="icone_status_analytics" id="status_gleba_leste" src="../../images/status/ideal.png"
+
+                <img class="home_icone_temp" src="../../images/status/temperatura-icon.png" alt="icone-grafico-temp">
+
+                <img class="icone_status_analytics_home" id="status_gleba_leste" src="../../images/status/ideal.png"
                     alt="status_gleba">
-                <a class="animacao" onclick="redirecionar_gleba('umid', 'leste')">
-                    <img src="../../images/" alt="icone-grafico-umid">
-                </a>
+                <a class="animacao">
+                    <img class="home_icone_umid" src="../../images/status/umidade-icon.png" alt="icone-grafico-umid">
+
             </div>
 
             <div class="home_info" id="norte">
@@ -89,17 +92,19 @@
                 </div>
 
                 <div class="alertas">
-                    <div class="alerta" id="div_alerta_temperatura4"></div>
+                    <div class="alerta" id="div_alerta_temperatura4">
+
+                    </div>
                     <div class="alerta_umid" id="div_alerta_umidade4"></div>
                 </div>
-                <a class="animacao" onclick="redirecionar_gleba('temp', 'norte')">
-                    <img src="../../images/" alt="icone-grafico-temp">
-                </a>
-                <img class="icone_status_analytics" id="status_gleba_norte" src="../../images/status/ideal.png"
+
+                <img class="home_icone_temp" src="../../images/status/temperatura-icon.png" alt="icone-grafico-temp">
+
+                <img class="icone_status_analytics_home" id="status_gleba_norte" src="../../images/status/ideal.png"
                     alt="status_gleba">
-                <a class="animacao" onclick="redirecionar_gleba('umid', 'norte')">
-                    <img src="../../images/" alt="icone-grafico-umid">
-                </a>
+
+                <img class="home_icone_umid" src="../../images/status/umidade-icon.png" alt="icone-grafico-umid">
+
             </div>
         </div>
     </div>
@@ -144,7 +149,7 @@
                             umidade: resposta.umidade
                         }
 
-                        alert_analytics(resposta.temperatura, resposta.umidade, fk_Sensor, 'home_frame');
+                        analytics(resposta.temperatura, resposta.umidade, fk_Sensor, 'home_frame');
                         alertas(resposta.temperatura, resposta.umidade, fk_Sensor);
                         atualizarTela(dados, fk_Sensor);
                     });
@@ -214,11 +219,12 @@
             div_umidade_alterar = div_umidade3
         }
 
-        div_temperatura_alterar.innerHTML = `Temperatura: ${dados.temperatura}º`;
+        div_temperatura_alterar.innerHTML = `${dados.temperatura}º`;
+        div_temperatura_alterar.style = 'font-size: 27pt;'
 
-        div_umidade_alterar.innerHTML = `Umidade: ${dados.umidade}%`;
 
-
+        div_umidade_alterar.innerHTML = `${dados.umidade}%`;
+        div_umidade_alterar.style = 'font-size: 27pt;'
 
     }
     function sendData() {
