@@ -1,8 +1,8 @@
 var configuracoes = {
-    server: "nigteste.database.windows.net",
-    user: "nigteste",
-    password: "#Grupo10",
-    database: "bd-nig-testes",
+    server: "bd-grupo10.database.windows.net",
+    user: "nig",
+    password: "#Gfgrupo10",
+    database: "bd-grupo10",
     options: {
       encrypt: true,
       enableArithAbort: true,
