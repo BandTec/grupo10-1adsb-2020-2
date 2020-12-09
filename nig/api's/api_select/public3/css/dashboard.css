@@ -206,13 +206,13 @@ table {
 /* CONTAINER INFERIOR */
 
 .container_table {
-    width: 100%;
-    height: 290px;
-    left: 112.02px;
-    margin-bottom: 5px;
-    background-color: #282c31;
-    border: 1px solid #448c648f;
-    border-radius: 10px;
+  width: 100%;
+  height: 290px;
+  left: 112.02px;
+  margin-bottom: 5px;
+  background-color: #282c31;
+  border: 1px solid #448c648f;
+  border-radius: 10px;
 }
 
 /* TABELA */
@@ -289,10 +289,10 @@ tr {
 }
 
 .itm_faq {
-    font-size: 14pt;
-    text-align: left;
-    color: rgb(196, 196, 196);
-    justify-items: center;
+  font-size: 14pt;
+  text-align: left;
+  color: rgb(196, 196, 196);
+  justify-items: center;
 }
 
 .num_faq {
@@ -375,6 +375,10 @@ tr {
   background-color: #282c31;
   border: 1px solid #448c648f;
   border-radius: 10px;
+}
+
+#norte, #oeste{
+  display: none;
 }
 
 .home_info .valores {
