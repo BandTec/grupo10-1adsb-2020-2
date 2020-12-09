@@ -122,10 +122,10 @@
 		obter_dados_por_gleba(3);
 		obter_dados_por_gleba(4);
 
-		document.getElementById('num_alert_leste').innerHTML = `${sessionStorage.getItem('leste')}`;
-		document.getElementById('num_alert_norte').innerHTML = `${sessionStorage.getItem('norte')}`;
-		document.getElementById('num_alert_sul').innerHTML = `${sessionStorage.getItem('sul')}`;
-		document.getElementById('num_alert_oeste').innerHTML = `${sessionStorage.getItem('oeste')}`;
+		document.getElementById('num_alert_leste').innerHTML = `${localStorage.getItem('leste')}`;
+		document.getElementById('num_alert_norte').innerHTML = `${localStorage.getItem('norte')}`;
+		document.getElementById('num_alert_sul').innerHTML = `${localStorage.getItem('sul')}`;
+		document.getElementById('num_alert_oeste').innerHTML = `${localStorage.getItem('oeste')}`;
 		
 		setTimeout(atualizacaoPeriodica, 5000);
 	}
@@ -161,7 +161,7 @@
 
 							if (alerta_critico == 1) {
 								num_alert = num_alert + 1;
-								sessionStorage.setItem('oeste', parseInt(num_alert))
+								localStorage.setItem('oeste', parseInt(num_alert))
 							};
 
 						} else if (fk_Sensor == 2) {
@@ -176,7 +176,7 @@
 
 							if (alerta_critico == 1) {
 								num_alert = num_alert + 1
-								sessionStorage.setItem('sul', parseInt(num_alert))
+								localStorage.setItem('sul', parseInt(num_alert))
 							};
 
 						} else if (fk_Sensor == 3) {
@@ -191,7 +191,7 @@
 
 							if (alerta_critico == 1) {
 								num_alert = num_alert + 1
-								sessionStorage.setItem('norte', parseInt(num_alert))
+								localStorage.setItem('norte', parseInt(num_alert))
 							};
 
 						} else if (fk_Sensor == 4) {
@@ -206,7 +206,7 @@
 
 							if (alerta_critico == 1) {
 								num_alert = num_alert + 1
-								sessionStorage.setItem('leste', parseInt(num_alert))
+								localStorage.setItem('leste', parseInt(num_alert))
 							};
 						}
 					});
