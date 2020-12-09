@@ -32,6 +32,7 @@ function analytics(valorTemperatura, valorUmidade, sensor_gleba, tela) {
 
       if (tela == "home_frame") {
         oeste.style.border = "#FF0000 1px solid";
+        oeste.style.display = "block";
       }
 
       const notificacaoFogoGleba1 = new Notification("Nova mensagem de NIG!",
@@ -210,6 +211,7 @@ function analytics(valorTemperatura, valorUmidade, sensor_gleba, tela) {
 
       if (tela == "home_frame") {
         norte.style.border = "#FF0000 1px solid";
+        norte.style.display = "block";
       }
 
       const notificacaoFogoGleba3 = new Notification("Nova mensagem de NIG!",

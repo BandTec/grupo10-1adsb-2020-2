@@ -377,9 +377,6 @@ tr {
   border-radius: 10px;
 }
 
-#norte, #oeste{
-  display: none;
-}
 
 .home_info .valores {
   margin: auto;
