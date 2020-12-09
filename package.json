@@ -1,0 +1,10 @@
+{
+    "name": "noignite-root",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+    "start": "node ./nig/apis/api_select/bin/www",
+    "postinstall": "cd nig/apis/api_select && npm install"
+    }
+    }
+    
