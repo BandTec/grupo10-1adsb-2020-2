@@ -6,6 +6,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 	<script src="https://www.chartjs.org/dist/2.7.1/Chart.js"></script>
 	<script src="https://www.chartjs.org/samples/latest/utils.js"></script>
+	<script src="../../js/status_sensor.js"></script>
 	<link rel="stylesheet" href="../../css/dashboard.css">
 	<script src="../../js/autenticar.js"></script>
 	<script src="../../js/alerts.js"></script>
@@ -125,6 +126,25 @@
 		document.getElementById('num_alert_sul').innerHTML = `${localStorage.getItem('sul')}`;
 		document.getElementById('num_alert_oeste').innerHTML = `${localStorage.getItem('oeste')}`;
 		
+		// let campo_oeste = {
+		// 	temp: document.getElementById('temp_gleba_oeste').classList,
+		// 	umid: document.getElementById('umid_gleba_oeste').classList
+		// }
+
+		// let campo_sul = {
+		// 	temp: document.getElementById('temp_gleba_sul').classList,
+		// 	umid: document.getElementById('umid_gleba_sul').classList
+		// }
+
+		// let campo_norte = {
+		// 	temp: document.getElementById('temp_gleba_norte').classList,
+		// 	umid: document.getElementById('umid_gleba_norte').classList
+		// }
+
+		// let campo_leste = {
+		// 	temp: document.getElementById('temp_gleba_leste').classList,
+		// 	umid: document.getElementById('umid_gleba_leste').classList
+		// }
 		setTimeout(atualizacaoPeriodica, 5000);
 	}
 
@@ -153,6 +173,8 @@
 							temp_gleba_oeste.innerHTML = `${temp} ºC`;
 							umid_gleba_oeste.innerHTML = `${umid} %`;
 
+							temp_gleba_oeste.classList.remove('desligado');
+
 							analytics(temp, umid, 1, 'dash_frame');;
 
 							let alerta_critico = analytics(temp, umid, 1, 'dash_frame');
@@ -167,6 +189,8 @@
 							div_umidade_alterar = umid_gleba_sul;
 							temp_gleba_sul.innerHTML = `${temp} ºC`;
 							umid_gleba_sul.innerHTML = `${umid} %`;
+
+							temp_gleba_sul.classList.remove('desligado');
 
 							analytics(temp, umid, 2, 'dash_frame');
 
@@ -183,6 +207,8 @@
 							temp_gleba_norte.innerHTML = `${temp} ºC`;
 							umid_gleba_norte.innerHTML = `${umid} %`;
 
+							temp_gleba_norte.classList.remove('desligado');
+
 							analytics(temp, umid, 3, 'dash_frame');
 
 							let alerta_critico = analytics(temp, umid, 3, 'dash_frame');
@@ -198,6 +224,8 @@
 							temp_gleba_leste.innerHTML = `${temp} ºC`;
 							umid_gleba_leste.innerHTML = `${umid} %`;
 
+							temp_gleba_leste.classList.remove('desligado');
+
 							analytics(temp, umid, 4, 'dash_frame');
 
 							let alerta_critico = analytics(temp, umid, 4, 'dash_frame');
@@ -209,7 +237,11 @@
 						}
 					});
 				} else {
-
+					temp_gleba_oeste.classList.add
+					('desligado');
+temp_gleba_sul.classList.add('desligado');
+temp_gleba_norte.classList.add('desligado');
+temp_gleba_leste.classList.add('desligado');
 					console.error('Nenhum dado encontrado ou erro na API');
 				}
 			}).catch(function (error) {
