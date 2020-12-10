@@ -1,7 +1,7 @@
 console.log(Notification.permission);
 
 if (Notification.permission === "granted") {
-  console.log(permission);
+  console.log("Permissão concedida");
 } else if (Notification.permission !== "denied") {
   Notification.requestPermission().then((permission) => {
     if (permission === "granted") {

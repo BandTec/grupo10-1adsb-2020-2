@@ -16,7 +16,7 @@
     </style>
 </head>
 
-<body style="padding: 20px;" onload="atualizacaoPeriodica()">
+<body style="padding: 20px;" onload="atualizacaoPeriodica();">
     <div class="dashboard">
         <div class="container">
             <div class="home_info" id="oeste">
@@ -116,7 +116,8 @@
 
 <script>
 
-    window.onload=verificar_autenticacao();
+    window.onload = atualizacaoPeriodica();
+    
     let usuario;
 
     // verificar_autenticacao();
@@ -124,6 +125,7 @@
     // só mexer se quiser alterar o tempo de atualização
     // ou se souber o que está fazendo!
     function atualizacaoPeriodica() {
+        // verificar_autenticacao();
         obter_dados_por_gleba(1);
         obter_dados_por_gleba(2);
         obter_dados_por_gleba(3);

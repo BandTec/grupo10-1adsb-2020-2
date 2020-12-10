@@ -15,46 +15,51 @@
 </head>
 
 <body id="corpo_sobre" style="position: static;">
-<!-- INICIO POP'S DE LOGIN E CADASTRO -->
-<div class="login" id="tela_login" style="display: none;">
-    <!-- INICIO CAMPO DE LOGIN -->
-    <a href="index.html"><i class="fas fa-arrow-left"></i></a>
-    <div class="div_cad">
-        <form id="form_login" method="post" onsubmit="return entrar()">
-            <h2>Login</h2>
-            <p>
-                <label for="login_email">Email:</label><br>
-                <input type="text" name="email" placeholder="Insira seu e-mail:" required>
-            </p>
-            <p>
-                <label for="login_senha">Senha:</label><br>
-                <input id="login_senha" type="password" name="senha" placeholder="Insira sua senha:" required>
-            </p>
+    <!-- INICIO POP'S DE LOGIN E CADASTRO -->
+    <div class="login" id="tela_login" style="display: none;">
+        <!-- INICIO CAMPO DE LOGIN -->
+        <a href="index.html"><i class="fas fa-arrow-left"></i></a>
+        <div class="div_cad">
+            <form id="form_login" method="post" onsubmit="return entrar()">
+                <h2>Login</h2>
+                <p>
+                    <label for="login_email">Email:</label><br>
+                    <input type="text" name="email" placeholder="Insira seu e-mail:" required>
+                </p>
+                <p>
+                    <label for="login_senha">Senha:</label><br>
+                    <input id="login_senha" type="password" name="senha" placeholder="Insira sua senha:" required>
+                </p>
 
-            <div class="botoes">
-                <button id="btn_entrar" type="submit">Entrar</button><br><br>
-            </div>
-        </form>
-        <div>Ainda não tem conta?<a onclick="cadastrar_animacao()"> Cadastre-se</a></div>
+                <div class="botoes">
+                    <button id="btn_entrar" type="submit">Entrar</button><br><br>
+                </div>
+            </form>
+            <div>Ainda não tem conta?<a onclick="cadastrar_animacao()"> Cadastre-se</a></div>
+        </div>
     </div>
-</div>
-<!-- FIM CAMPO DE LOGIN -->
+    <!-- FIM CAMPO DE LOGIN -->
 
-<!-- CAMPO DE CADASTRO -->
-<div class="cadastro div_cad" id="tela_cadastro" style="display: none;">
-    <form id="form_cadastro" method="post" onclick="return cadastrar()">
-        <h2>Cadastre-se</h2>
-        <input type="text" name="nome" placeholder="Nome" required>
-        <input type="text" name="sobrenome" placeholder="Sobrenome" required>
-        <input type="tel" name="telefone" placeholder="(00) 0000-0000">
-        <input type="text" name="codEmpresa" placeholder="Código empresa" ><br/>
-        <input type="text" name="email" placeholder="Insira seu e-mail" required>
-        <input type="text" name="conf_email" placeholder="Confirme o e-mail" required><br>
-        <input type="password" name="senha" placeholder="Insira sua senha" required>
-        <input type="password" name="conf_senha" placeholder="Confirme sua senha" required><br>
-        <input type="text" name="cpf" placeholder="CPF">
-        <input type="text" name="cidade" placeholder="Cidade em que mora"><br/>
-            <!-- <select id="uf" class="ls-select">
+    <!-- CAMPO DE CADASTRO -->
+    <div class="cadastro div_cad" id="tela_cadastro" style="display: none;">
+
+        <form id="form_cadastro" method="post" onsubmit="return cadastrar()">
+
+            <h2>Cadastre-se</h2>
+            <input type="text" name="nome" placeholder="Nome" required>
+            <input type="text" name="sobrenome" placeholder="Sobrenome" required>
+            <input type="tel" name="telefone" placeholder="(00) 0000-0000">
+            <input type="number" name="codEmpresa" placeholder="Código empresa"><br />
+            <input type="email" name="email" placeholder="Insira seu e-mail" required>
+            <input type="email" name="conf_email" placeholder="Confirme o e-mail" required><br>
+            <input type="password" name="senha" placeholder="Insira sua senha" id="psw"
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                title="A senha deve conter letras maiúscula e minúscula, número, caracter especial e no minimo 8 digitos!"
+                required>
+            <input type="password" name="conf_senha" placeholder="Confirme sua senha" required><br>
+            <input type="text" name="cpf" placeholder="CPF">
+            <input type="text" name="cidade" placeholder="Cidade em que mora"><br />
+            <!-- <select name="uf" class="ls-select">
                 <option value="" disabled selected> UF </option>
                 <option value="AC">Acre</option>
                 <option value="AL">Alagoas</option>
@@ -84,17 +89,24 @@
                 <option value="SE">Sergipe</option>
                 <option value="TO">Tocantins</option>
             </select><br> -->
-        <div class="botoes">
-            <button type="submit" onclick="cadastrar()">Cadastrar</button>
-        </div>
-    </form>
-<!-- FIM CAMPO DE CADASTRO -->
-</div>
-<!-- FIM POP'S LOGIN E CADASTRO -->
-<!-- BARRA LATERAL LARANJA -->
-<div class="tampa tampa_direita" id="tampa" style="display: none;" onclick="logar()"> <img src="images/skip.png"
-        alt="seta de skip"></div>
-<!-- ######################################################################################## -->
+
+            <div class="botoes">
+                <button type="submit">Cadastrar</button>
+            </div>
+
+            <div id="div_erro" style="background-color: sandybrown; color: maroon; display: none;">
+                Erro no cadastro
+            </div>
+
+        </form>
+        <!-- FIM CAMPO DE CADASTRO -->
+
+    </div>
+    <!-- FIM POP'S LOGIN E CADASTRO -->
+    <!-- BARRA LATERAL LARANJA -->
+    <div class="tampa tampa_direita" id="tampa" style="display: none;" onclick="logar()"> <img src="images/skip.png"
+            alt="seta de skip"></div>
+    <!-- ######################################################################################## -->
 
     <div class="div_cad financeiro" style="display: none;" id="tela_financeiro">
         <h2>Calcule o seu custo utilizando o NIG</h2>
@@ -130,7 +142,7 @@
                     <div class="menu_btn">Login</div>
                 </a>
                 <div class="menu" id="menu">
-                    <a href="index.html" class="item_menu"><b>Home</b></a>
+                    <a href="index.html" class="item_menu"><b>Início</b></a>
                     <a href="sobre.html" class="item_menu" style="color: #b74a33;"><b>Projeto</b></a>
                     <!-- <a href="#contato" class="item_menu"><b>Contato</b></a> -->
                     <a onclick="calc_financeiro()" class="item_menu"><b>Financeiro</b></a>
@@ -171,11 +183,15 @@
         <div class="content fundoVerde">
             <div class="container alinhamento">
                 <div class="titulo">Como Funciona</div>
-                <div class="texto text_inst"><p>Criamos um sistema com sensores de temperatura e umidade para captar os dados e gerar valores de risco para monitoramento do usuário. 
-                    Com estes valores gerados, o usuário poderá ser notificado de que uma região corre risco de incêndio, e assim escolher a melhor forma de agir!
-                    Veja mais no vídeo ao lado:</p>
+                <div class="texto text_inst">
+                    <p>Criamos um sistema com sensores de temperatura e umidade para captar os dados e gerar valores de
+                        risco para monitoramento do usuário.
+                        Com estes valores gerados, o usuário poderá ser notificado de que uma região corre risco de
+                        incêndio, e assim escolher a melhor forma de agir!
+                        Veja mais no vídeo ao lado:</p>
                 </div>
-                <div><iframe class="hld" width="480" height="270" src="https://www.powtoon.com/embed/dCaOUSkZAdI/" frameborder="0" allowfullscreen></iframe></div>
+                <div><iframe class="hld" width="480" height="270" src="https://www.powtoon.com/embed/dCaOUSkZAdI/"
+                        frameborder="0" allowfullscreen></iframe></div>
             </div>
         </div>
 
@@ -201,28 +217,51 @@
                     </select>
                     <div class="div_areas">
                         <div id="cerrado" style="display: none;">
-                            <p class="div_textEsquerda">Cerrado é o nome dado às savanas brasileiras caracterizadas por árvores baixas, arbustos espaçados e gramíneas, e pode ser classificado como cerradão, cerrado típico, campo cerrado, campo sujo de cerrado ou campo limpo, sendo que o cerradão é o único que apresenta formação florestal.</p>
+                            <p class="div_textEsquerda">Cerrado é o nome dado às savanas brasileiras caracterizadas por
+                                árvores baixas, arbustos espaçados e gramíneas, e pode ser classificado como cerradão,
+                                cerrado típico, campo cerrado, campo sujo de cerrado ou campo limpo, sendo que o
+                                cerradão é o único que apresenta formação florestal.</p>
                             <img src="images/cerrado1.jpg" alt="Cerrado" class="div_imgDireita">
                         </div>
                         <div id="mataAtlant" style="display: none;">
                             <img src="images/mataAtlan.jpeg" alt="Mata Atlantica" class="div_imgEsquerda">
-                            <p class="div_textDireita">A Mata Atlântica é um bioma que cobria uma área de 15% do território brasileiro, área essa que incluía os estados de Alagoas, Bahia, Ceará, Espírito Santo, Goiás, Mato Grosso do Sul, Minas Gerais, Paraíba, Paraná, Pernambuco, Piauí, Rio de Janeiro, Rio Grande do Norte, Rio Grande do Sul, Santa Catarina, São Paulo e Sergipe. Originalmente, o referido bioma cobria uma área superior a 1,3 milhões de km2.</p>
+                            <p class="div_textDireita">A Mata Atlântica é um bioma que cobria uma área de 15% do
+                                território brasileiro, área essa que incluía os estados de Alagoas, Bahia, Ceará,
+                                Espírito Santo, Goiás, Mato Grosso do Sul, Minas Gerais, Paraíba, Paraná, Pernambuco,
+                                Piauí, Rio de Janeiro, Rio Grande do Norte, Rio Grande do Sul, Santa Catarina, São Paulo
+                                e Sergipe. Originalmente, o referido bioma cobria uma área superior a 1,3 milhões de
+                                km2.</p>
                         </div>
                         <div id="pantanal" style="display: none;">
                             <img src="images/pantanal.png" alt="Pantanal" class="div_imgDireita">
-                            <p class="div_textEsquerda">Pantanal ou Complexo do Pantanal é o menor bioma brasileiro e a maior planície de inundação do mundo com 250 mil km² de extensão. Considerado pela UNESCO "Patrimônio Natural Mundial" e "Reserva da Biosfera", essa região possui grande biodiversidade.</p>
+                            <p class="div_textEsquerda">Pantanal ou Complexo do Pantanal é o menor bioma brasileiro e a
+                                maior planície de inundação do mundo com 250 mil km² de extensão. Considerado pela
+                                UNESCO "Patrimônio Natural Mundial" e "Reserva da Biosfera", essa região possui grande
+                                biodiversidade.</p>
                         </div>
                         <div id="plantacoes" style="display: none;">
                             <img src="images/plantacao.png" alt="Plantação" class="div_imgEsquerda">
-                            <p class="div_textDireita">Dos principais produtos agropecuários do Brasil, cabe destaque para a cana-de-açúcar, o café e a laranja, dos quais somos os maiores produtores mundiais; a soja, o fumo e a carne bovina – encontramos-nos na segunda posição internacional; e o milho, produto em que o Brasil é o terceiro país em volume de produção anual.</p>
+                            <p class="div_textDireita">Dos principais produtos agropecuários do Brasil, cabe destaque
+                                para a cana-de-açúcar, o café e a laranja, dos quais somos os maiores produtores
+                                mundiais; a soja, o fumo e a carne bovina – encontramos-nos na segunda posição
+                                internacional; e o milho, produto em que o Brasil é o terceiro país em volume de
+                                produção anual.</p>
                         </div>
                         <div id="parqEstad" style="display: none;">
                             <img src="images/parqueestadual.png" alt="Parque Estadual" class="div_imgDireita">
-                            <p class="div_textEsquerda">No Brasil, parque estadual é a denominação dada às unidades de conservação de proteção integral da natureza pertencentes à categoria "parque nacional" do Sistema Nacional de Unidades de Conservação da Natureza, quando criadas na esfera administrativa estadual. </p>
+                            <p class="div_textEsquerda">No Brasil, parque estadual é a denominação dada às unidades de
+                                conservação de proteção integral da natureza pertencentes à categoria "parque nacional"
+                                do Sistema Nacional de Unidades de Conservação da Natureza, quando criadas na esfera
+                                administrativa estadual. </p>
                         </div>
                         <div id="reserAmb" style="display: none;">
                             <img src="images/reserva.png" alt="Reserva Ambiental" class="div_imgEsquerda">
-                            <p class="div_textDireita">As unidades de conservação ambiental são espaços geralmente formados por áreas contínuas, institucionalizados com o objetivo de preservar e conservar a flora, a fauna, os recursos hídricos, as características geológicas, culturais, as belezas naturais, recuperar ecossistemas degradados, promover o desenvolvimento sustentável, entre outros fatores que contribuem para a preservação ambiental.</p>
+                            <p class="div_textDireita">As unidades de conservação ambiental são espaços geralmente
+                                formados por áreas contínuas, institucionalizados com o objetivo de preservar e
+                                conservar a flora, a fauna, os recursos hídricos, as características geológicas,
+                                culturais, as belezas naturais, recuperar ecossistemas degradados, promover o
+                                desenvolvimento sustentável, entre outros fatores que contribuem para a preservação
+                                ambiental.</p>
                         </div>
                     </div>
                 </div>
@@ -245,7 +284,7 @@
 </html>
 
 <script>
-    function area(){
+    function area() {
         cerrado.style = "display: none";
         mataAtlant.style = "display: none";
         pantanal.style = "display: none";
@@ -253,25 +292,25 @@
         parqEstad.style = "display: none";
         reserAmb.style = "display: none";
 
-        if(atuacao.value == "Mata Atlantica"){
+        if (atuacao.value == "Mata Atlantica") {
             mataAtlant.style = "display: block";
         }
-        else if(atuacao.value == "Parques Estaduais"){
+        else if (atuacao.value == "Parques Estaduais") {
             parqEstad.style = "display: block";
         }
-        else if(atuacao.value == "Reservas Ambientais"){
+        else if (atuacao.value == "Reservas Ambientais") {
             reserAmb.style = "display: block";
         }
-        else if(atuacao.value == "Plantações"){
+        else if (atuacao.value == "Plantações") {
             plantacoes.style = "display: block";
         }
-        else if(atuacao.value == "Pantanal"){
+        else if (atuacao.value == "Pantanal") {
             pantanal.style = "display: block";
         }
-        else if(atuacao.value == "Cerrado"){
+        else if (atuacao.value == "Cerrado") {
             cerrado.style = "display: block";
         }
-        else if(atuacao.value == "Selecione"){
+        else if (atuacao.value == "Selecione") {
             alert("Por favor, selecione uma área de atuação!");
         }
     }
