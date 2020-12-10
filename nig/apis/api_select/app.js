@@ -17,7 +17,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public3')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/usuarios', usuariosRouter);
@@ -37,7 +37,7 @@ app.post('/contato', function(req,res){
     }).then(resultado => {
         console.log(`Inseridos : ${resultado.length} \n`);
         
-        res.sendFile(__dirname + "/public3/index.html");
+        res.sendFile(__dirname + "/public/index.html");
 
     }).catch(erro => {
         console.error(erro);

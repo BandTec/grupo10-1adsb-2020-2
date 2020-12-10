@@ -6,6 +6,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 	<script src="https://www.chartjs.org/dist/2.7.1/Chart.js"></script>
 	<script src="https://www.chartjs.org/samples/latest/utils.js"></script>
+	<script src="../../js/status_sensor.js"></script>
 	<link rel="stylesheet" href="../../css/dashboard.css">
 	<script src="../../js/autenticar.js"></script>
 	<script src="../../js/alerts.js"></script>
@@ -39,8 +40,8 @@
 					<td>Gleba Oeste</td>
 					<td><img class="icone_status_analytics" id="status_gleba_oeste" src="../../images/status/ideal.png"
 							alt="status_gleba"></td>
-					<td id="temp_gleba_oeste">ºC</td>
-					<td id="umid_gleba_oeste">%</td>
+					<td id="temp_gleba_oeste" class="desligado">ºC</td>
+					<td id="umid_gleba_oeste" class="desligado">%</td>
 					<td id="num_alert_oeste">0</td>
 					<td><img class="icone_status" id="status_sensor_oeste" src="../../images/status/connected_white.png"
 							alt="status_sensor"></td>
@@ -125,6 +126,17 @@
 		document.getElementById('num_alert_sul').innerHTML = `${localStorage.getItem('sul')}`;
 		document.getElementById('num_alert_oeste').innerHTML = `${localStorage.getItem('oeste')}`;
 		
+		let campo_oeste_temp = document.getElementById('temp_gleba_oeste').innerHTML;
+		let campo_oeste_umid = document.getElementById('temp_gleba_oeste').innerHTML;
+		let campo_norte_temp = document.getElementById('temp_gleba_norte').innerHTML;
+		let campo_norte_umid = document.getElementById('umid_gleba_norte').innerHTML;
+		let campo_sul_temp = document.getElementById('temp_gleba_sul').innerHTML;
+		let campo_sul_umid = document.getElementById('umid_gleba_sul').innerHTML;
+		let campo_leste_temp = document.getElementById('temp_gleba_leste').innerHTML;
+		let campo_leste_umid = document.getElementById('umid_gleba_leste').innerHTML;
+		
+		verificar_campo(temp_gleba_oeste, umid_gleba_oeste, temp_gleba_sul, umid_gleba_sul, temp_gleba_norte, umid_gleba_norte, temp_gleba_leste, umid_gleba_leste);
+		
 		setTimeout(atualizacaoPeriodica, 5000);
 	}
 
@@ -152,6 +164,8 @@
 							div_umidade_alterar = umid_gleba_oeste;
 							temp_gleba_oeste.innerHTML = `${temp} ºC`;
 							umid_gleba_oeste.innerHTML = `${umid} %`;
+
+							temp_gleba_oeste.classList.remove('desligado');
 
 							analytics(temp, umid, 1, 'dash_frame');;
 
