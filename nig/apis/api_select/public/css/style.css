@@ -116,7 +116,7 @@ a {color: azure; text-decoration: none;}
 }
 .logo{margin-left: 10px; float: left;}
 
-.menu{width: 20%; float: right; margin-top: 1.2%; overflow: hidden;}
+.menu{ width: 20%; float: right; margin-top: 1.4%; overflow: hidden; display: flex;}
 
 .item_menu{
     color: #6b6b6b;
@@ -143,7 +143,7 @@ a {color: azure; text-decoration: none;}
 .alinhamento{
     margin-right: 5%;
     margin-left: 5%;
-    text-align: justify;
+    text-align: left;
 }
 
 .ani_direita{margin-right: 35%; float: right;}
